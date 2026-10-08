@@ -7,8 +7,8 @@ import { Icon, type IconName } from '@/components/ui/Icon'
 
 const LAYERS = [
   { id: 'user', label: 'User (liveware)', text: 'You. The person giving instructions.', color: 'var(--color-accent-700)' },
-  { id: 'app', label: 'Application software', text: 'Word processors, browsers, games. Written for people to use directly — and they cannot run without an OS underneath.', color: 'var(--color-brand-600)' },
-  { id: 'os', label: 'Operating system', text: 'The bridge. It provides interfaces, manages processes, allocates resources, and enforces security — so applications never have to know what brand of disk you own.', color: 'var(--color-brand-700)' },
+  { id: 'app', label: 'Application software', text: 'Word processors, browsers, games. Written for people to use directly, and they cannot run without an OS underneath.', color: 'var(--color-brand-600)' },
+  { id: 'os', label: 'Operating system', text: 'The bridge. It provides interfaces, manages processes, allocates resources, and enforces security, so applications never have to know what brand of disk you own.', color: 'var(--color-brand-700)' },
   { id: 'driver', label: 'Device drivers', text: 'Translators for each individual device, turning general OS instructions into the specific commands that piece of hardware understands.', color: 'var(--color-brand-800)' },
   { id: 'hw', label: 'Hardware', text: 'CPU, RAM, disks, keyboard, screen. Fast, dumb, and completely unaware of what a "file" is.', color: 'var(--color-brand-950)' },
 ]
@@ -47,7 +47,7 @@ export function SystemLayers() {
           <p className="text-base leading-relaxed text-ink-2">{LAYERS[active].text}</p>
           <p className="mt-3 rounded-lg bg-sunken px-3.5 py-2.5 text-sm leading-relaxed text-ink-2">
             Each layer only talks to its neighbours. An application never reaches down and pokes
-            the disk directly — it asks the OS, and the OS asks the driver. That indirection is
+            the disk directly. It asks the OS, and the OS asks the driver. That indirection is
             what makes one program able to run on thousands of different machines.
           </p>
         </div>
@@ -140,7 +140,7 @@ export function MultitaskingIllusion() {
       <p className="mt-4 rounded-lg bg-sunken px-4 py-3 text-sm leading-relaxed text-ink-2">
         {speed >= 4 ? (
           <>
-            At real switching speeds — thousands of times a second — you cannot perceive the gaps,
+            At real switching speeds (thousands of times a second) you cannot perceive the gaps,
             so all three appear to run at once.{' '}
             <span className="font-medium text-ink">
               This is an illusion created by rapid switching, not true simultaneous execution
@@ -165,8 +165,8 @@ const INTERRUPT_CAUSES = [
   { id: 'timer', kind: 'Hardware', label: 'Time expiry', text: 'The time slice allocated to the running process ran out. The timer chip raises an interrupt so the scheduler can pick someone else.' },
   { id: 'io', kind: 'Hardware', label: 'I/O completion', text: 'A disk read finished, or the printer is ready. The device signals the CPU that the waiting process can now continue.' },
   { id: 'input', kind: 'Hardware', label: 'Peripheral input', text: 'A key was pressed, the mouse moved, the printer sent a signal. The CPU must be told immediately.' },
-  { id: 'hwfail', kind: 'Hardware', label: 'Hardware failure', text: 'A power failure, device malfunction or parity error. These are usually non-maskable — they cannot be ignored.' },
-  { id: 'syscall', kind: 'Software', label: 'System call', text: 'A program asks the OS for a service using a software interrupt — open a file, create a process, allocate memory.' },
+  { id: 'hwfail', kind: 'Hardware', label: 'Hardware failure', text: 'A power failure, device malfunction or parity error. These are usually non-maskable: they cannot be ignored.' },
+  { id: 'syscall', kind: 'Software', label: 'System call', text: 'A program asks the OS for a service using a software interrupt: open a file, create a process, allocate memory.' },
   { id: 'osreq', kind: 'Software', label: 'OS service request', text: 'The operating system itself needs to perform a specific operation and interrupts the current flow to do it.' },
   { id: 'error', kind: 'Software', label: 'Program error', text: 'Division by zero, or an invalid instruction. The process cannot continue meaningfully.' },
   { id: 'memviol', kind: 'Software', label: 'Memory access violation', text: 'The process tried to touch memory outside its allocated space. Memory protection catches it and the OS usually terminates the process.' },
@@ -223,7 +223,7 @@ export function InterruptExplorer() {
           'An interrupt signal is sent to the CPU.',
           'The CPU pauses the current process and saves its state into the PCB.',
           'The OS runs an interrupt handler to manage the event.',
-          'Once done, the original process resumes where it left off — or a different process is dispatched.',
+          'Once done, the original process resumes where it left off, or a different process is dispatched.',
         ].map((s, i) => (
           <li key={i} className="flex gap-2.5 text-sm text-ink-2">
             <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-100 text-2xs font-bold text-brand-700 dark:bg-brand-900 dark:text-brand-300">
@@ -246,7 +246,7 @@ const FILE_TYPES = [
   { cat: 'Image', exts: ['.jpg / .jpeg', '.png', '.gif', '.bmp'], opens: 'Photos, Photoshop, GIMP', icon: 'image' as IconName },
   { cat: 'Audio', exts: ['.mp3', '.wav'], opens: 'VLC, Windows Media Player', icon: 'audio' as IconName },
   { cat: 'Video', exts: ['.mp4', '.avi', '.mkv', '.wmv'], opens: 'VLC, Media Player', icon: 'video' as IconName },
-  { cat: 'Compressed', exts: ['.zip', '.rar', '.tar', '.gz'], opens: 'WinRAR, 7-Zip', icon: 'archive' as IconName },
+  { cat: 'Compressed', exts: ['.zip', '.rar', '.7z', '.tar.gz'], opens: 'WinRAR, 7-Zip', icon: 'archive' as IconName },
   { cat: 'Executable', exts: ['.exe', '.app', '.bat', '.sh'], opens: 'Run directly by the OS', icon: 'gear' as IconName },
   { cat: 'Web', exts: ['.html / .htm', '.css', '.js', '.php'], opens: 'Browsers, code editors', icon: 'globe' as IconName },
   { cat: 'Programming', exts: ['.py', '.java', '.cpp'], opens: 'IDEs, compilers', icon: 'code' as IconName },
@@ -302,7 +302,7 @@ export function FileTypeExplorer() {
       <p className="mt-3 text-sm leading-relaxed text-ink-2">
         The extension is how the operating system decides{' '}
         <span className="font-medium text-ink">which application should open the file</span>. It
-        does not change what is inside the file — renaming <span className="font-mono">song.mp3</span>{' '}
+        does not change what is inside the file. Renaming <span className="font-mono">song.mp3</span>{' '}
         to <span className="font-mono">song.txt</span> does not turn music into text; it just makes
         the OS hand it to the wrong program.
       </p>
@@ -342,7 +342,7 @@ export function InterfaceComparison() {
               <span className="h-2.5 w-2.5 rounded-full bg-danger-400" />
               <span className="h-2.5 w-2.5 rounded-full bg-warn-400" />
               <span className="h-2.5 w-2.5 rounded-full bg-success-400" />
-              <span className="ml-2 text-xs text-ink-3">File Explorer</span>
+              <span className="ml-2 text-xs text-ink-3">File manager</span>
             </div>
             <div className="space-y-1.5">
               {[
@@ -374,7 +374,7 @@ export function InterfaceComparison() {
             </p>
             <p className="text-slate-400">nimal@pc:~/Documents$ ▍</p>
             <p className="mt-3 text-xs text-slate-300">
-              One line. Faster if you already know it — and it can be scripted to run on a thousand
+              One line. Faster if you already know it, and it can be scripted to run on a thousand
               files. But nothing on screen tells you the command exists.
             </p>
           </div>
@@ -387,7 +387,7 @@ export function InterfaceComparison() {
             </p>
             <ProsCons
               pros={[
-                'Easy for beginners — visual cues everywhere',
+                'Easy for beginners: visual cues everywhere',
                 'Gentle learning curve',
                 'Errors shown as readable messages',
               ]}
@@ -400,7 +400,7 @@ export function InterfaceComparison() {
             </p>
             <ProsCons
               pros={[
-                'Lightweight — uses fewer resources',
+                'Lightweight: uses fewer resources',
                 'Very fast for experienced users',
                 'Tasks can be automated and scripted',
               ]}

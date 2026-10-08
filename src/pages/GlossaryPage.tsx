@@ -3,10 +3,14 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useReducedMotion } from 'motion/react'
 import { glossary, glossaryById } from '@/content/glossary'
 import { lessonById } from '@/content/course'
+import { ScrollStrip } from '@/components/ui/ScrollStrip'
 import { cx } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { inline } from '@/lib/inline'
 
 export function GlossaryPage() {
+  useDocumentTitle('Glossary')
   const [params, setParams] = useSearchParams()
   const focused = params.get('term')
   const [query, setQuery] = useState('')
@@ -64,7 +68,7 @@ export function GlossaryPage() {
           placeholder="Filter terms…"
           className="w-full rounded-xl border border-line bg-card px-4 py-2.5 text-md text-ink placeholder:text-ink-3 focus:border-brand-400 focus:outline-none"
         />
-        <div className="scroll-x mt-2 flex gap-1 pb-1">
+        <ScrollStrip className="mt-2 flex gap-1 pb-1" aria-label="Filter by first letter">
           <button
             type="button"
             onClick={() => setLetter(null)}
@@ -90,7 +94,7 @@ export function GlossaryPage() {
               {l}
             </button>
           ))}
-        </div>
+        </ScrollStrip>
       </div>
 
       {filtered.length === 0 ? (
@@ -122,20 +126,20 @@ export function GlossaryPage() {
                   <span className="text-2xs font-semibold uppercase tracking-[0.08em] text-brand-600 dark:text-brand-400">
                     In plain words:{' '}
                   </span>
-                  {g.simple}
+                  {inline(g.simple)}
                 </p>
 
                 <p className="mt-2 border-t border-line pt-2 text-base leading-relaxed text-ink-2">
                   <span className="text-2xs font-semibold uppercase tracking-[0.08em] text-ink-3">
                     Precisely:{' '}
                   </span>
-                  {g.technical}
+                  {inline(g.technical)}
                 </p>
 
                 {g.example && (
                   <p className="mt-2 rounded-lg bg-sunken px-3.5 py-2.5 text-sm text-ink-2">
                     <span className="font-semibold text-ink">Example: </span>
-                    {g.example}
+                    {inline(g.example)}
                   </p>
                 )}
 

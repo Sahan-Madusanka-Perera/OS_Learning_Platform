@@ -1,0 +1,15 @@
+{
+  "name": "Operating Systems · A/L ICT",
+  "short_name": "OS Course",
+  "description": "A free interactive course on Operating Systems for G.C.E. A/L ICT, Competency 5.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f131b",
+  "theme_color": "#2a67e1",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -98,6 +98,14 @@ const PATHS = {
   code: <><path d="M9 17l-5-5 5-5M15 7l5 5-5 5" /></>,
   globe: <><circle cx="12" cy="12" r="9" /><path d="M3.2 9.5h17.6M3.2 14.5h17.6" /><path d="M12 3a15 15 0 000 18 15 15 0 000-18z" /></>,
   terminal: <><rect x="2.5" y="4" width="19" height="16" rx="2.2" /><path d="M6.5 9.5l3 2.5-3 2.5M12.5 15h5" /></>,
+
+  /* --- credits & sharing --- */
+  heart: <><path d="M12 20.3s-7.8-4.6-7.8-10.4A4.4 4.4 0 0112 7.3a4.4 4.4 0 017.8 2.6c0 5.8-7.8 10.4-7.8 10.4z" /></>,
+  /* Outline after Lucide's github glyph (ISC licence), redrawn on this grid. */
+  github: <><path d="M15 22v-4a4.8 4.8 0 00-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 004 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></>,
+  instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.1" /><path d="M17.3 6.7v.1" /></>,
+  share: <><circle cx="18" cy="5.5" r="2.5" /><circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="18.5" r="2.5" /><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1" /></>,
+  link: <><path d="M10 14a4.5 4.5 0 006.4 0l3.2-3.2a4.5 4.5 0 00-6.4-6.4l-1.1 1.1" /><path d="M14 10a4.5 4.5 0 00-6.4 0l-3.2 3.2a4.5 4.5 0 006.4 6.4l1.1-1.1" /></>,
 } as const
 
 interface Props extends Omit<SVGProps<SVGSVGElement>, 'name'> {

@@ -198,8 +198,8 @@ export function DefragmentationDemo() {
       <p className="mt-3 text-sm leading-relaxed text-ink-2">
         {defragged ? (
           <>
-            Each file's blocks are now <span className="font-medium text-ink">contiguous</span>, so
-            the read/write head sweeps once instead of jumping about — seek time drops and files
+            Each file's blocks are now <span className="font-medium text-ink">contiguous</span>.
+            The read/write head sweeps once instead of jumping about, so seek time drops and files
             open faster. As a side effect the free space has also gathered into one region, though
             that is compaction's goal, not defragmentation's.
           </>
@@ -208,7 +208,7 @@ export function DefragmentationDemo() {
             The three files are scattered. To read one file the disk head must jump across the
             platter repeatedly, which raises <span className="font-medium text-ink">seek time</span>{' '}
             and slows every open, save and backup. Note this matters for{' '}
-            <span className="font-medium text-ink">HDDs only</span> — an SSD has no moving head, and
+            <span className="font-medium text-ink">HDDs only</span>: an SSD has no moving head, and
             defragmenting one simply wears it out.
           </>
         )}

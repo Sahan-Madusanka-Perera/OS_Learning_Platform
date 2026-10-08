@@ -58,12 +58,12 @@ export const questionsM6M7: Question[] = [
     type: 'numeric',
     level: 2,
     prompt:
-      'A computer has a 20-bit address bus and byte-addressable memory. What is the maximum addressable memory, in MB?',
-    answer: 1,
+      'A computer has a 22-bit address bus and byte-addressable memory. What is the maximum addressable memory, in MB?',
+    answer: 4,
     unit: 'MB',
     hint: '2^(bus width) = maximum accessible memory in bytes.',
     explanation:
-      '2²⁰ bytes = 1 MB (since 2²⁰ = 1024 × 1024). This is why the address bus width is a hard limit on how much RAM a system can use — a 32-bit bus gives 2³² = 4 GB.',
+      '2²² bytes = 2² × 2²⁰ bytes = 2² MB = **4 MB**. Every extra address line doubles the memory that can be reached: 20 bits give 1 MB, 21 give 2 MB, 22 give 4 MB.',
     tags: ['addressable-memory'],
   },
   {
@@ -73,8 +73,8 @@ export const questionsM6M7: Question[] = [
     level: 2,
     prompt: 'Match each bus to what it carries.',
     pairs: [
-      { left: 'Data bus', right: 'The actual data — bidirectional' },
-      { left: 'Address bus', right: 'Memory addresses — unidirectional, CPU outward' },
+      { left: 'Data bus', right: 'The actual data: bidirectional' },
+      { left: 'Address bus', right: 'Memory addresses: unidirectional, CPU outward' },
       { left: 'Control bus', right: 'Read, Write, Interrupt, Clock and Reset signals' },
     ],
     explanation:
@@ -97,11 +97,11 @@ export const questionsM6M7: Question[] = [
     optionFeedback: [
       'Parallel is usually faster over short distances.',
       null,
-      'Serial uses *fewer* wires — that is part of its advantage.',
+      'Serial uses *fewer* wires: that is part of its advantage.',
       'That is parallel transmission.',
     ],
     explanation:
-      'Serial transmission sends one bit at a time through a single line. It requires fewer wires and simpler hardware, and suffers less interference and fewer timing issues (skew) over distance — which is why USB, SATA and network communication all use it.',
+      'Serial transmission sends one bit at a time through a single line. It requires fewer wires and simpler hardware, and suffers less interference and fewer timing issues (skew) over distance, which is why USB, SATA and network communication all use it.',
     tags: ['transmission'],
   },
   {
@@ -110,12 +110,12 @@ export const questionsM6M7: Question[] = [
     type: 'numeric',
     level: 4,
     prompt:
-      'A computer’s physical memory is divided into 16384 frames. The frame number and the offset use an equal number of bits. What is the physical memory capacity in MB?',
-    answer: 256,
+      'A computer’s physical memory is divided into 4096 frames. The frame number and the offset use an equal number of bits. What is the physical memory capacity in MB?',
+    answer: 16,
     unit: 'MB',
-    hint: '16384 = 2^? — that gives the frame number bits, and the offset has the same number.',
+    hint: '4096 = 2^? gives the frame number bits, and the offset has the same number.',
     explanation:
-      '16384 = 2¹⁴, so frame number bits = 14. Equal offset bits = 14. Bus width = 14 + 14 = 28. Capacity = 2²⁸ bytes = 2⁸ × 2²⁰ = 2⁸ MB = **256 MB**.',
+      '4096 = 2¹², so frame number bits = 12. Equal offset bits = 12. Bus width = 12 + 12 = 24. Capacity = 2²⁴ bytes = 2⁴ × 2²⁰ = 2⁴ MB = **16 MB**.',
     remediation:
       'Convert everything to a power of 2 first, then just add the exponents.',
     tags: ['addressable-memory', 'calculations'],
@@ -142,7 +142,7 @@ export const questionsM6M7: Question[] = [
       'Internal fragmentation still occurs even with matched sizes.',
     ],
     explanation:
-      'A page must fit exactly into a frame to ensure proper placement in physical memory — if they differed, it would cause internal fragmentation. Equal sizes are also what allows the offset to remain unchanged during address translation.',
+      'A page must fit exactly into a frame to ensure proper placement in physical memory: if they differed, it would cause internal fragmentation. Equal sizes are also what allows the offset to remain unchanged during address translation.',
     tags: ['paging'],
   },
   {
@@ -151,12 +151,12 @@ export const questionsM6M7: Question[] = [
     type: 'numeric',
     level: 3,
     prompt:
-      'A computer system has virtual memory divided into 4096 pages. Each page is 4 MB. What is the total virtual memory capacity, in GB?',
-    answer: 16,
+      'A computer system has virtual memory divided into 1024 pages. Each page is 2 MB. What is the total virtual memory capacity, in GB?',
+    answer: 2,
     unit: 'GB',
     hint: 'Convert both to powers of 2 before multiplying.',
     explanation:
-      'Capacity = page size × number of pages = 4 MB × 4096 = 2²² × 2¹² = 2³⁴ bytes = 2⁴ × 2³⁰ = 2⁴ GB = **16 GB**.',
+      'Capacity = page size × number of pages = 2 MB × 1024 = 2²¹ × 2¹⁰ = 2³¹ bytes = 2¹ × 2³⁰ = **2 GB**.',
     remediation:
       'Convert to powers of 2, then multiplying means adding exponents. No calculator needed.',
     tags: ['paging', 'calculations'],
@@ -166,11 +166,11 @@ export const questionsM6M7: Question[] = [
     lessonId: 'l6-3',
     type: 'numeric',
     level: 3,
-    prompt: 'A 2 GB virtual memory is divided into 512 KB pages. How many pages are there?',
-    answer: 4096,
+    prompt: 'A 4 GB virtual memory is divided into 256 KB pages. How many pages are there?',
+    answer: 16384,
     unit: 'pages',
     explanation:
-      'Number of pages = capacity ÷ page size = 2 GB ÷ 512 KB = 2³¹ ÷ 2¹⁹ = 2¹² = **4096 pages**.',
+      'Number of pages = capacity ÷ page size = 4 GB ÷ 256 KB = 2³² ÷ 2¹⁸ = 2¹⁴ = **16384 pages**.',
     tags: ['paging', 'calculations'],
   },
   {
@@ -178,11 +178,11 @@ export const questionsM6M7: Question[] = [
     lessonId: 'l6-3',
     type: 'numeric',
     level: 2,
-    prompt: 'A system uses pages of size 8 KB. How many bits are required for the offset?',
-    answer: 13,
+    prompt: 'A system uses pages of size 32 KB. How many bits are required for the offset?',
+    answer: 15,
     unit: 'bits',
     explanation:
-      '2^(offset bits) = page size in bytes. 8 KB = 2³ × 2¹⁰ = 2¹³ bytes, so **13 offset bits** are needed.',
+      '2^(offset bits) = page size in bytes. 32 KB = 2⁵ × 2¹⁰ = 2¹⁵ bytes, so **15 offset bits** are needed.',
     tags: ['paging', 'calculations'],
   },
   {
@@ -224,7 +224,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     explanation:
-      'Only the page number is replaced by the frame number. The offset is preserved byte-for-byte, because a page and a frame are the same size — so a byte 232 positions into its page is still 232 positions into its frame.',
+      'Only the page number is replaced by the frame number. The offset is preserved byte-for-byte, because a page and a frame are the same size, so a byte 232 positions into its page is still 232 positions into its frame.',
     remediation:
       'This is the single most common place students lose marks. The offset never changes.',
     tags: ['address-translation'],
@@ -247,11 +247,11 @@ export const questionsM6M7: Question[] = [
     type: 'numeric',
     level: 3,
     prompt:
-      'A logical address is byte 1000 and the page size is 256 bytes. What is the page number?',
-    answer: 3,
+      'A logical address is byte 2500 and the page size is 512 bytes. What is the page number?',
+    answer: 4,
     hint: 'Page number = logical address ÷ page size, taking the integer part.',
     explanation:
-      '1000 ÷ 256 = 3.90625 → take the integer part → page number = **3**. The offset is 1000 mod 256 = 232, so address 1000 sits at page 3, offset 232.',
+      '2500 ÷ 512 = 4.88… → take the integer part → page number = **4**. The offset is 2500 mod 512 = 2500 − 2048 = 452, so address 2500 sits at page 4, offset 452.',
     tags: ['address-translation', 'calculations'],
   },
   {
@@ -260,18 +260,18 @@ export const questionsM6M7: Question[] = [
     type: 'mcq',
     level: 4,
     prompt:
-      'The CPU wants virtual address `0x4F5DE`. The page number is `0x4F` and it maps to frame `0x35`. What is the physical address?',
-    options: ['0x354F5DE', '0x355DE', '0x4F355DE', '0x5DE', 'None of the above'],
+      'The CPU wants virtual address `0x7A2C4`. The page number is `0x7A` and it maps to frame `0x1D`. What is the physical address?',
+    options: ['0x1D7A2C4', '0x1D2C4', '0x7A1D2C4', '0x2C4', 'None of the above'],
     correct: 1,
     optionFeedback: [
       'You have prepended the frame number instead of replacing the page number.',
       null,
-      'Both the page number and the frame number appear — the page number must be replaced, not kept.',
+      'Both the page number and the frame number appear: the page number must be replaced, not kept.',
       'The frame number is missing entirely.',
       'One of the options above is correct.',
     ],
     explanation:
-      'The page number `4F` is replaced by the frame number `35`, and the offset `5DE` is preserved exactly. `0x35` + `5DE` = **0x355DE**.',
+      'The page number `7A` is replaced by the frame number `1D`, and the offset `2C4` is preserved exactly. `0x1D` + `2C4` = **0x1D2C4**.',
     remediation:
       'Replace, do not append. The physical address has exactly the same number of offset digits as the virtual one.',
     tags: ['address-translation', 'calculations'],
@@ -351,7 +351,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'That is context-switching overhead — a scheduling problem.',
+      'That is context-switching overhead: a scheduling problem.',
       null,
       'That is a crash loop, not a memory management concept.',
       'That is the seek-time cost of disk fragmentation.',
@@ -380,7 +380,7 @@ export const questionsM6M7: Question[] = [
       'A TLB hit still requires the page to be resident; it cannot prevent faults.',
     ],
     explanation:
-      'Without a TLB, every memory access would cost two: one to read the page table, one to fetch the data. The TLB is a small, very fast cache of recently used page table entries, so most translations are found instantly — a TLB hit.',
+      'Without a TLB, every memory access would cost two: one to read the page table, one to fetch the data. The TLB is a small, very fast cache of recently used page table entries, so most translations are found instantly: a TLB hit.',
     tags: ['tlb'],
   },
 
@@ -393,19 +393,19 @@ export const questionsM6M7: Question[] = [
     prompt: 'What is a device driver?',
     options: [
       'A hardware component that interfaces between the system and a device',
-      'Utility software that lets the OS communicate with a device by translating general instructions into device-specific commands',
+      'System software that lets the OS communicate with a device by translating general instructions into device-specific commands',
       'The physical cable connecting a device to the computer',
       'A process that runs a peripheral device',
     ],
     correct: 1,
     optionFeedback: [
-      'That is the device controller — the hardware half.',
+      'That is the device controller: the hardware half.',
       null,
       'Cables carry signals; drivers are software.',
       'Drivers are software components, not processes in their own right.',
     ],
     explanation:
-      'A device driver is utility software. Without drivers, the OS cannot understand how to use a device. The hardware counterpart is the device controller, which manages the electronic communication between the device and the CPU.',
+      'A device driver is system software. Without drivers, the OS cannot understand how to use a device. The hardware counterpart is the device controller, which manages the electronic communication between the device and the CPU.',
     tags: ['device-driver'],
   },
   {
@@ -451,7 +451,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     explanation:
-      'In the 1970s and 1980s storage was mainly floppy disks, and computers often had two floppy disk drives — so A: and B: were taken. That is why the primary hard disk, where the OS is installed, conventionally starts at C:.',
+      'In the 1970s and 1980s storage was mainly floppy disks, and computers often had two floppy disk drives, so A: and B: were taken. That is why the primary hard disk, where the OS is installed, conventionally starts at C:.',
     tags: ['drive-letter'],
   },
   {
@@ -487,7 +487,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     explanation:
-      'Spooling — Simultaneous Peripheral Operations On-Line — queues I/O data from multiple processes in **secondary storage** so a peripheral can process jobs sequentially while the CPU continues executing other processes. The disk location is the key difference from buffering.',
+      'Spooling, Simultaneous Peripheral Operations On-Line, queues I/O data from multiple processes in **secondary storage** so a peripheral can process jobs sequentially while the CPU continues executing other processes. The disk location is the key difference from buffering.',
     tags: ['spooling'],
   },
   {
@@ -520,7 +520,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'The printer runs at exactly the same speed — what changes is what the CPU does meanwhile.',
+      'The printer runs at exactly the same speed: what changes is what the CPU does meanwhile.',
       null,
       'Spooling *requires* additional disk space; that is a named disadvantage.',
       'Drivers are still needed to talk to the device.',
@@ -545,7 +545,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'The shell is the interface layer — the kernel sits beneath it.',
+      'The shell is the interface layer: the kernel sits beneath it.',
       null,
       'That is BIOS/UEFI, which is not part of the OS at all.',
       'Applications run *on top of* the kernel’s services.',
@@ -590,7 +590,7 @@ export const questionsM6M7: Question[] = [
     ],
     correct: [0, 1, 3, 4],
     explanation:
-      'The kernel’s five main functions are process management, memory management, device management, file management and system call handling. Compiling is done by a compiler — system software, but not part of the kernel.',
+      'The kernel’s five main functions are process management, memory management, device management, file management and system call handling. Compiling is done by a compiler: system software, but not part of the kernel.',
     tags: ['kernel'],
   },
 ]

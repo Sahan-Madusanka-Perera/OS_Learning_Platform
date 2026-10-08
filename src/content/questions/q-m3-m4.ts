@@ -16,7 +16,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: 1,
     explanation:
-      'Data refers to raw facts, figures or symbols which may have no meaning until processed. A file is a named collection of related information — the container holding that content.',
+      'Data refers to raw facts, figures or symbols which may have no meaning until processed. A file is a named collection of related information: the container holding that content.',
     tags: ['files'],
   },
   {
@@ -27,7 +27,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Renaming `song.mp3` to `song.txt` converts the audio into text.',
     correct: false,
     explanation:
-      'The extension only tells the operating system which application should open the file. The bytes inside are completely unchanged — Notepad will simply display them as gibberish.',
+      'The extension only tells the operating system which application should open the file. The bytes inside are completely unchanged: Notepad will simply display them as gibberish.',
     remediation:
       'The extension is a label the OS reads, not a transformation of the contents.',
     tags: ['file-types'],
@@ -53,7 +53,7 @@ export const questionsM3M4: Question[] = [
       'File systems never merge file contents.',
     ],
     explanation:
-      'Each file in a directory must have a unique name. If two files have the same name and extension, saving the second overwrites the first — which is exactly why unique naming matters.',
+      'Each file in a directory must have a unique name. If two files have the same name and extension, saving the second overwrites the first, which is exactly why unique naming matters.',
     tags: ['files', 'file-name'],
   },
 
@@ -110,7 +110,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: 1,
     explanation:
-      'The root directory is the topmost directory — the starting point from which all other files and folders branch out. Every file and directory in the system is located inside it, directly or indirectly. Examples: `/` on Unix-like systems, `C:\\` on Windows.',
+      'The root directory is the topmost directory: the starting point from which all other files and folders branch out. Every file and directory in the system is located inside it, directly or indirectly. Examples: `/` on Unix-like systems, `C:\\` on Windows.',
     tags: ['directories'],
   },
   {
@@ -139,7 +139,7 @@ export const questionsM3M4: Question[] = [
     prompt:
       'A website is developed on a laptop and all image references use absolute paths like `C:\\site\\images\\logo.png`. What happens when the site is uploaded to a web server?',
     options: [
-      'It works normally — the server copies the paths',
+      'It works normally: the server copies the paths',
       'The images break, because the server has no `C:\\site\\images` folder',
       'The images load more slowly but still appear',
       'The server automatically converts the paths to relative ones',
@@ -148,7 +148,7 @@ export const questionsM3M4: Question[] = [
     optionFeedback: [
       'The paths refer to a location that only exists on the developer’s laptop.',
       null,
-      'They will not appear at all — there is nothing at that location.',
+      'They will not appear at all: there is nothing at that location.',
       'No server does this; the path is just text in the HTML.',
     ],
     explanation:
@@ -165,7 +165,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Order these directory structures from simplest to most flexible.',
     items: ['Single-level directory', 'Two-level directory', 'Hierarchical directory'],
     explanation:
-      'Single-level puts everything in one directory (every file needs a globally unique name). Two-level allows top-level directories each holding files. Hierarchical allows directories inside directories to any depth — flexible, scalable, and what every modern OS uses.',
+      'Single-level puts everything in one directory (every file needs a globally unique name). Two-level allows top-level directories each holding files. Hierarchical allows directories inside directories to any depth: flexible, scalable, and what every modern OS uses.',
     tags: ['directories'],
   },
 
@@ -189,9 +189,9 @@ export const questionsM3M4: Question[] = [
       'Permissions are file attributes; the directory entry is about locating the file.',
     ],
     explanation:
-      'A directory does not contain files the way a box contains objects — the data sits elsewhere on the disk. The directory entry is the row the folder keeps for each file: its name, plus whatever the allocation method needs to find the data (a starting block, a length, or an index block address).',
+      'A directory does not contain files the way a box contains objects: the data sits elsewhere on the disk. The directory entry is the row the folder keeps for each file: its name, plus whatever the allocation method needs to find the data (a starting block, a length, or an index block address).',
     remediation:
-      'This is why moving a file within one disk is instant but copying it is slow: moving rewrites one directory entry, copying duplicates every block.',
+      'This is why moving a file within one drive is instant but copying it is slow: moving rewrites one directory entry, copying duplicates every block.',
     tags: ['directories', 'directory-entry'],
   },
 
@@ -228,11 +228,11 @@ export const questionsM3M4: Question[] = [
     type: 'numeric',
     level: 3,
     prompt:
-      'A disk uses 8 KB blocks. A file is 20 KB. How much space is wasted as internal fragmentation?',
-    answer: 4,
+      'A disk uses 16 KB blocks. A file is 50 KB. How much space is wasted as internal fragmentation?',
+    answer: 14,
     unit: 'KB',
     explanation:
-      '20 ÷ 8 = 2.5 → 3 blocks. 3 × 8 = 24 KB allocated. 24 − 20 = 4 KB wasted inside the last block.',
+      '50 ÷ 16 = 3.125 → 4 blocks. 4 × 16 = 64 KB allocated. 64 − 50 = 14 KB wasted inside the last block.',
     remediation:
       'Three steps every time: blocks needed (round up) → space allocated (blocks × block size) → waste (allocated − file size).',
     tags: ['internal-fragmentation'],
@@ -269,7 +269,7 @@ export const questionsM3M4: Question[] = [
       'Only the method that demands an unbroken run can be defeated by scattered free space.',
     ],
     explanation:
-      'Contiguous allocation requires a file to occupy one unbroken run of blocks. When deletions leave scattered gaps, a large file may not fit even though the total free space is sufficient — that is external fragmentation. Linked and indexed allocation are immune, because they can use any free block anywhere.',
+      'Contiguous allocation requires a file to occupy one unbroken run of blocks. When deletions leave scattered gaps, a large file may not fit even though the total free space is sufficient: that is external fragmentation. Linked and indexed allocation are immune, because they can use any free block anywhere.',
     tags: ['allocation', 'external-fragmentation'],
   },
   {
@@ -280,7 +280,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Why does linked allocation give slow access?',
     options: [
       'Because the pointers take up too much disk space',
-      'Because you must follow the chain from the first block — there is no way to jump directly to block N',
+      'Because you must follow the chain from the first block: there is no way to jump directly to block N',
       'Because the blocks are always at the far end of the disk',
       'Because the index block must be read first',
     ],
@@ -288,7 +288,7 @@ export const questionsM3M4: Question[] = [
     optionFeedback: [
       'Pointer overhead is a real disadvantage, but it costs space, not speed.',
       null,
-      'Blocks can be anywhere — position is not the issue.',
+      'Blocks can be anywhere: position is not the issue.',
       'Index blocks belong to *indexed* allocation, not linked.',
     ],
     explanation:
@@ -303,7 +303,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Match each allocation method to what its directory entry stores.',
     pairs: [
       { left: 'Contiguous', right: 'File name + starting block + length' },
-      { left: 'Linked', right: 'File name + starting block + size' },
+      { left: 'Linked', right: 'File name + starting block only (each block points to the next)' },
       { left: 'Indexed', right: 'File name + index block' },
     ],
     explanation:
@@ -316,12 +316,12 @@ export const questionsM3M4: Question[] = [
     type: 'mcq',
     level: 4,
     prompt:
-      'A video editing system stores very large files that must support random access — jumping instantly to any point. Which allocation method is most appropriate?',
+      'A video editing system stores very large files that must support random access, jumping instantly to any point. Which allocation method is most appropriate?',
     options: ['Contiguous', 'Linked', 'Indexed', 'Any of them would work equally well'],
     correct: 2,
     optionFeedback: [
       'Contiguous gives fast access but a very large file may never find an unbroken run big enough, and it cannot grow.',
-      'Linked gives sequential access only — jumping to the middle means walking the whole chain.',
+      'Linked gives sequential access only, jumping to the middle means walking the whole chain.',
       null,
       'They differ substantially on exactly this requirement.',
     ],
@@ -337,7 +337,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Indexed allocation has no overhead at all.',
     correct: false,
     explanation:
-      'Indexed allocation avoids the *pointer* overhead of linked allocation, but each file requires an extra index block — and the size of that index block limits the maximum file size. Those are its two named disadvantages.',
+      'Indexed allocation avoids the *pointer* overhead of linked allocation, but each file requires an extra index block, and the size of that index block limits the maximum file size. Those are its two named disadvantages.',
     tags: ['allocation', 'indexed'],
   },
 
@@ -348,18 +348,18 @@ export const questionsM3M4: Question[] = [
     type: 'mcq',
     level: 3,
     prompt:
-      'A disk has 8 KB blocks. The FAT shows: 150→151, 151→152, 152→−1, 153→154, 154→155, 155→156. A file starts at block 150. What is the directory entry and the disk space allocated?',
-    options: ['150, 16 KB', '150, 24 KB', '151, 16 KB', '152, 8 KB', '150, 32 KB'],
+      'A disk has 4 KB blocks. The FAT shows: 210→212, 211→214, 212→213, 213→215, 214→−1, 215→−1. A file starts at block 210. What is the directory entry and the disk space allocated?',
+    options: ['210, 12 KB', '210, 16 KB', '215, 16 KB', '210, 24 KB', '212, 16 KB'],
     correct: 1,
     optionFeedback: [
-      'The directory entry is right, but count the blocks again: 150 → 151 → 152 is three blocks, not two.',
+      'The directory entry is right, but count again: 210 → 212 → 213 → 215 is four blocks, not three.',
       null,
-      'The directory entry is the *first* block of the file, which is 150.',
-      'Block 152 is where the chain *ends*, not where it starts.',
-      'The chain is only three blocks long, so 32 KB would need four.',
+      'Block 215 is where the chain ends. The directory entry holds the FIRST block.',
+      'That counts every row in the table. Rows 211 and 214 belong to a different file.',
+      'Block 212 is the second block of the file, not the first.',
     ],
     explanation:
-      'By the standard rules: the directory entry contains the block number of the first block = **150**. Following the chain: 150 → 151 → 152 → −1, so three blocks are used. 3 × 8 KB = **24 KB**. Blocks 153, 154 and 155 belong to another file entirely.',
+      'By the standard rules: the directory entry contains the block number of the first block = **210**. Following the chain: 210 → 212 → 213 → 215 → −1, so four blocks are used. 4 × 4 KB = **16 KB**. Rows 211 and 214 form a different file’s chain (211 → 214 → −1).',
     remediation:
       'Two things to get right: the directory entry is the FIRST block, and the space answer must be blocks × block size.',
     tags: ['fat', 'fat-chaining'],
@@ -370,12 +370,12 @@ export const questionsM3M4: Question[] = [
     type: 'numeric',
     level: 4,
     prompt:
-      'A disk has 8 KB blocks. The FAT shows: 310→311, 311→315, 312→−1, 313→314, 314→316, 315→−1. The file `report.txt` starts at block 310. How much disk space is allocated to it, in KB?',
-    answer: 24,
+      'A disk has 16 KB blocks. The FAT shows: 520→523, 521→−1, 522→521, 523→525, 524→526, 525→−1. The file `data.csv` starts at block 522. How much disk space is allocated to it, in KB?',
+    answer: 32,
     unit: 'KB',
-    hint: 'Follow the chain from 310. Ignore any −1 you did not reach by following it.',
+    hint: 'Follow the chain from 522. A pointer can lead to a lower block number.',
     explanation:
-      'The chain is 310 → 311 → 315 → −1, so three blocks. 3 × 8 KB = 24 KB. The −1 in row 312 belongs to a different file — you never reach it by following this chain, so it is irrelevant.',
+      'The chain is 522 → 521 → −1, so two blocks. 2 × 16 KB = 32 KB. The next block can have a lower number, because a file’s blocks go wherever free space was. Rows 520, 523 and 525 are another file’s chain, and 524 belongs to yet another.',
     remediation:
       'Never scan the table looking for −1. Always start at the given block and follow the pointers.',
     tags: ['fat', 'fat-chaining'],
@@ -395,7 +395,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: [0, 1, 3, 4],
     explanation:
-      'Universal compatibility is FAT’s advantage, not NTFS’s — it is precisely why cameras, printers and consoles still use FAT. NTFS improves on security, size limits, compression, fault tolerance and Unicode support.',
+      'Universal compatibility is FAT’s advantage, not NTFS’s: it is precisely why cameras, printers and consoles still use FAT. NTFS improves on security, size limits, compression, fault tolerance and Unicode support.',
     tags: ['ntfs', 'fat'],
   },
   {
@@ -431,7 +431,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'That is disk **compaction** — its focus is free space, not file blocks.',
+      'That is disk **compaction**: its focus is free space, not file blocks.',
       null,
       'That is disk cleanup, a different utility entirely.',
       'That is backup software.',
@@ -448,7 +448,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'Defragmenting an SSD regularly improves its performance.',
     correct: false,
     explanation:
-      'Defragmentation exists to reduce seek time — the physical movement of a read/write head across a platter. An SSD has no moving head, so there is nothing to gain, and the extra write operations shorten its lifespan.',
+      'Defragmentation exists to reduce seek time: the physical movement of a read/write head across a platter. An SSD has no moving head, so there is nothing to gain, and the extra write operations shorten its lifespan.',
     remediation:
       'Defragmentation is for HDDs only. The syllabus is explicit: run disk defragmentation only for HDDs, not SSDs.',
     tags: ['defragmentation'],
@@ -468,7 +468,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Fragmentation does not change a file’s size — only where its pieces sit.',
+      'Fragmentation does not change a file’s size, only where its pieces sit.',
       null,
       'Fragmented files can be read perfectly well; they are just slower to read.',
       'Fragmentation is a performance problem, not a corruption problem.',
@@ -495,7 +495,7 @@ export const questionsM3M4: Question[] = [
     optionFeedback: [
       'That is partitioning.',
       null,
-      'That is drive wiping — formatting does not overwrite repeatedly.',
+      'That is drive wiping: formatting does not overwrite repeatedly.',
       'That is defragmentation.',
     ],
     explanation:
@@ -510,10 +510,10 @@ export const questionsM3M4: Question[] = [
     prompt:
       'A company is disposing of old computers containing confidential client records. Is formatting the drives sufficient?',
     options: [
-      'Yes — formatting removes all data permanently',
-      'No — they should use drive wipe software, which overwrites data multiple times',
+      'Yes: formatting removes all data permanently',
+      'No: they should use drive wipe software, which overwrites data multiple times',
       'Yes, provided they format twice',
-      'No — they should defragment the drives first',
+      'No: they should defragment the drives first',
     ],
     correct: 1,
     optionFeedback: [
@@ -523,7 +523,7 @@ export const questionsM3M4: Question[] = [
       'Defragmentation rearranges files; it does nothing for security.',
     ],
     explanation:
-      'Unlike formatting, wiping destroys data completely. Drive wipe software permanently deletes all data by overwriting it multiple times, making recovery nearly impossible — which is exactly why it is used for securely disposing of old computers.',
+      'Unlike formatting, wiping destroys data completely. Drive wipe software permanently deletes all data by overwriting it multiple times, making recovery nearly impossible, which is exactly why it is used for securely disposing of old computers.',
     tags: ['formatting', 'security'],
   },
   {
@@ -541,7 +541,7 @@ export const questionsM3M4: Question[] = [
     ],
     correct: [0, 1, 3],
     explanation:
-      'Different file systems on different partitions is an *advantage* of partitioning, not a limitation. And confining problems to one partition is also an advantage — a virus or corruption in one partition may not affect others.',
+      'Different file systems on different partitions is an *advantage* of partitioning, not a limitation. And confining problems to one partition is also an advantage: a virus or corruption in one partition may not affect others.',
     tags: ['partitioning'],
   },
 
@@ -566,16 +566,16 @@ export const questionsM3M4: Question[] = [
     level: 4,
     prompt:
       'Ransomware encrypts a company’s files. Nobody unauthorised has read them and nobody has altered their contents. Which security principle has been violated?',
-    options: ['Confidentiality', 'Integrity', 'Availability', 'None — the files are unchanged'],
+    options: ['Confidentiality', 'Integrity', 'Availability', 'None, because the files are unchanged'],
     correct: 2,
     optionFeedback: [
       'Confidentiality is about unauthorised *access*, which has not happened here.',
-      'Integrity is about unauthorised *alteration of content* — the underlying data is intact, just locked.',
+      'Integrity is about unauthorised *alteration of content*: the underlying data is intact, just locked.',
       null,
       'Being unable to open your own files is very much a security failure.',
     ],
     explanation:
-      'Availability means authorised users can access files when needed. Ransomware attacks availability specifically — which is why backups, not just access control, are part of file security.',
+      'Availability means authorised users can access files when needed. Ransomware attacks availability specifically, which is why backups, not just access control, are part of file security.',
     remediation:
       'Three questions: Can the wrong people read it? (confidentiality) Can they change it? (integrity) Can the right people get to it? (availability)',
     tags: ['file-security'],
@@ -588,7 +588,7 @@ export const questionsM3M4: Question[] = [
     prompt: 'What does a File Control Block store?',
     options: [
       'The contents of an open file',
-      'Information about an open file — driver name, file name, type, current block number, size and timestamps',
+      'Information about an open file: drive name, file name, type, current block number, size and timestamps',
       'A list of all files on the disk',
       'The encryption key for a protected file',
     ],

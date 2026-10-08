@@ -15,7 +15,7 @@ export const m7: Module = {
       moduleId: 'm7',
       title: 'How the OS manages input and output devices',
       summary:
-        'Device controllers and device drivers — the hardware and software halves of talking to a keyboard, a printer or a disk.',
+        'Device controllers and device drivers: the hardware and software halves of talking to a keyboard, a printer or a disk.',
       whyItMatters:
         '"Briefly describes how an OS manages input and output devices" is a named learning outcome, and it has a clean two-part answer: controllers and drivers.',
       objectives: [
@@ -40,8 +40,8 @@ export const m7: Module = {
           title: 'What device management does',
           style: 'check',
           items: [
-            'Controls input devices — keyboard, mouse, scanner',
-            'Controls output devices — monitor, printer, speakers',
+            'Controls input devices: keyboard, mouse, scanner',
+            'Controls output devices: monitor, printer, speakers',
             'Allocates devices to programs when needed',
             'Handles device errors and interrupts',
           ],
@@ -49,13 +49,13 @@ export const m7: Module = {
         {
           kind: 'keyIdea',
           title: 'Two components do the work',
-          text: 'The OS manages devices using **device controllers** (hardware) and **device drivers** (software). One question, two named answers — that is how the marks are allocated.',
+          text: 'The OS manages devices using **device controllers** (hardware) and **device drivers** (software). One question, two named answers: that is how the marks are allocated.',
         },
         {
           kind: 'compare',
           headers: ['', '[[device-controller|Device controller]]', '[[device-driver|Device driver]]'],
           rows: [
-            ['What it is', 'A **hardware** component', '**Utility software**'],
+            ['What it is', 'A **hardware** component', '**Software** (a type of system software)'],
             [
               'Its role',
               'Acts as an interface between the computer system and a specific hardware device. Manages the electronic communication between the device and the CPU.',
@@ -72,7 +72,7 @@ export const m7: Module = {
           kind: 'analogy',
           title: 'A translator and a telephone',
           everyday:
-            'You want to speak to someone who only speaks Japanese. The **telephone** is the physical equipment that carries your voice — that is the device controller. The **interpreter** who converts your English into Japanese is the driver. Change to a Korean speaker and you need a different interpreter — but the same telephone.',
+            'You want to speak to someone who only speaks Japanese. The **telephone** is the physical equipment that carries your voice: that is the device controller. The **interpreter** who converts your English into Japanese is the driver. Change to a Korean speaker and you need a different interpreter, but the same telephone.',
           mapsTo:
             'That is exactly why every different printer model needs its own driver, but they all connect through the same USB controller. The driver knows the language of one specific device.',
         },
@@ -80,7 +80,7 @@ export const m7: Module = {
           kind: 'misconception',
           wrong: 'A device driver is hardware, because it comes with the device.',
           right:
-            'A device driver is **software** — specifically, utility software. The hardware part is the device controller, which sits on the motherboard or inside the device itself.',
+            'A device driver is **software**: system software that the OS loads to talk to the device. The hardware part is the device controller, which sits on the motherboard or inside the device itself.',
         },
         {
           kind: 'recall',
@@ -108,7 +108,7 @@ export const m7: Module = {
       moduleId: 'm7',
       title: 'Device drivers, Plug and Play, and drive letters',
       summary:
-        'How installing a driver went from inserting a floppy disk to plugging in a cable — and why your USB stick is sometimes E: and sometimes F:.',
+        'How installing a driver went from inserting a floppy disk to plugging in a cable, and why your USB stick is sometimes E: and sometimes F:.',
       whyItMatters:
         '"Installs appropriate device drivers when connecting a peripheral" is a practical learning outcome. Understanding the evolution explains why you rarely have to do it manually any more.',
       objectives: [
@@ -169,7 +169,7 @@ export const m7: Module = {
           term: 'Drive letter',
           simple: 'The letter Windows uses to name each drive, like C: or D:.',
           technical:
-            'A single alphabetical letter assigned by the operating system — especially Microsoft Windows — to identify a storage device or partition. Each storage device or partition is assigned a letter followed by a colon.',
+            'A single alphabetical letter assigned by the operating system, especially Microsoft Windows, to identify a storage device or partition. Each storage device or partition is assigned a letter followed by a colon.',
         },
         {
           kind: 'steps',
@@ -191,7 +191,7 @@ export const m7: Module = {
             ],
             [
               '**A: and B:**',
-              'Historically reserved for floppy disk drives. In early computers during the 1970s and 1980s, storage was mainly floppy disks and computers often had two floppy drives — so the first two letters were taken.',
+              'Historically reserved for floppy disk drives. In early computers during the 1970s and 1980s, storage was mainly floppy disks and computers often had two floppy drives, so the first two letters were taken.',
             ],
           ],
         },
@@ -200,16 +200,16 @@ export const m7: Module = {
           headers: ['Advantages of drive letters', 'Disadvantages'],
           rows: [
             [
-              '**Easy to identify storage devices** — a simple way to recognise different devices',
-              '**Limited number of letters** — only 26 (A–Z). Servers with many storage devices may run out.',
+              '**Easy to identify storage devices**: a simple way to recognise different devices',
+              '**Limited number of letters**: only 26 (A–Z). Servers with many storage devices may run out.',
             ],
             [
-              '**Simple file navigation** — file paths become easy to understand and use, e.g. `C:\\Users\\Student\\Documents`',
-              '**Drive letters may change** — when removable devices such as USB drives are connected, the letter assigned may differ from last time.',
+              '**Simple file navigation**: file paths become easy to understand and use, e.g. `C:\\Users\\Student\\Documents`',
+              '**Drive letters may change**: when removable devices such as USB drives are connected, the letter assigned may differ from last time.',
             ],
             [
-              '**Supports multiple storage devices** — the OS can manage many devices at once',
-              '—',
+              '**Supports multiple storage devices**: the OS can manage many devices at once',
+              '',
             ],
           ],
         },
@@ -240,7 +240,7 @@ export const m7: Module = {
       moduleId: 'm7',
       title: 'Spooling and buffering',
       summary:
-        'Two ways to stop a slow device holding up a fast CPU — and the difference between them, which is a guaranteed exam question.',
+        'Two ways to stop a slow device holding up a fast CPU, and the difference between them, which is a guaranteed exam question.',
       whyItMatters:
         '"Briefly describes spooling" is a named learning outcome, and spooling vs buffering is an easy comparison to get right if you remember one thing: where the data is stored.',
       objectives: [
@@ -259,11 +259,11 @@ export const m7: Module = {
           simple:
             'Queueing jobs on disk so a slow device can work through them while the CPU gets on with other things.',
           technical:
-            'Simultaneous Peripheral Operations On-Line — an operating system technique in which I/O data from multiple processes is queued in secondary storage (disk) so that a peripheral device can process the jobs sequentially while the CPU continues executing other processes.',
+            'Simultaneous Peripheral Operations On-Line: an operating system technique in which I/O data from multiple processes is queued in secondary storage (disk) so that a peripheral device can process the jobs sequentially while the CPU continues executing other processes.',
         },
         {
           kind: 'keyIdea',
-          text: 'Without spooling, the CPU must wait until the peripheral device finishes the current job — which reduces overall system efficiency.',
+          text: 'Without spooling, the CPU must wait until the peripheral device finishes the current job, which reduces overall system efficiency.',
         },
         {
           kind: 'viz',
@@ -279,7 +279,7 @@ export const m7: Module = {
             { title: 'Multiple programs send print jobs', detail: '' },
             {
               title: 'The operating system stores each job in a spool file on disk',
-              detail: 'Not in main memory — on secondary storage.',
+              detail: 'Not in main memory, on secondary storage.',
             },
             { title: 'A print spooler manages the job queue', detail: '' },
             {
@@ -338,7 +338,7 @@ export const m7: Module = {
         },
         {
           kind: 'compare',
-          title: 'Spooling vs buffering — the comparison to memorise',
+          title: 'Spooling vs buffering: the comparison to memorise',
           headers: ['Feature', 'Spooling', 'Buffering'],
           rows: [
             ['**Storage used**', 'Disk (secondary storage)', 'Main memory (RAM)'],
@@ -351,7 +351,7 @@ export const m7: Module = {
           kind: 'analogy',
           title: 'A restaurant',
           everyday:
-            '**Buffering** is the small hot plate under the serving hatch: a dish sits there for a moment between the chef finishing it and the waiter collecting it — tiny, in the kitchen, smoothing out a mismatch of seconds. **Spooling** is the order pad: fifty orders written down and worked through in turn, kept somewhere else entirely, so the waiters can keep taking orders while the kitchen catches up.',
+            '**Buffering** is the small hot plate under the serving hatch: a dish sits there for a moment between the chef finishing it and the waiter collecting it. It is tiny, it is in the kitchen, and it smooths out a mismatch of seconds. **Spooling** is the order pad: fifty orders written down and worked through in turn, kept somewhere else entirely, so the waiters can keep taking orders while the kitchen catches up.',
           mapsTo:
             'Buffer = small, in RAM, speed mismatch. Spool = large, on disk, device queue. Two different problems.',
         },
@@ -360,7 +360,7 @@ export const m7: Module = {
           prompt:
             'State the two clearest differences between spooling and buffering.',
           answer:
-            'Where the data is stored — spooling uses disk (secondary storage), buffering uses main memory. And the purpose — spooling manages slow devices with a job queue, buffering handles a speed mismatch between two components. Spooling also handles larger amounts of data.',
+            'Where the data is stored: spooling uses disk (secondary storage), buffering uses main memory. And the purpose: spooling manages slow devices with a job queue, buffering handles a speed mismatch between two components. Spooling also handles larger amounts of data.',
         },
         {
           kind: 'quickCheck',
@@ -383,7 +383,7 @@ export const m7: Module = {
       summary:
         'What sits at the very core of the OS, the three kernel designs, and the OS brands you should be able to name.',
       whyItMatters:
-        'The kernel ties every function in this unit together — process, memory, device and file management are all kernel jobs. And "name an OS used for X" is a free mark if you have the examples ready.',
+        'The kernel ties every function in this unit together: process, memory, device and file management are all kernel jobs. And "name an OS used for X" is a free mark if you have the examples ready.',
       objectives: [
         'Define the kernel and list its main functions',
         'Distinguish monolithic, micro and hybrid kernels',
@@ -397,7 +397,7 @@ export const m7: Module = {
         {
           kind: 'definition',
           term: 'Operating system kernel',
-          simple: 'The innermost part of the OS — the bit that talks straight to the hardware.',
+          simple: 'The innermost part of the OS: the bit that talks straight to the hardware.',
           technical:
             'The core part of an operating system that directly interacts with the computer hardware and manages system resources.',
         },
@@ -406,17 +406,17 @@ export const m7: Module = {
           title: 'Main functions of the kernel',
           style: 'number',
           items: [
-            '**Process management** — controls the creation, scheduling and termination of processes',
-            '**Memory management** — allocates and deallocates memory to programs',
-            '**Device management** — communicates with hardware devices through device drivers',
-            '**File management** — manages files and storage devices',
-            '**[[system-call|System call]] handling** — provides an interface between user programs and hardware',
+            '**Process management**: controls the creation, scheduling and termination of processes',
+            '**Memory management**: allocates and deallocates memory to programs',
+            '**Device management**: communicates with hardware devices through device drivers',
+            '**File management**: manages files and storage devices',
+            '**[[system-call|System call]] handling**: provides an interface between user programs and hardware',
           ],
         },
         {
           kind: 'keyIdea',
           title: 'You have already learned all five',
-          text: 'Those five functions are Modules 3–7 of this course. The kernel is where they all live — everything you have studied since Module 3 is a description of what the kernel does.',
+          text: 'Those five functions are Modules 3–7 of this course. The kernel is where they all live: everything you have studied since Module 3 is a description of what the kernel does.',
         },
         {
           kind: 'compare',
@@ -431,12 +431,12 @@ export const m7: Module = {
             [
               '**[[microkernel|Microkernel]]**',
               'Only essential services run in the kernel; others run in user space as separate processes.',
-              '—',
+              'MINIX 3, QNX',
             ],
             [
               '**Hybrid**',
               'A combination of monolithic and microkernel features.',
-              'Windows',
+              'Windows, macOS',
             ],
           ],
         },
@@ -446,58 +446,58 @@ export const m7: Module = {
           headers: ['Family', 'Notes', 'Examples'],
           rows: [
             [
-              '**Microsoft — desktop**',
+              '**Microsoft · desktop**',
               'User-friendly graphical user interface',
               'Windows 7, Windows 10, Windows 11',
             ],
             [
-              '**Microsoft — server**',
+              '**Microsoft · server**',
               'Network and enterprise server management',
-              'Windows Server 2016, 2019, 2022',
+              'Windows Server 2019, 2022, 2025',
             ],
             [
-              '**Microsoft — mobile**',
-              'Live Tiles touch interface with Microsoft service integration',
+              '**Microsoft · mobile (discontinued)**',
+              'Windows Phone: Live Tiles touch interface, discontinued in 2017',
               'Nokia Lumia 520, Lumia 950',
             ],
             [
-              '**Google — Android**',
+              '**Google · Android**',
               'Open-source platform with a large app ecosystem',
               'Samsung Galaxy series, Xiaomi Redmi, Google Pixel',
             ],
             [
-              '**Google — ChromeOS**',
+              '**Google · ChromeOS**',
               'Cloud-based lightweight operating system',
               'Acer, HP and Lenovo Chromebooks',
             ],
             [
-              '**Apple — iOS / iPadOS**',
+              '**Apple · iOS / iPadOS**',
               'Secure and optimised Apple ecosystem',
-              'iPhone 15, iPad Pro',
+              'iPhone, iPad Pro',
             ],
             [
-              '**Apple — macOS**',
+              '**Apple · macOS**',
               'Stable Unix-based OS optimised for Apple hardware',
-              'macOS Ventura, macOS Sonoma',
+              'macOS Sequoia, macOS Tahoe',
             ],
             [
-              '**Linux — community**',
+              '**Linux · community**',
               'Free and open-source, customisable',
-              'Ubuntu 22.04, Fedora, Linux Mint',
+              'Ubuntu 24.04 LTS, Fedora, Linux Mint',
             ],
             [
-              '**Linux — server**',
+              '**Linux · server**',
               'High stability and security for servers',
               'Red Hat Enterprise Linux, CentOS Stream, Ubuntu Server',
             ],
             [
-              '**BlackBerry OS**',
-              'Strong enterprise security with push email support',
+              '**BlackBerry OS (discontinued)**',
+              'Strong enterprise security with push email support; shut down in 2022',
               'BlackBerry Bold, BlackBerry Curve',
             ],
             [
-              '**Symbian**',
-              'An efficient operating system for low-resource devices',
+              '**Symbian (discontinued)**',
+              'An efficient operating system for low-resource devices; ended in 2014',
               'Nokia N95, Nokia 6600',
             ],
           ],
@@ -505,12 +505,12 @@ export const m7: Module = {
         {
           kind: 'teachBack',
           prompt:
-            'You have now finished the whole competency. In your own words, explain what an operating system does — using at least four of the five kernel functions.',
+            'You have now finished the whole competency. In your own words, explain what an operating system does, using at least four of the five kernel functions.',
           checklist: [
-            'You explained process management — creating, scheduling and terminating processes, and sharing CPU time',
-            'You explained memory management — allocating and deallocating memory, and virtual memory/paging',
-            'You explained device management — controllers, drivers, and not letting slow devices block the CPU',
-            'You explained file management — files, directories, allocation methods and security',
+            'You explained process management: creating, scheduling and terminating processes, and sharing CPU time',
+            'You explained memory management: allocating and deallocating memory, and virtual memory/paging',
+            'You explained device management: controllers, drivers, and not letting slow devices block the CPU',
+            'You explained file management: files, directories, allocation methods and security',
             'You mentioned that the OS provides an interface between the user and the hardware',
             'You used at least one concrete example of a real operating system',
           ],
@@ -523,7 +523,7 @@ export const m7: Module = {
       takeaways: [
         'The kernel is the core of the OS, interacting directly with hardware.',
         'Kernel functions: process, memory, device and file management, plus system call handling.',
-        'Monolithic = all services in kernel space (Linux). Microkernel = only essentials. Hybrid = both (Windows).',
+        'Monolithic = all services in kernel space (Linux). Microkernel = only essentials (QNX). Hybrid = both (Windows).',
         'Know at least one OS example per category: desktop, server, mobile, cloud, embedded.',
       ],
     },

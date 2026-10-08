@@ -2,6 +2,8 @@ import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { glossaryById } from '@/content/glossary'
+import { plain } from '@/lib/inline'
+import { Icon } from '@/components/ui/Icon'
 
 /* A technical term rendered inline in a lesson. Clicking it opens a compact
    card with the plain-English meaning first, then the precise definition —
@@ -94,7 +96,7 @@ export function GlossaryTerm({ termId, label }: { termId: string; label: string 
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={open ? cardId : undefined}
-        className="cursor-help rounded-[3px] font-medium text-brand-700 underline decoration-brand-300 decoration-dotted decoration-2 underline-offset-[3px] transition-colors hover:decoration-brand-500 dark:text-brand-300 dark:decoration-brand-600"
+        className="cursor-help rounded-[3px] text-left font-medium text-brand-700 underline decoration-brand-300 decoration-dotted decoration-2 underline-offset-[3px] transition-colors hover:decoration-brand-500 dark:text-brand-300 dark:decoration-brand-600"
       >
         {label}
       </button>
@@ -124,17 +126,18 @@ export function GlossaryTerm({ termId, label }: { termId: string; label: string 
                 className="popover-in fixed z-[61] rounded-xl border border-line bg-card p-3.5 text-left shadow-[var(--shadow-lift)]"
               >
                 <p className="mb-1.5 text-sm font-semibold text-ink">{entry.term}</p>
-                <p className="mb-2 text-sm leading-relaxed text-ink-2">{entry.simple}</p>
+                <p className="mb-2 text-sm leading-relaxed text-ink-2">{plain(entry.simple)}</p>
                 <p className="mb-2 border-t border-line pt-2 text-xs leading-relaxed text-ink-3">
                   <span className="font-semibold uppercase tracking-wide">Precisely: </span>
-                  {entry.technical}
+                  {plain(entry.technical)}
                 </p>
                 <Link
                   to={`/glossary?term=${entry.id}`}
-                  className="text-xs font-medium text-brand-600 hover:underline dark:text-brand-400"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:underline dark:text-brand-400"
                   onClick={() => setOpen(false)}
                 >
-                  Open in glossary →
+                  Open in glossary
+                  <Icon name="arrowRight" size={13} />
                 </Link>
               </div>
             </>

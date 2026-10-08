@@ -14,7 +14,7 @@ const STAGES = [
     label: 'Power On',
     icon: 'plug' as IconName,
     what: 'Electricity flows to the CPU, RAM, hard drive/SSD and motherboard. The CPU becomes active and immediately looks for instructions to start the system.',
-    detail: 'Nothing has been loaded yet — RAM is empty.',
+    detail: 'Nothing has been loaded yet: RAM is empty.',
   },
   {
     id: 'bios',
@@ -28,20 +28,20 @@ const STAGES = [
     label: 'POST',
     icon: 'success' as IconName,
     what: 'The Power-On Self-Test checks that essential hardware is present and working: RAM, keyboard, processor and storage devices.',
-    detail: 'If something fails, the computer signals the fault with beep codes — one beep usually means POST passed.',
+    detail: 'If something fails, the computer signals the fault with beep codes: one beep usually means POST passed.',
   },
   {
     id: 'device',
     label: 'Boot device selection',
     icon: 'disk' as IconName,
-    what: 'BIOS looks for a bootable device according to the boot order in its settings — hard disk/SSD, USB drive, CD/DVD or network — and selects the one containing the operating system.',
+    what: 'BIOS looks for a bootable device according to the boot order in its settings (hard disk/SSD, USB drive, CD/DVD or network) and selects the one containing the operating system.',
     detail: 'It then reads the partition table: MBR on BIOS systems, GPT on UEFI systems.',
   },
   {
     id: 'loader',
     label: 'Boot loader loads',
     icon: 'layers' as IconName,
-    what: 'The system finds and loads a small program called the boot loader — Windows Boot Manager, or GRUB on Linux. Its only job is to load the operating system into RAM.',
+    what: 'The system finds and loads a small program called the boot loader: Windows Boot Manager, or GRUB on Linux. Its only job is to load the operating system into RAM.',
     detail: 'On UEFI systems the loader lives in the EFI System Partition (ESP) named in the GPT.',
   },
   {
@@ -49,7 +49,7 @@ const STAGES = [
     label: 'Operating system loads',
     icon: 'cpu' as IconName,
     what: 'The boot loader copies the OS kernel and system files into RAM. The OS then initialises device drivers, starts system services and prepares system resources.',
-    detail: 'From this moment the OS — not the firmware — is in control of the machine.',
+    detail: 'From this moment the OS, not the firmware, is in control of the machine.',
   },
   {
     id: 'login',
@@ -127,7 +127,7 @@ export function BootSequence() {
               transition={{ duration: reduce ? 0 : 0.25 }}
               className="w-full text-center"
             >
-              {stage === 0 && <p className="font-mono text-2xs text-slate-400">— no signal —</p>}
+              {stage === 0 && <p className="font-mono text-2xs text-slate-400">NO SIGNAL</p>}
               {stage === 1 && (
                 <p className="font-mono text-2xs leading-relaxed text-emerald-400">
                   American Megatrends
@@ -216,7 +216,8 @@ export function BootSequence() {
                 setStage((v) => v - 1)
               }}
             >
-              ← Back
+              <Icon name="arrowLeft" size={16} />
+              Back
             </Button>
             <Button
               size="sm"
@@ -226,7 +227,8 @@ export function BootSequence() {
                 setStage((v) => v + 1)
               }}
             >
-              Next step →
+              Next step
+              <Icon name="arrowRight" size={16} />
             </Button>
             <Button
               size="sm"
@@ -236,7 +238,8 @@ export function BootSequence() {
                 setPlaying((p) => !p)
               }}
             >
-              {playing ? '⏸ Pause' : '▶ Play through'}
+              <Icon name={playing ? 'pause' : 'play'} size={15} />
+              {playing ? 'Pause' : 'Play through'}
             </Button>
           </div>
         </div>

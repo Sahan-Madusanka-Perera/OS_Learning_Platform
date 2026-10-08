@@ -29,7 +29,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Monolithic kernel',
     simple: 'A kernel where all OS services run together in one big block.',
     technical:
-      'A kernel design in which all operating system services — process management, memory management, file systems and device drivers — execute in kernel space as a single large program.',
+      'A kernel design in which all operating system services (process management, memory management, file systems and device drivers) execute in kernel space as a single large program.',
     example: 'Linux.',
     related: ['kernel', 'microkernel'],
     appearsIn: ['l7-4'],
@@ -40,6 +40,7 @@ export const glossary: GlossaryEntry[] = [
     simple: 'A kernel that keeps only the essentials inside, and pushes the rest out.',
     technical:
       'A kernel design in which only essential services run in kernel space, while other services such as file systems and drivers run in user space as separate processes.',
+    example: 'MINIX 3, QNX.',
     related: ['kernel', 'monolithic-kernel'],
     appearsIn: ['l7-4'],
   },
@@ -88,7 +89,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'BIOS',
     simple: 'The small startup program on the motherboard that wakes the computer up.',
     technical:
-      'Basic Input Output System — firmware stored in non-volatile ROM on the motherboard that initialises hardware, runs POST, and loads the boot loader. Released in 1981, text-based, 16-bit, supports MBR partitioning up to 2 TB.',
+      'Basic Input Output System: firmware stored in non-volatile ROM on the motherboard that initialises hardware, runs POST, and loads the boot loader. Standard on the IBM PC from 1981; text-based, 16-bit, supports MBR partitioning up to 2 TB.',
     related: ['uefi', 'post', 'firmware', 'cmos'],
     appearsIn: ['l1-3'],
   },
@@ -97,7 +98,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'UEFI',
     simple: 'The modern replacement for BIOS.',
     technical:
-      'Unified Extensible Firmware Interface — a specification defining a software interface between an operating system and platform firmware. Introduced in 2002, graphical, 32/64-bit, supports GPT partitions over 2 TB and Secure Boot.',
+      'Unified Extensible Firmware Interface: a specification defining a software interface between an operating system and platform firmware. Specified in 2006 (growing out of Intel’s earlier EFI); graphical, 32/64-bit, supports GPT partitions over 2 TB and Secure Boot.',
     related: ['bios', 'gpt', 'firmware'],
     appearsIn: ['l1-3'],
   },
@@ -106,7 +107,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'POST',
     simple: 'A quick self-test the computer runs before it starts up properly.',
     technical:
-      'Power-On Self-Test — a diagnostic routine run by the BIOS at startup that checks essential hardware such as RAM, keyboard, processor and storage devices, reporting failures using beep codes.',
+      'Power-On Self-Test: a diagnostic routine run by the BIOS at startup that checks essential hardware such as RAM, keyboard, processor and storage devices, reporting failures using beep codes.',
     related: ['bios', 'booting'],
     appearsIn: ['l1-3'],
   },
@@ -143,7 +144,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'MBR',
     simple: 'The old style of partition table, read from the first sector of the disk.',
     technical:
-      'Master Boot Record — a partition scheme used mainly with BIOS-based systems. The first sector of the disk holds the partition table plus a small boot program. Limited to 2 TB.',
+      'Master Boot Record: a partition scheme used mainly with BIOS-based systems. The first sector of the disk holds the partition table plus a small boot program. Limited to 2 TB.',
     related: ['gpt', 'bios', 'partitioning'],
     appearsIn: ['l1-3'],
   },
@@ -152,7 +153,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'GPT',
     simple: 'The modern partition table, used with UEFI.',
     technical:
-      'GUID Partition Table — a partition scheme used mainly with UEFI-based systems. UEFI reads the GPT and locates the EFI System Partition (ESP) containing the boot loader. Supports disks over 2 TB.',
+      'GUID Partition Table: a partition scheme used mainly with UEFI-based systems. UEFI reads the GPT and locates the EFI System Partition (ESP) containing the boot loader. Supports disks over 2 TB.',
     related: ['mbr', 'uefi', 'partitioning'],
     appearsIn: ['l1-3'],
   },
@@ -168,7 +169,7 @@ export const glossary: GlossaryEntry[] = [
     id: 'warm-boot',
     term: 'Warm boot',
     simple: 'Restarting without cutting the power.',
-    technical: 'Restarting the computer without disconnecting the power supply completely — for example, by choosing Restart.',
+    technical: 'Restarting the computer without disconnecting the power supply completely: for example, by choosing Restart.',
     related: ['cold-boot', 'booting'],
     appearsIn: ['l1-3'],
   },
@@ -177,7 +178,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'RAM',
     simple: 'The computer’s fast, temporary workspace. It empties when power goes off.',
     technical:
-      'Random Access Memory — the primary volatile storage that holds the OS kernel, running programs and active data, providing fast directly-addressable working space for the CPU.',
+      'Random Access Memory: the primary volatile storage that holds the OS kernel, running programs and active data, providing fast directly-addressable working space for the CPU.',
     related: ['virtual-memory', 'volatile', 'secondary-storage'],
     appearsIn: ['l6-1'],
   },
@@ -193,14 +194,14 @@ export const glossary: GlossaryEntry[] = [
     id: 'rom',
     term: 'ROM',
     simple: 'Memory that can be read but keeps its contents forever.',
-    technical: 'Read-Only Memory — non-volatile memory whose contents are retained without power; used to store firmware such as the BIOS.',
+    technical: 'Read-Only Memory: non-volatile memory whose contents are retained without power; used to store firmware such as the BIOS.',
     related: ['firmware', 'bios', 'volatile'],
     appearsIn: ['l1-3'],
   },
   {
     id: 'secondary-storage',
     term: 'Secondary storage',
-    simple: 'Where files live permanently — the hard disk or SSD.',
+    simple: 'Where files live permanently: the hard disk or SSD.',
     technical:
       'Non-volatile storage used to hold the user’s and the system’s data and programs permanently. Slower but far larger than main memory, and not directly executable by the CPU.',
     example: 'Hard disk drive, solid-state drive, USB flash drive.',
@@ -294,7 +295,7 @@ export const glossary: GlossaryEntry[] = [
     simple: 'An OS that must respond within a guaranteed time, every time.',
     technical:
       'An operating system designed to serve real-time applications that process data as it arrives, typically without buffer delays, using deterministic timing, priority-based scheduling and minimal interrupt latency.',
-    example: 'VxWorks, FreeRTOS, QNX — used in airbags, pacemakers, avionics.',
+    example: 'VxWorks, FreeRTOS, QNX: used in airbags, pacemakers, avionics.',
     related: ['hard-real-time', 'soft-real-time', 'time-sharing'],
     appearsIn: ['l2-4'],
   },
@@ -330,7 +331,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Graphical User Interface (GUI)',
     simple: 'You point and click on windows, icons and buttons.',
     technical:
-      'A user interface using visual elements — windows, icons, menus and pointers (WIMP) — together with a pointing device, making navigation easier than a command line.',
+      'A user interface using visual elements (windows, icons, menus and pointers, known as WIMP) together with a pointing device, making navigation easier than a command line.',
     related: ['cli', 'user-interface'],
     appearsIn: ['l2-5'],
   },
@@ -355,7 +356,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'data',
     term: 'Data',
-    simple: 'The raw content — numbers, text, pictures, sound.',
+    simple: 'The raw content: numbers, text, pictures, sound.',
     technical:
       'Raw facts, figures, symbols or information such as numbers, text, images or sounds. Data by itself may have no meaning until it is processed. Data is the content; a file is the container.',
     related: ['file'],
@@ -376,7 +377,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'File name (primary name)',
     simple: 'The name you give a file so you can tell it apart from others.',
     technical:
-      'The part of a file’s identity used to uniquely distinguish it from other files in the same directory. Two files with the same name and extension in one directory cannot coexist — saving the second overwrites the first.',
+      'The part of a file’s identity used to uniquely distinguish it from other files in the same directory. Two files with the same name and extension in one directory cannot coexist: saving the second overwrites the first.',
     related: ['file-extension', 'file'],
     appearsIn: ['l3-1'],
   },
@@ -454,23 +455,23 @@ export const glossary: GlossaryEntry[] = [
     term: 'FAT',
     simple: 'A simple, very widely supported file system that uses a lookup table.',
     technical:
-      'File Allocation Table — a file system developed for MS-DOS that manages storage using a table recording which block follows which. Two copies of the FAT are kept for safety, and the table and root directory sit at fixed locations.',
+      'File Allocation Table: a file system created by Microsoft in the late 1970s and made famous by MS-DOS. It manages storage using a table recording which block follows which. Two copies of the FAT are kept for safety, and the table and root directory sit at fixed locations.',
     related: ['file-system', 'linked-allocation', 'ntfs'],
     appearsIn: ['l4-2'],
   },
   {
     id: 'ntfs',
     term: 'NTFS',
-    simple: 'Windows’ modern file system — more secure and handles bigger files.',
+    simple: 'Windows’ modern file system: more secure and handles bigger files.',
     technical:
-      'New Technology File System — introduced by Microsoft in 1993 with Windows NT 3.1. Uses a Master File Table, supports permissions, encryption, compression, fault tolerance, Unicode and very large files and partitions.',
+      'New Technology File System: introduced by Microsoft in 1993 with Windows NT 3.1. Uses a Master File Table, supports permissions, encryption, compression, fault tolerance, Unicode and very large files and partitions.',
     related: ['fat', 'file-system'],
     appearsIn: ['l4-2'],
   },
   {
     id: 'metadata',
     term: 'Metadata',
-    simple: 'Data about the data — a file’s name, size, dates and permissions.',
+    simple: 'Data about the data: a file’s name, size, dates and permissions.',
     technical:
       'Information stored by a file system describing a file, such as its name, size, type, permissions, creation date and modification date, rather than its contents.',
     related: ['file-system', 'file-attributes'],
@@ -508,7 +509,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Sector',
     simple: 'The smallest physical slice of a track.',
     technical:
-      'A small section of a track and the smallest physical storage unit on a disk, storing data in fixed-size portions — commonly 512 bytes or 4 KB.',
+      'A small section of a track and the smallest physical storage unit on a disk, storing data in fixed-size portions: commonly 512 bytes or 4 KB.',
     related: ['track', 'block', 'cluster'],
     appearsIn: ['l3-4'],
   },
@@ -671,7 +672,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'File Control Block (FCB)',
     simple: 'The OS’s record card for an open file.',
     technical:
-      'A data structure holding information related to an open file — drive name, file name, type, current block number, size in bytes, and creation/modification timestamps — used by the OS to locate files, manage access control and support file operations.',
+      'A data structure holding information related to an open file (drive name, file name, type, current block number, size in bytes, and creation/modification timestamps) used by the OS to locate files, manage access control and support file operations.',
     related: ['file', 'metadata', 'pcb'],
     appearsIn: ['l4-5'],
   },
@@ -716,7 +717,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Interrupt',
     simple: 'A signal that says "stop what you are doing, something needs attention".',
     technical:
-      'An event that alters the sequence of execution of a process. A signal sent to the processor by hardware or software indicating that an event needs immediate attention. Interrupts occur asynchronously and have priority levels; some are maskable, some are not.',
+      'An event that alters the sequence of execution of a process. A signal sent to the processor by hardware or software indicating that an event needs immediate attention. Hardware interrupts occur asynchronously; interrupts have priority levels, and some are maskable while others are not.',
     related: ['context-switch', 'system-call'],
     appearsIn: ['l5-5'],
   },
@@ -733,7 +734,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'deadlock',
     term: 'Deadlock',
-    simple: 'Two processes each waiting for something the other is holding — forever.',
+    simple: 'Two processes each waiting for something the other is holding: forever.',
     technical:
       'A state in which two or more processes wait for each other indefinitely and none can proceed. It requires four simultaneous conditions: mutual exclusion, hold and wait, no preemption, and circular wait.',
     related: ['process', 'blocked-state'],
@@ -769,7 +770,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'ready-state',
     term: 'Ready state',
-    simple: 'Fully prepared to run — just waiting for a turn on the CPU.',
+    simple: 'Fully prepared to run: just waiting for a turn on the CPU.',
     technical:
       'A process state in which a process is fully prepared to execute and is waiting only for the CPU to become available.',
     related: ['running-state', 'blocked-state', 'seven-state'],
@@ -789,7 +790,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Seven-state process transition diagram',
     simple: 'The full map of every state a process can be in and how it moves between them.',
     technical:
-      'A diagram showing the seven process states — New, Ready, Running, Blocked, Terminated, Suspended Ready and Suspended Blocked — together with the transitions between them, including swapping between main memory and secondary storage.',
+      'A diagram showing the seven process states (New, Ready, Running, Blocked, Terminated, Suspended Ready and Suspended Blocked) together with the transitions between them, including swapping between main memory and secondary storage.',
     related: ['ready-state', 'running-state', 'blocked-state', 'swapping'],
     appearsIn: ['l5-3'],
   },
@@ -889,7 +890,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'srtf',
     term: 'Shortest Remaining Time First (SRTF)',
-    simple: 'Preemptive SJF — a shorter newcomer can push out whatever is running.',
+    simple: 'Preemptive SJF: a shorter newcomer can push out whatever is running.',
     technical:
       'The preemptive version of SJF. If a newly arrived process has a shorter remaining time than the running process, the running process is preempted. Gives the best average waiting and turnaround times but requires accurate burst estimates and causes many context switches.',
     related: ['sjf', 'preemptive'],
@@ -936,7 +937,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Aging',
     simple: 'Slowly raising the priority of a process that has waited a long time.',
     technical:
-      'A technique in which the priority of long-waiting processes is gradually increased — conventionally by 1 for every 15 minutes of waiting — so that they eventually run, preventing starvation.',
+      'A technique in which the priority of long-waiting processes is gradually increased (for example, by 1 for every 15 minutes of waiting) so that they eventually run, preventing starvation.',
     related: ['starvation', 'priority-scheduling'],
     appearsIn: ['l5-8'],
   },
@@ -1066,7 +1067,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'mmu',
     term: 'Memory Management Unit (MMU)',
-    simple: 'The hardware chip that converts virtual addresses to real ones.',
+    simple: 'The hardware (inside the CPU on modern computers) that converts virtual addresses to real ones.',
     technical:
       'A hardware component responsible for handling memory access requests and managing memory resources. Its functions are address translation, memory protection, relocation, virtual memory support and access control.',
     related: ['address-translation', 'page-table', 'tlb'],
@@ -1129,7 +1130,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'bus-width',
     term: 'Bus width',
-    simple: 'How many address lines there are — which caps how much memory you can reach.',
+    simple: 'How many address lines there are, which caps how much memory you can reach.',
     technical:
       'The number of address lines in the address bus. The maximum addressable memory equals 2^(bus width) bytes on a byte-addressable machine, and the maximum length of a memory address equals the bus width.',
     related: ['address-bus', 'addressable-memory'],
@@ -1167,7 +1168,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Control bus',
     simple: 'The wires that carry "read now", "write now" and other commands.',
     technical:
-      'The part of the system bus that carries control signals — Read, Write, Interrupt, Clock and Reset — coordinating system operations and synchronising hardware components.',
+      'The part of the system bus that carries control signals (Read, Write, Interrupt, Clock and Reset) coordinating system operations and synchronising hardware components.',
     related: ['address-bus', 'data-bus'],
     appearsIn: ['l6-2'],
   },
@@ -1176,7 +1177,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Device driver',
     simple: 'A translator that lets the OS talk to one particular piece of hardware.',
     technical:
-      'Utility software allowing the operating system to communicate with a hardware device by translating general OS instructions into device-specific commands. Without a driver, the OS cannot use the device.',
+      'System software allowing the operating system to communicate with a hardware device by translating general OS instructions into device-specific commands. Without a driver, the OS cannot use the device.',
     related: ['device-controller', 'plug-and-play'],
     appearsIn: ['l7-1', 'l7-2'],
   },
@@ -1192,7 +1193,7 @@ export const glossary: GlossaryEntry[] = [
   {
     id: 'plug-and-play',
     term: 'Plug and Play (PnP)',
-    simple: 'Plug the device in and it just works — the OS finds the driver itself.',
+    simple: 'Plug the device in and it just works: the OS finds the driver itself.',
     technical:
       'A technology supported by modern operating systems that automatically detects a newly connected device, finds the correct driver and installs it without manual intervention.',
     related: ['device-driver'],
@@ -1212,7 +1213,7 @@ export const glossary: GlossaryEntry[] = [
     term: 'Spooling',
     simple: 'Queueing jobs on disk so a slow device can work through them while the CPU carries on.',
     technical:
-      'Simultaneous Peripheral Operations On-Line — a technique in which I/O data from multiple processes is queued in secondary storage so a peripheral device can process jobs sequentially while the CPU continues executing other processes.',
+      'Simultaneous Peripheral Operations On-Line: a technique in which I/O data from multiple processes is queued in secondary storage so a peripheral device can process jobs sequentially while the CPU continues executing other processes.',
     example: 'Printer spooling: multiple print jobs are stored in spool files on disk and printed in turn.',
     related: ['buffering', 'device-driver'],
     appearsIn: ['l7-3'],

@@ -5,12 +5,14 @@ import { STAGE_META } from '@/lib/mastery'
 import { cx } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
 import { Icon, MODULE_ICON } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 /* The whole course as one vertical route. The student should always be
    able to see where they are, what they have finished, and what is next —
    without having to remember it. */
 
 export function LearningPath() {
+  useDocumentTitle('Learning path')
   const overview = useCourseOverview()
 
   return (

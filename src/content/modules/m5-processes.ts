@@ -15,7 +15,7 @@ export const m5: Module = {
       moduleId: 'm5',
       title: 'Program vs process',
       summary:
-        'The single most examined distinction in this competency — and the types of process the OS has to juggle.',
+        'The single most examined distinction in this competency, and the types of process the OS has to juggle.',
       whyItMatters:
         '"Distinguishes a process and a program" is a named learning outcome, and it is the foundation of everything else in this module. Get it precise now.',
       objectives: [
@@ -38,7 +38,7 @@ export const m5: Module = {
               'A program **currently being executed** by the computer, along with its current state, CPU registers, memory and other required resources.',
             ],
             ['Where it lives', 'On the disk', 'In main memory (RAM)'],
-            ['State', 'Passive — it just sits there', 'Active — it is doing something'],
+            ['State', 'Passive: it just sits there', 'Active: it is doing something'],
             ['Lifetime', 'Permanent until deleted', 'Exists only while running'],
           ],
         },
@@ -51,7 +51,7 @@ export const m5: Module = {
           kind: 'analogy',
           title: 'A recipe and a meal',
           everyday:
-            'A recipe in a book is a program — instructions, sitting still, waiting. Cooking that recipe is a process. Three cooks can follow the same recipe at the same time in three kitchens: one recipe, three processes. Each has its own pan, its own half-chopped onions, and its own place in the instructions.',
+            'A recipe in a book is a program: instructions, sitting still, waiting. Cooking that recipe is a process. Three cooks can follow the same recipe at the same time in three kitchens: one recipe, three processes. Each has its own pan, its own half-chopped onions, and its own place in the instructions.',
           mapsTo:
             'That "own place in the instructions" is the [[program-counter|program counter]]. The half-chopped onions are the process’s memory. The pan is a resource the OS allocated. All of this is what makes a process more than a program.',
         },
@@ -59,9 +59,9 @@ export const m5: Module = {
           kind: 'confused',
           question: 'How can ONE program have MANY processes at once?',
           simpler:
-            'Open Chrome. Now open a second Chrome window. Same program file on your disk — but the OS is running it twice, and each copy has its own memory, its own tabs and its own place in the code. Two processes, one program.',
+            'Open Chrome. Now open a second Chrome window. Same program file on your disk, but the OS is running it twice, and each copy has its own memory, its own tabs and its own place in the code. Two processes, one program.',
           picture:
-            'Look in Task Manager. You will often see the same application name listed six or seven times — each row is a separate process from a single program file.',
+            'Look in Task Manager. You will often see the same application name listed six or seven times: each row is a separate process from a single program file.',
         },
         { kind: 'heading', text: 'Types of process' },
         {
@@ -71,7 +71,7 @@ export const m5: Module = {
           rows: [
             [
               '**[[io-bound|I/O bound]]**',
-              'Spends more time waiting for I/O operations — reading from or writing to a disk or network — than doing actual computation.',
+              'Spends more time waiting for I/O operations, reading from or writing to a disk or network, than doing actual computation.',
               'Copying a large file; loading a web page',
             ],
             [
@@ -105,7 +105,7 @@ export const m5: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Why the OS cares about I/O bound vs CPU bound',
-          text: 'A good mix keeps everything busy. If every process were CPU bound, the disk would idle; if every process were I/O bound, the CPU would idle. Schedulers work best when they can overlap one process’s waiting with another’s computing — which is exactly the multiprogramming idea from Module 2.',
+          text: 'A good mix keeps everything busy. If every process were CPU bound, the disk would idle; if every process were I/O bound, the CPU would idle. Schedulers work best when they can overlap one process’s waiting with another’s computing, which is exactly the multiprogramming idea from Module 2.',
         },
         {
           kind: 'heading',
@@ -149,7 +149,7 @@ export const m5: Module = {
       summary:
         'What a process is actually made of, and the data structure that lets the OS put a paused process back exactly as it was.',
       whyItMatters:
-        '"Briefly explains the process control block and lists its contents" is an explicit learning outcome — this is a list you can be asked to reproduce.',
+        '"Briefly explains the process control block and lists its contents" is an explicit learning outcome: this is a list you can be asked to reproduce.',
       objectives: [
         'List the components of a process',
         'Explain the purpose of the Process Control Block',
@@ -166,17 +166,17 @@ export const m5: Module = {
           title: 'The main components of a process',
           style: 'number',
           items: [
-            '**Executable code** — the program or binary file containing the instructions for the process to execute',
-            '**Data segment** — the data the process needs while running',
-            '**[[pcb|Process Control Block]] (PCB)** — the OS’s record of everything about this process',
-            '**Input/output resources** — the devices and files the process is using',
+            '**Executable code**: the program or binary file containing the instructions for the process to execute',
+            '**Data segment**: the data the process needs while running',
+            '**[[pcb|Process Control Block]] (PCB)**: the OS’s record of everything about this process',
+            '**Input/output resources**: the devices and files the process is using',
           ],
         },
         {
           kind: 'prose',
           paragraphs: [
             'A process also has an **execution context**: all the important information the operating system needs to keep track of for the process to run correctly. If the process is interrupted, the OS saves this information so it can resume exactly where it left off when it is ready to run again.',
-            'And every process has a **[[pid|Process ID (PID)]]** — a unique identifier assigned by the operating system, whose purpose is to facilitate easy allocation and tracking of system resources such as memory, CPU time and I/O operations.',
+            'And every process has a **[[pid|Process ID (PID)]]**: a unique identifier assigned by the operating system, whose purpose is to facilitate easy allocation and tracking of system resources such as memory, CPU time and I/O operations.',
           ],
         },
         { kind: 'heading', text: 'The Process Control Block' },
@@ -198,7 +198,7 @@ export const m5: Module = {
             ],
             [
               '**Process state**',
-              'The current status of the process in its lifecycle — new, ready, running, blocked and so on.',
+              'The current status of the process in its lifecycle: new, ready, running, blocked and so on.',
             ],
             [
               '**[[program-counter|Program counter]]**',
@@ -206,7 +206,7 @@ export const m5: Module = {
             ],
             [
               '**CPU registers**',
-              'In the running state, processes are stored in various CPU registers for execution; these values are saved here when the process is switched out.',
+              'While a process runs, its working values live in the CPU’s registers. Those values are copied here when the process is switched out, and copied back when it resumes.',
             ],
             [
               '**Memory management information**',
@@ -218,11 +218,11 @@ export const m5: Module = {
             ],
             [
               '**Accounting information**',
-              'Resources used by the process — CPU time used, time limits and similar.',
+              'Resources used by the process: CPU time used, time limits and similar.',
             ],
             [
               '**I/O status information**',
-              'Information about I/O devices allocated to the process — open files, pending requests.',
+              'Information about I/O devices allocated to the process: open files, pending requests.',
             ],
             [
               '**List of open files**',
@@ -240,9 +240,9 @@ export const m5: Module = {
           kind: 'analogy',
           title: 'Pausing a film',
           everyday:
-            'You pause a film 47 minutes in and switch off the TV. When you come back, the player remembers the timestamp, the subtitle setting and the volume — so it resumes exactly where you were. It did not save the film itself; it saved *where you were in it*.',
+            'You pause a film 47 minutes in and switch off the TV. When you come back, the player remembers the timestamp, the subtitle setting and the volume, so it resumes exactly where you were. It did not save the film itself; it saved *where you were in it*.',
           mapsTo:
-            'That saved information is the PCB. The program counter is the timestamp. The registers are the settings. This is why the PCB makes multitasking possible — without it, a paused process could never be resumed.',
+            'That saved information is the PCB. The program counter is the timestamp. The registers are the settings. This is why the PCB makes multitasking possible: without it, a paused process could never be resumed.',
         },
         { kind: 'heading', text: 'Parent and child processes' },
         {
@@ -261,7 +261,7 @@ export const m5: Module = {
             ],
             [
               'Independence',
-              '—',
+              'Carries on with its own work, and may wait for its children to finish',
               'Can run independently, but usually reports its termination status back to the parent.',
             ],
           ],
@@ -281,7 +281,7 @@ export const m5: Module = {
       ],
       takeaways: [
         'A process consists of executable code, a data segment, a PCB and I/O resources.',
-        'The PCB stores everything needed to manage and control a process — including the program counter and CPU registers.',
+        'The PCB stores everything needed to manage and control a process, including the program counter and CPU registers.',
         'The PID uniquely identifies a process for resource allocation and tracking.',
         'A parent process creates child processes via a system call; each child has its own memory space and PID.',
       ],
@@ -341,7 +341,7 @@ export const m5: Module = {
             {
               title: '4. Blocked',
               detail:
-                'The process is paused and waiting for a resource — such as I/O completion or data availability — before it can continue execution. It is still in main memory.',
+                'The process is paused and waiting for a resource, such as I/O completion or data availability, before it can continue execution. It is still in main memory.',
             },
             {
               title: '5. Terminated / Exit',
@@ -363,7 +363,7 @@ export const m5: Module = {
         {
           kind: 'keyIdea',
           title: 'The organising idea',
-          text: 'Ready, Running and Blocked are **in main memory**. The two Suspended states are **on disk**. Suspension is not about what the process wants — it is about the OS needing RAM back.',
+          text: 'Ready, Running and Blocked are **in main memory**. The two Suspended states are **on disk**. Suspension is not about what the process wants: it is about the OS needing RAM back.',
         },
         { kind: 'heading', text: 'The transitions' },
         {
@@ -377,7 +377,7 @@ export const m5: Module = {
             ['Ready → Running', 'The scheduler assigns CPU time to the process (dispatch).'],
             [
               'Running → Ready',
-              'A higher-priority process arrives, or the time slice (quantum) expires — **timeout**.',
+              'A higher-priority process arrives, or the time slice (quantum) expires: **timeout**.',
             ],
             [
               'Running → Blocked',
@@ -417,14 +417,14 @@ export const m5: Module = {
           kind: 'misconception',
           wrong: 'A process in the Ready state is one that has not started yet.',
           right:
-            '**New** is the state for a process that has not started. **Ready** means the process is completely prepared to run and is waiting for one thing only — a free CPU. It may have already run many times.',
+            '**New** is the state for a process that has not started. **Ready** means the process is completely prepared to run and is waiting for one thing only: a free CPU. It may have already run many times.',
         },
         {
           kind: 'confused',
           question:
             'Why does the OS suspend a process that is Ready? It could be running!',
           simpler:
-            'Because RAM is finite. If ten processes are ready and there is only room for six, four must wait somewhere — and disk is the only somewhere there is. The OS is choosing between "some processes progress slowly" and "the system runs out of memory and crashes".',
+            'Because RAM is finite. If ten processes are ready and there is only room for six, four must wait somewhere, and disk is the only somewhere there is. The OS is choosing between "some processes progress slowly" and "the system runs out of memory and crashes".',
           picture:
             'A restaurant with twelve tables and forty bookings. Some diners wait in the lobby. They are perfectly ready to eat; there is simply no table. The lobby is secondary storage.',
           prerequisite: { label: 'Inside a process: components and the PCB', lessonId: 'l5-2' },
@@ -433,14 +433,14 @@ export const m5: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Who does the suspending?',
-          text: 'Swapping between main memory and secondary storage is the job of the **[[medium-term-scheduler|medium-term scheduler]]** — the one you will meet in lesson 5.6. That is the entire reason the medium-term scheduler exists.',
+          text: 'Swapping between main memory and secondary storage is the job of the **[[medium-term-scheduler|medium-term scheduler]]**: the one you will meet in lesson 5.6. That is the entire reason the medium-term scheduler exists.',
         },
         {
           kind: 'recall',
           prompt:
             'A process is Running. Name the three states it can move to, and what causes each move.',
           answer:
-            'Ready (timeout — its quantum expired, or a higher-priority process arrived). Blocked (it requested I/O or must wait for an event or resource). Terminated (it completed, or the OS ended it because of an error).',
+            'Ready (timeout: its quantum expired, or a higher-priority process arrived). Blocked (it requested I/O or must wait for an event or resource). Terminated (it completed, or the OS ended it because of an error).',
         },
         {
           kind: 'teachBack',
@@ -476,7 +476,7 @@ export const m5: Module = {
       summary:
         'What the OS does when a process is born, the ten reasons it might die, deadlock, and the zombie left behind.',
       whyItMatters:
-        '"Lists the operating system tasks when a process is created" and "explains process termination" are both named learning outcomes — and deadlock’s four conditions are a classic four-mark answer.',
+        '"Lists the operating system tasks when a process is created" and "explains process termination" are both named learning outcomes, and deadlock’s four conditions are a classic four-mark answer.',
       objectives: [
         'List the OS tasks performed when a process is created',
         'State the reasons for process creation and termination',
@@ -496,7 +496,7 @@ export const m5: Module = {
             {
               title: 'Process initiation',
               detail:
-                'A new process is usually created by an existing process — the **parent process** — through a [[system-call|system call]], such as `fork()` in Unix/Linux. The newly created process is called the **child process**.',
+                'A new process is usually created by an existing process, the **parent process**, through a [[system-call|system call]], such as `fork()` in Unix/Linux. The newly created process is called the **child process**.',
             },
             {
               title: 'Process identification',
@@ -506,7 +506,7 @@ export const m5: Module = {
             {
               title: 'PCB creation',
               detail:
-                'A new [[pcb|Process Control Block]] for the child process is created. Vital information — state, memory allocation, program counter and other details — is stored in it.',
+                'A new [[pcb|Process Control Block]] for the child process is created. Vital information (state, memory allocation, program counter and other details) is stored in it.',
             },
             {
               title: 'Memory allocation',
@@ -530,11 +530,11 @@ export const m5: Module = {
           rows: [
             [
               '**New batch job**',
-              'A task submitted to run automatically without user interaction, usually executed in groups at scheduled times — nightly system backups, large-scale data processing, system updates and maintenance.',
+              'A task submitted to run automatically without user interaction, usually executed in groups at scheduled times: nightly system backups, large-scale data processing, system updates and maintenance.',
             ],
             [
               '**User starts a program**',
-              'When a user opens an application, the OS creates a new process to execute that program — it loads the program into memory, assigns a PID, creates a PCB and schedules it for execution.',
+              'When a user opens an application, the OS creates a new process to execute that program: it loads the program into memory, assigns a PID, creates a PCB and schedules it for execution.',
             ],
             [
               '**OS creates a process to provide services**',
@@ -559,35 +559,35 @@ export const m5: Module = {
           title: 'The ten reasons a process terminates',
           style: 'number',
           items: [
-            '**Normal termination** — the process completes its task successfully, releases resources and shuts down properly',
-            '**A requested resource is unavailable** — the required memory, file, device or network resource is unavailable for a long time, and the OS stops the process to prevent system problems',
-            '**An execution error** — an unexpected issue during execution prevents it completing its intended task',
-            '**A memory access violation** — the process tried to touch memory it does not own, or perform an unauthorised action; memory protection (via paging or segmentation) keeps each process in its own sandbox, and the OS terminates a process that breaks out',
-            '**An OS or parent process request** — a parent can explicitly terminate its child using system calls, due to task completion, errors, or the need to stop misbehaving children',
-            '**Execution time limit exceeded** — the process ran longer than the maximum CPU time allowed, so the OS terminates it to stop it monopolising system resources',
-            '**The parent process has been terminated** — when a parent terminates, all its child processes stop executing',
-            '**User intervention** — the user manually stops a running program; the OS stops execution and releases the allocated resources',
-            '**Hardware failures** — a disk crash, RAM error or power failure means the process cannot continue safely or access required hardware',
-            '**Exceptions** — such as divide-by-zero, invalid memory access or an illegal instruction; the OS detects the fault and stops the process to prevent system instability',
+            '**Normal termination**: the process completes its task successfully, releases resources and shuts down properly',
+            '**A requested resource is unavailable**: the required memory, file, device or network resource is unavailable for a long time, and the OS stops the process to prevent system problems',
+            '**An execution error**: an unexpected issue during execution prevents it completing its intended task',
+            '**A memory access violation**: the process tried to touch memory it does not own, or perform an unauthorised action; memory protection (via paging or segmentation) keeps each process in its own sandbox, and the OS terminates a process that breaks out',
+            '**An OS or parent process request**: a parent can explicitly terminate its child using system calls, due to task completion, errors, or the need to stop misbehaving children',
+            '**Execution time limit exceeded**: the process ran longer than the maximum CPU time allowed, so the OS terminates it to stop it monopolising system resources',
+            '**The parent process has been terminated**: on many systems, when a parent terminates its child processes are terminated too (cascading termination). Unix and Linux instead hand orphaned children to a system process so they can carry on',
+            '**User intervention**: the user manually stops a running program; the OS stops execution and releases the allocated resources',
+            '**Hardware failures**: a disk crash, RAM error or power failure means the process cannot continue safely or access required hardware',
+            '**Exceptions**: such as divide-by-zero, invalid memory access or an illegal instruction; the OS detects the fault and stops the process to prevent system instability',
           ],
         },
         { kind: 'heading', text: 'Deadlock' },
         {
           kind: 'definition',
           term: 'Deadlock',
-          simple: 'Two processes each waiting for something the other is holding — forever.',
+          simple: 'Two processes each waiting for something the other is holding: forever.',
           technical:
             'A state that occurs when two or more processes are waiting for each other indefinitely, and none of them can proceed.',
         },
         {
           kind: 'list',
-          title: 'The four conditions — all must happen at the same time',
+          title: 'The four conditions: all must happen at the same time',
           style: 'number',
           items: [
-            '**Mutual exclusion** — processes require exclusive access to resources',
-            '**Hold and wait** — a process holds one resource while waiting for another',
-            '**No preemption** — resources cannot be forcibly taken away',
-            '**Circular wait** — a circular waiting condition exists, each process waiting for another in a cycle',
+            '**Mutual exclusion**: processes require exclusive access to resources',
+            '**Hold and wait**: a process holds one resource while waiting for another',
+            '**No preemption**: resources cannot be forcibly taken away',
+            '**Circular wait**: a circular waiting condition exists, each process waiting for another in a cycle',
           ],
         },
         {
@@ -622,7 +622,7 @@ export const m5: Module = {
           kind: 'prose',
           paragraphs: [
             '**Why it happens:** when a child process terminates, it sends its exit status to the parent process. If the parent does not collect this exit status, the terminated child remains in the system as a zombie.',
-            '**The effect:** a zombie process has already completed execution and **does not use CPU or main memory** — but it occupies an entry in the process table. If many zombie processes accumulate, the process table can become full, preventing new processes from being created.',
+            '**The effect:** a zombie process has already completed execution and **does not use CPU or main memory**, but it occupies an entry in the process table. If many zombie processes accumulate, the process table can become full, preventing new processes from being created.',
           ],
         },
         {
@@ -674,7 +674,7 @@ export const m5: Module = {
         {
           kind: 'definition',
           term: 'Interrupt',
-          simple: 'A signal saying "stop what you are doing — something needs attention right now".',
+          simple: 'A signal saying "stop what you are doing: something needs attention right now".',
           technical:
             'According to the syllabus: an event that alters the sequence of execution of a process. More generally, a signal sent to the processor by hardware or software to indicate that an event needs immediate attention. It temporarily stops the current process so the operating system can handle an important task.',
         },
@@ -705,15 +705,15 @@ export const m5: Module = {
           kind: 'list',
           title: 'Key points about interrupts',
           items: [
-            '**Priority levels** — interrupts have different priority levels; higher-priority interrupts can interrupt lower-priority ones.',
-            '**Asynchronous** — interrupts occur independently of the processor’s current activity, and their timing is unpredictable.',
-            '**Maskable** interrupts can be temporarily ignored by the OS. **Non-maskable** interrupts cannot be ignored and must be handled immediately — for example, hardware failures.',
-            '**Latency** — the time taken to respond to an interrupt. Lower latency means faster response.',
+            '**Priority levels**: interrupts have different priority levels; higher-priority interrupts can interrupt lower-priority ones.',
+            '**Asynchronous**: hardware interrupts occur independently of what the processor is doing, so their timing is unpredictable. (Software interrupts, such as a divide-by-zero, happen at a predictable point in the program.)',
+            '**Maskable** interrupts can be temporarily ignored by the OS. **Non-maskable** interrupts cannot be ignored and must be handled immediately: for example, hardware failures.',
+            '**Latency**: the time taken to respond to an interrupt. Lower latency means faster response.',
           ],
         },
         {
           kind: 'steps',
-          title: 'Interrupt handling — how it works',
+          title: 'Interrupt handling: how it works',
           steps: [
             { title: 'An interrupt signal is sent to the CPU', detail: 'From hardware or software.' },
             {
@@ -734,7 +734,7 @@ export const m5: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Why interrupts and I/O go together',
-          text: 'I/O devices are far slower than the CPU. Rather than waiting, the CPU switches to another task during an I/O operation. When the I/O finishes, the device sends an interrupt, and the CPU can then resume the original process. This keeps the system efficient — and it is exactly why the Blocked state exists.',
+          text: 'I/O devices are far slower than the CPU. Rather than waiting, the CPU switches to another task during an I/O operation. When the I/O finishes, the device sends an interrupt, and the CPU can then resume the original process. This keeps the system efficient, and it is exactly why the Blocked state exists.',
         },
         { kind: 'heading', text: 'Context switching' },
         {
@@ -759,26 +759,26 @@ export const m5: Module = {
             'Two processes P0 and P1 exist. P0 is running. Explain what happens when P1 needs to run.',
           steps: [
             {
-              title: 'Step 1 — P0 is in progress',
+              title: 'Step 1: P0 is in progress',
               detail: 'P0 holds the CPU; its registers and program counter are live in the CPU.',
             },
             {
-              title: 'Step 2 — an interrupt is created',
+              title: 'Step 2: an interrupt is created',
               detail:
                 'The central processing unit is informed. P0 must stop where it stands.',
             },
             {
-              title: 'Step 3 — save P0’s state',
+              title: 'Step 3: save P0’s state',
               detail:
                 'The memory management information and process status related to P0 are stored in the PCB belonging to that process.',
             },
             {
-              title: 'Step 4 — restore and run P1',
+              title: 'Step 4: restore and run P1',
               detail:
                 'P1’s saved state is loaded from its PCB into the CPU, and P1 starts running.',
             },
             {
-              title: 'Step 5 — reverse it later',
+              title: 'Step 5: reverse it later',
               detail:
                 'When an interrupt related to P1 occurs, P1’s information is stored in its own PCB the same way, and P0 is executed again from exactly where it stopped.',
             },
@@ -813,13 +813,13 @@ export const m5: Module = {
         {
           kind: 'keyIdea',
           title: 'Why this matters later',
-          text: 'Context switching is not free. That single fact explains why a Round Robin time quantum must not be too small — you would spend more time switching than computing. Keep it in mind for lesson 5.8.',
+          text: 'Context switching is not free. That single fact explains why a Round Robin time quantum must not be too small: you would spend more time switching than computing. Keep it in mind for lesson 5.8.',
         },
         {
           kind: 'recall',
           prompt: 'Define context switching in one sentence, then state its main cost.',
           answer:
-            'Context switching is the mechanism by which the OS saves the execution state of the running process and restores the saved state of another, so multiple processes can share the CPU. Its main cost is overhead — time spent saving and restoring state during which no useful work happens.',
+            'Context switching is the mechanism by which the OS saves the execution state of the running process and restores the saved state of another, so multiple processes can share the CPU. Its main cost is overhead: time spent saving and restoring state during which no useful work happens.',
         },
         {
           kind: 'quickCheck',
@@ -829,8 +829,8 @@ export const m5: Module = {
       takeaways: [
         'An interrupt is an event that alters the sequence of execution of a process.',
         'Hardware interrupts come from devices; software interrupts come from programs (system calls, errors, exceptions).',
-        'Interrupts are asynchronous, have priority levels, and may be maskable or non-maskable.',
-        'Context switching saves the running process’s state into its PCB and restores another’s — enabling multitasking at the cost of overhead.',
+        'Hardware interrupts are asynchronous; interrupts have priority levels and may be maskable or non-maskable.',
+        'Context switching saves the running process’s state into its PCB and restores another’s, enabling multitasking at the cost of overhead.',
       ],
     },
 
@@ -840,7 +840,7 @@ export const m5: Module = {
       moduleId: 'm5',
       title: 'The three schedulers',
       summary:
-        'Long-term, short-term and medium-term — three different decisions, three different speeds.',
+        'Long-term, short-term and medium-term: three different decisions, three different speeds.',
       whyItMatters:
         '"Compares long, short and medium term schedulers" is a named learning outcome, and the comparison table is a guaranteed-mark question if you know which scheduler does what.',
       objectives: [
@@ -861,7 +861,7 @@ export const m5: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'In a multiprogramming environment the operating system decides which process gets the CPU, when, and for how long. This decision-making function is called **process scheduling** — and it is split across three schedulers, each answering a different question.',
+            'In a multiprogramming environment the operating system decides which process gets the CPU, when, and for how long. This decision-making function is called **process scheduling**, and it is split across three schedulers, each answering a different question.',
           ],
         },
         {
@@ -920,9 +920,9 @@ export const m5: Module = {
           kind: 'analogy',
           title: 'A hospital',
           everyday:
-            'The **long-term scheduler** is the admissions desk: it decides how many patients are allowed into the hospital at all. Admit too many and the wards overflow. The **short-term scheduler** is the doctor deciding which waiting patient to see next — a decision made constantly, in seconds. The **medium-term scheduler** is the ward manager who moves a stable patient to an overflow annex when beds run short, and brings them back when a bed frees up.',
+            'The **long-term scheduler** is the admissions desk: it decides how many patients are allowed into the hospital at all. Admit too many and the wards overflow. The **short-term scheduler** is the doctor deciding which waiting patient to see next: a decision made constantly, in seconds. The **medium-term scheduler** is the ward manager who moves a stable patient to an overflow annex when beds run short, and brings them back when a bed frees up.',
           mapsTo:
-            'This is why the long-term scheduler controls the degree of multiprogramming — it literally decides how many processes are in memory — while the short-term scheduler only picks among those already admitted.',
+            'This is why the long-term scheduler controls the degree of multiprogramming (it literally decides how many processes are in memory), while the short-term scheduler only picks among those already admitted.',
         },
         {
           kind: 'misconception',
@@ -935,7 +935,7 @@ export const m5: Module = {
           prompt:
             'Which scheduler is fastest, and why does that make sense?',
           answer:
-            'The short-term scheduler. It must run every time the CPU becomes free — potentially thousands of times a second — so it has to make its decision extremely quickly. The long-term scheduler runs far less often, so it can afford to take longer.',
+            'The short-term scheduler. It must run every time the CPU becomes free, potentially thousands of times a second, so it has to make its decision extremely quickly. The long-term scheduler runs far less often, so it can afford to take longer.',
         },
         {
           kind: 'quickCheck',
@@ -1001,7 +1001,7 @@ export const m5: Module = {
             ],
           ],
         },
-        { kind: 'heading', text: 'Scheduling criteria — how we judge a scheduler' },
+        { kind: 'heading', text: 'Scheduling criteria: how we judge a scheduler' },
         {
           kind: 'table',
           headers: ['Criterion', 'Definition', 'Goal'],
@@ -1009,7 +1009,7 @@ export const m5: Module = {
             [
               '**CPU utilisation**',
               'The percentage of time the CPU is actively working.',
-              'Keep the CPU as busy as possible — ideally 100% — to avoid wasting processing power.',
+              'Keep the CPU as busy as possible, ideally 100%, to avoid wasting processing power.',
             ],
             [
               '**[[throughput|Throughput]]**',
@@ -1029,7 +1029,7 @@ export const m5: Module = {
             [
               '**[[response-time|Response time]]**',
               'The duration from when a process is first submitted until the very first response or output is produced.',
-              'As low as possible — critical for interactive systems.',
+              'As low as possible: critical for interactive systems.',
             ],
           ],
         },
@@ -1052,11 +1052,11 @@ export const m5: Module = {
             ],
             [
               '**Time**',
-              'A specific moment or timestamp — arrival time, start time, completion time.',
+              'A specific moment or timestamp: arrival time, start time, completion time.',
             ],
             [
               '**Duration**',
-              'The total length of time a process uses the CPU or stays in a state — burst time, waiting time, turnaround time.',
+              'The total length of time a process uses the CPU or stays in a state: burst time, waiting time, turnaround time.',
             ],
             [
               '**[[gantt-chart|Gantt chart]]**',
@@ -1067,7 +1067,7 @@ export const m5: Module = {
         {
           kind: 'callout',
           tone: 'success',
-          title: 'The two formulas — memorise these exactly',
+          title: 'The two formulas: memorise these exactly',
           text: '**Turnaround duration = Completion time − Arrival time**  ·  **Waiting duration = Turnaround duration − Burst duration**. Every calculation question in this competency reduces to these two lines plus a correctly drawn Gantt chart.',
         },
         {
@@ -1087,7 +1087,7 @@ export const m5: Module = {
             {
               title: 'Sanity check',
               detail:
-                'The process existed for 14 ms and used the CPU for 8 of them, so it waited 6. Waiting time can never be negative — if yours is, the Gantt chart is wrong.',
+                'The process existed for 14 ms and used the CPU for 8 of them, so it waited 6. Waiting time can never be negative: if yours is, the Gantt chart is wrong.',
             },
           ],
           answer: 'Turnaround duration = 14 ms; waiting duration = 6 ms.',
@@ -1096,7 +1096,7 @@ export const m5: Module = {
           kind: 'misconception',
           wrong: 'Waiting time is how long a process waits before it first starts running.',
           right:
-            'That is **response time**. Waiting time is the **total** time spent in the ready queue — including every time a preempted process goes back and waits again.',
+            'That is **response time**. Waiting time is the **total** time spent in the ready queue, including every time a preempted process goes back and waits again.',
           why: 'In Round Robin a process may wait, run, wait, run, wait, run. Response time counts only the first gap; waiting time counts all of them added together.',
         },
         {
@@ -1125,7 +1125,7 @@ export const m5: Module = {
       moduleId: 'm5',
       title: 'Scheduling algorithms and Gantt charts',
       summary:
-        'FCFS, SJF, SRTF, Priority and Round Robin — drawn, calculated and compared on the same set of processes.',
+        'FCFS, SJF, SRTF, Priority and Round Robin: drawn, calculated and compared on the same set of processes.',
       whyItMatters:
         'This is the biggest calculation topic in the competency. Full marks are available and entirely mechanical, provided you can draw a correct Gantt chart.',
       objectives: [
@@ -1175,7 +1175,7 @@ export const m5: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'The simplest scheduling algorithm. Processes are executed in the order they arrive in the ready queue, following the **FIFO** principle. Once a process starts, it runs until completion — **non-preemptive**. After finishing, the CPU is given to the next process in the queue.',
+            'The simplest scheduling algorithm. Processes are executed in the order they arrive in the ready queue, following the **FIFO** principle. Once a process starts, it runs until completion: **non-preemptive**. After finishing, the CPU is given to the next process in the queue.',
           ],
         },
         {
@@ -1209,18 +1209,18 @@ export const m5: Module = {
           kind: 'compare',
           headers: ['FCFS advantages', 'FCFS disadvantages'],
           rows: [
-            ['Fair — processes executed in arrival order', '**Convoy effect** — a long job delays short jobs behind it'],
+            ['Fair: processes executed in arrival order', '**Convoy effect**: a long job delays short jobs behind it'],
             ['No starvation', 'High average waiting time'],
             ['Low scheduling overhead', 'Poor turnaround time'],
-            ['Easy to manage and understand', 'Non-preemptive — not suitable for time-sharing systems'],
-            ['—', 'Not efficient for short or interactive processes'],
+            ['Easy to manage and understand', 'Non-preemptive, not suitable for time-sharing systems'],
+            ['', 'Not efficient for short or interactive processes'],
           ],
         },
         { kind: 'heading', text: '2. Shortest Job First (SJF)' },
         {
           kind: 'prose',
           paragraphs: [
-            'Selects the process with the **shortest burst time** to execute next. In its non-preemptive form, once a process starts it cannot be interrupted — the CPU completes the shortest job fully before switching.',
+            'Selects the process with the **shortest burst time** to execute next. In its non-preemptive form, once a process starts it cannot be interrupted: the CPU completes the shortest job fully before switching.',
           ],
         },
         {
@@ -1253,7 +1253,7 @@ export const m5: Module = {
           kind: 'callout',
           tone: 'warn',
           title: 'A subtlety worth knowing',
-          text: 'In **non-preemptive** SJF, even if a shorter process arrives while a longer one is already on the CPU, the longer process runs to completion without being interrupted. Different arrival times therefore give the same averages here — because the algorithm never looks back once it has committed.',
+          text: 'In **non-preemptive** SJF, even if a shorter process arrives while a longer one is already on the CPU, the longer process runs to completion. With the **real** arrival times, only P1 exists at time 0, so it must start and runs 0–5. Then P2 (5–8), P4 (8–12) and P3 (12–20). That gives an average turnaround of 9.5 ms and average waiting of 4.5 ms. Arrival times change the answer, so always check which times a question gives you.',
         },
         { kind: 'heading', text: '3. Shortest Remaining Time First (SRTF)' },
         {
@@ -1268,43 +1268,43 @@ export const m5: Module = {
           problem: 'Draw the Gantt chart and find the averages.',
           steps: [
             {
-              title: 'Time 0 — P1 arrives and starts',
+              title: 'Time 0: P1 arrives and starts',
               detail: 'Remaining burst for P1 is 5 ms.',
             },
             {
-              title: 'Time 1 — P2 arrives with burst 3',
+              title: 'Time 1: P2 arrives with burst 3',
               detail:
                 'P1 has 4 ms remaining. P2 needs only 3, so P1 is preempted and P2 starts.',
             },
             {
-              title: 'Time 2 — P3 arrives with burst 8',
+              title: 'Time 2: P3 arrives with burst 8',
               detail:
                 'P2 continues: its remaining 2 ms is shorter than P1’s 4 ms and P3’s 8 ms.',
             },
             {
-              title: 'Time 4 — P2 finishes, P4 arrives with burst 4',
+              title: 'Time 4: P2 finishes, P4 arrives with burst 4',
               detail:
                 'Remaining: P1 = 4, P3 = 8, P4 = 4. P1 is chosen (equal to P4 but arrived first). P1 runs 4–8.',
             },
             {
-              title: 'Time 8 — P1 finishes',
+              title: 'Time 8: P1 finishes',
               detail: 'P4 (4 ms) is shorter than P3 (8 ms), so P4 runs 8–12.',
             },
             {
-              title: 'Time 12 — only P3 remains',
+              title: 'Time 12: only P3 remains',
               detail: 'P3 runs 12–20.',
             },
             {
               title: 'Calculate',
               detail:
-                'Completions — P1: 8, P2: 4, P3: 20, P4: 12. Turnaround: 8, 3, 18, 8. Waiting: 3, 0, 10, 4.',
+                'Completion times are P1 = 8, P2 = 4, P3 = 20, P4 = 12. Turnaround: 8, 3, 18, 8. Waiting: 3, 0, 10, 4.',
             },
             {
               title: 'Averages',
               detail: 'ATD = (8+3+18+8)/4 = 9.25 ms   ·   AWD = (3+0+10+4)/4 = 4.25 ms',
             },
           ],
-          answer: 'Average turnaround = 9.25 ms; average waiting = 4.25 ms — the best so far.',
+          answer: 'Average turnaround = 9.25 ms; average waiting = 4.25 ms, the best so far.',
         },
         {
           kind: 'compare',
@@ -1330,11 +1330,11 @@ export const m5: Module = {
           problem: 'Using priorities P1=3, P2=1, P3=4, P4=2 (lower number = higher priority).',
           steps: [
             {
-              title: 'Time 0 — only P1 is available',
+              title: 'Time 0: only P1 is available',
               detail: 'P1 starts and, being non-preemptive, runs to completion: 0–5.',
             },
             {
-              title: 'Time 5 — choose among the waiting processes',
+              title: 'Time 5: choose among the waiting processes',
               detail: 'P2 (priority 1) is highest, so P2 runs 5–8.',
             },
             {
@@ -1360,23 +1360,23 @@ export const m5: Module = {
           problem: 'Same priorities, but the OS may now interrupt.',
           steps: [
             {
-              title: 'Time 0 — P1 starts',
+              title: 'Time 0: P1 starts',
               detail: 'It is the only process available.',
             },
             {
-              title: 'Time 1 — P2 arrives with priority 1',
+              title: 'Time 1: P2 arrives with priority 1',
               detail: 'Higher priority than P1 (3), so P2 preempts P1 and runs until it finishes at 4.',
             },
             {
-              title: 'Time 4 — P4 arrives with priority 2',
+              title: 'Time 4: P4 arrives with priority 2',
               detail: 'Higher than P1 (3), so P4 runs 4–8.',
             },
             {
-              title: 'Time 8 — P1 resumes',
+              title: 'Time 8: P1 resumes',
               detail: 'It has 4 ms left, running 8–12.',
             },
             {
-              title: 'Time 12 — P3 finally runs',
+              title: 'Time 12: P3 finally runs',
               detail: 'Lowest priority, so last: 12–20.',
             },
             {
@@ -1399,13 +1399,13 @@ export const m5: Module = {
           term: 'Aging',
           simple: 'Slowly raising the priority of a process that has been waiting a long time.',
           technical:
-            'A technique where the priority of long-waited processes in the system is gradually increased — conventionally by 1 for every 15 minutes of waiting. It is the standard solution to starvation.',
+            'A technique where the priority of long-waited processes in the system is gradually increased: for example, by 1 for every 15 minutes of waiting. It is the standard solution to starvation.',
         },
         {
           kind: 'callout',
           tone: 'danger',
           title: 'A named disadvantage',
-          text: 'Priority scheduling has **no built-in aging mechanism**, so starvation can occur if aging is not applied deliberately. Round Robin, by contrast, prevents starvation structurally — everyone gets a turn.',
+          text: 'Priority scheduling has **no built-in aging mechanism**, so starvation can occur if aging is not applied deliberately. Round Robin, by contrast, prevents starvation structurally: everyone gets a turn.',
         },
         { kind: 'heading', text: '5. Round Robin (RR)' },
         {
@@ -1443,7 +1443,7 @@ export const m5: Module = {
             {
               title: 'First round',
               detail:
-                'P1 runs 0–4 (1 ms remaining, preempted). P2 runs 4–7 (finishes — burst 3 ≤ 4). P3 runs 7–11 (4 ms remaining, preempted). P4 runs 11–15 (finishes).',
+                'P1 runs 0–4 (1 ms remaining, preempted). P2 runs 4–7 (finishes: burst 3 ≤ 4). P3 runs 7–11 (4 ms remaining, preempted). P4 runs 11–15 (finishes).',
             },
             {
               title: 'Second round',
@@ -1465,7 +1465,7 @@ export const m5: Module = {
             },
           ],
           answer:
-            'Average turnaround = 14.5 ms; average waiting = 9.5 ms — the worst averages here, but nobody starved and everyone responded quickly.',
+            'Average turnaround = 14.5 ms; average waiting = 9.5 ms. These are the worst averages here, but nobody starved and everyone responded quickly.',
         },
         {
           kind: 'compare',
@@ -1479,7 +1479,7 @@ export const m5: Module = {
             ],
             [
               'Positive',
-              'Each process gets the CPU quickly — better for interactive systems.',
+              'Each process gets the CPU quickly: better for interactive systems.',
               'CPU efficiency increases because switching happens less often.',
             ],
             [
@@ -1493,10 +1493,10 @@ export const m5: Module = {
           kind: 'compare',
           headers: ['Round Robin advantages', 'Round Robin disadvantages'],
           rows: [
-            ['Fair allocation of CPU — each process gets an equal time slice', 'Performance depends heavily on quantum size'],
-            ['**Prevents starvation** — every process gets a chance', 'High context-switching overhead'],
+            ['Fair allocation of CPU: each process gets an equal time slice', 'Performance depends heavily on quantum size'],
+            ['**Prevents starvation**: every process gets a chance', 'High context-switching overhead'],
             ['Good response time for interactive and time-sharing systems', 'Average waiting time can be high'],
-            ['Preemptive — the system stays responsive', 'Turnaround time may not be optimal'],
+            ['Preemptive: the system stays responsive', 'Turnaround time may not be optimal'],
             ['Simple to implement using a circular queue', 'Not suitable for real-time systems without priority handling'],
             ['Suitable for multitasking environments', 'Does not consider process priority'],
           ],
@@ -1505,16 +1505,17 @@ export const m5: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'For this particular set of four processes, the best scheduler is **preemptive SJF (SRTF)** — it gives the lowest average waiting time (4.25 ms) and lowest average turnaround time (9.25 ms).',
+            'For this particular set of four processes, the best scheduler is **preemptive SJF (SRTF)**: it gives the lowest average waiting time (4.25 ms) and lowest average turnaround time (9.25 ms).',
+            'A fair comparison needs the same arrival times. The SJF and Round Robin examples above assumed everything arrived at 0. With the real arrival times, non-preemptive SJF gives 9.5 / 4.5 ms and Round Robin (quantum 4) gives 12.75 / 7.75 ms, so SRTF still wins.',
             'Why? Shorter processes (P2 and P4) are executed earlier, which reduces overall waiting time, and newly arrived short jobs are handled immediately by preempting the current process.',
-            '**Preemptive priority scheduling gets the same averages in this example** — but SRTF reaches that performance using burst length alone, without depending on manually assigned priorities. That independence is why it is preferred here.',
+            '**Preemptive priority scheduling gets the same averages in this example**, but SRTF reaches that performance using burst length alone, without depending on manually assigned priorities. That independence is why it is preferred here.',
           ],
         },
         {
           kind: 'callout',
           tone: 'warn',
           title: 'But "best" depends on the workload',
-          text: 'SRTF’s advantages — high efficiency, fast completion of short jobs — come with real costs: long processes such as P3 may wait far longer, the scheduler must know or estimate CPU burst times in advance, and it is harder to implement. In this workload the short jobs naturally benefit first, which is exactly why the averages improve. A different mix of processes could favour a different algorithm.',
+          text: 'SRTF’s advantages (high efficiency, fast completion of short jobs) come with real costs: long processes such as P3 may wait far longer, the scheduler must know or estimate CPU burst times in advance, and it is harder to implement. In this workload the short jobs naturally benefit first, which is exactly why the averages improve. A different mix of processes could favour a different algorithm.',
         },
         {
           kind: 'teachBack',
@@ -1537,7 +1538,7 @@ export const m5: Module = {
       takeaways: [
         'FCFS: non-preemptive, arrival order, suffers the convoy effect.',
         'SJF: shortest burst first, non-preemptive. SRTF: its preemptive version, usually the best averages.',
-        'Priority scheduling risks starvation; aging (raise priority by 1 every 15 minutes) is the fix.',
+        'Priority scheduling risks starvation; aging (for example, raising priority by 1 every 15 minutes) is the fix.',
         'Round Robin: fixed time quantum, circular order, prevents starvation, designed for time-sharing.',
         'Too small a quantum wastes time switching; too large and RR degenerates into FCFS.',
       ],

@@ -138,7 +138,7 @@ export function SchedulerLab({
                 ? 'Very short: fast response, but look how many context switches it costs.'
                 : quantum >= 8
                   ? 'Very long: most processes finish in one turn, so this behaves almost like FCFS.'
-                  : 'A balanced quantum — good response time without excessive switching.'}
+                  : 'A balanced quantum: good response time without excessive switching.'}
             </p>
           </div>
         )}

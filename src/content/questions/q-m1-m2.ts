@@ -11,13 +11,13 @@ export const questionsM1M2: Question[] = [
     options: ['Microsoft Excel', 'A device driver', 'Google Chrome', 'Adobe Photoshop'],
     correct: 1,
     optionFeedback: [
-      'Excel produces work *for you* — that makes it application software.',
+      'Excel produces work *for you*: that makes it application software.',
       null,
       'A browser is something you use to get a job done, so it is application software.',
       'Photoshop is an application: you use it to produce images.',
     ],
     explanation:
-      'System software provides the essential services a computer needs to function and manages hardware. Device drivers, operating systems and language translators are all system software. The other three are all application software — you use them directly to produce work.',
+      'System software provides the essential services a computer needs to function and manages hardware. Device drivers, operating systems and language translators are all system software. The other three are all application software: you use them directly to produce work.',
     remediation:
       'Ask what the software is *for*. Producing output you wanted → application. Running or maintaining the machine → system.',
     tags: ['software-classification'],
@@ -30,7 +30,7 @@ export const questionsM1M2: Question[] = [
     prompt: 'Utility software is a type of application software.',
     correct: false,
     explanation:
-      'Utility software is a type of **system** software. Its job is to maintain, manage and optimise the computer system itself — not to produce work for the user.',
+      'Utility software is a type of **system** software. Its job is to maintain, manage and optimise the computer system itself, not to produce work for the user.',
     remediation:
       'Antivirus, disk cleanup and backup tools all look after the machine. Word and Chrome produce output for you. That is the dividing line.',
     tags: ['software-classification'],
@@ -61,7 +61,7 @@ export const questionsM1M2: Question[] = [
     options: ['WinRAR', 'Microsoft PowerPoint', 'Windows Defender', 'Task Manager', 'VLC Media Player'],
     correct: [0, 2, 3],
     explanation:
-      'WinRAR (file compression), Windows Defender (antivirus) and Task Manager all maintain, manage or optimise the system. PowerPoint and VLC are application software — you use them to produce or consume content.',
+      'WinRAR (file compression), Windows Defender (antivirus) and Task Manager all maintain, manage or optimise the system. PowerPoint and VLC are application software: you use them to produce or consume content.',
     remediation:
       'The eight utility types are: antivirus, disk cleanup, backup, file compression, screen saver, clipboard, task manager and encryption software.',
     tags: ['utility-software'],
@@ -76,7 +76,7 @@ export const questionsM1M2: Question[] = [
     options: ['Lossless compression', 'Lossy compression', 'Symmetric compression', 'Asymmetric compression'],
     correct: 1,
     optionFeedback: [
-      'Lossless compression reduces size **without losing any data** — the original can be perfectly reconstructed.',
+      'Lossless compression reduces size **without losing any data**: the original can be perfectly reconstructed.',
       null,
       'Symmetric and asymmetric describe *encryption*, not compression.',
       'Symmetric and asymmetric describe *encryption*, not compression.',
@@ -94,7 +94,7 @@ export const questionsM1M2: Question[] = [
       'Encryption that uses a single secret key for both encryption and decryption is called ___ encryption.',
     accepted: ['symmetric'],
     explanation:
-      'Symmetric encryption uses one shared secret key for both directions. Asymmetric encryption uses a pair of mathematically linked keys — a public key and a private key.',
+      'Symmetric encryption uses one shared secret key for both directions. Asymmetric encryption uses a pair of mathematically linked keys: a public key and a private key.',
     tags: ['encryption'],
   },
 
@@ -134,7 +134,7 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 2,
     optionFeedback: [
-      'That is POST — the Power-On Self-Test.',
+      'That is POST: the Power-On Self-Test.',
       'That is CMOS memory, kept alive by the motherboard battery.',
       null,
       'That is the boot device selection stage, done by the BIOS according to the boot order.',
@@ -158,13 +158,13 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'If the BIOS chip had failed the machine would not boot at all — the BIOS code is what starts everything.',
+      'If the BIOS chip had failed the machine would not boot at all: the BIOS code is what starts everything.',
       null,
       'A corrupted boot loader would prevent the OS loading, not affect the clock.',
       'A POST failure would produce beep codes and halt the boot.',
     ],
     explanation:
-      'BIOS *code* lives in non-volatile ROM, so it survives without power. BIOS *settings* — date, time, boot order, hardware configuration — live in CMOS memory, which is kept alive by a small battery. A dead battery means those settings are lost each time power is removed.',
+      'BIOS *code* lives in non-volatile ROM, so it survives without power. BIOS *settings* (date, time, boot order, hardware configuration) live in CMOS memory, which is kept alive by a small battery. A dead battery means those settings are lost each time power is removed.',
     remediation:
       'Separate the two: BIOS = the program, in ROM. CMOS = the settings, in battery-backed memory.',
     tags: ['booting', 'cmos'],
@@ -179,11 +179,11 @@ export const questionsM1M2: Question[] = [
       'UEFI is 16-bit and uses MBR partitions up to 2 TB',
       'UEFI supports GPT partitions over 2 TB and Secure Boot',
       'UEFI was released in 1981 and uses a text-based interface',
-      'UEFI stores its settings in ROM rather than CMOS',
+      'UEFI can only boot from disks smaller than 2 TB',
     ],
     correct: 1,
     explanation:
-      'UEFI (2002) is the modern replacement for BIOS: graphical interface, 32/64-bit operation, GPT partitions over 2 TB, and Secure Boot to prevent an unauthorised OS from loading. The 16-bit, MBR, 2 TB, 1981, text-based description is BIOS.',
+      'UEFI is the modern replacement for BIOS: graphical interface, 32/64-bit operation, GPT partitions over 2 TB, and Secure Boot to prevent an unauthorised OS from loading. The 16-bit, MBR, 2 TB, 1981, text-based description is BIOS, and GPT is what lets UEFI boot from disks larger than 2 TB.',
     tags: ['uefi', 'bios'],
   },
 
@@ -202,10 +202,10 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'True but far too narrow — it misses resource management entirely.',
+      'True but far too narrow: it misses resource management entirely.',
       null,
       'That describes the BIOS, which is firmware, not the operating system.',
-      'That is antivirus — utility software.',
+      'That is antivirus: utility software.',
     ],
     explanation:
       'A complete definition has two halves: it **manages hardware and software resources**, and it **provides an interface between the user and the hardware**. An answer with only one half is incomplete.',
@@ -232,7 +232,7 @@ export const questionsM1M2: Question[] = [
       'The earliest computers had no operating system because operating systems had not been invented yet.',
     correct: false,
     explanation:
-      'They had no OS because they did not *need* one. Early computers were special-purpose machines with pre-programmed instructions that were not meant to change — so there was nothing for an OS to do. The need arose only once general-purpose computers had to run many different, frequently changing programs.',
+      'They had no OS because they did not *need* one. Early computers were special-purpose machines with pre-programmed instructions that were not meant to change, so there was nothing for an OS to do. The need arose only once general-purpose computers had to run many different, frequently changing programs.',
     remediation:
       'The invention followed the need, not the other way round. Von Neumann’s general-purpose design is what created the problem an OS solves.',
     tags: ['os-need', 'evolution'],
@@ -254,7 +254,7 @@ export const questionsM1M2: Question[] = [
     ],
     correct: [0, 1, 3, 4],
     explanation:
-      'The five main functions are: providing interfaces, process management, resource management, security and protection, and executing application software. Compiling source code is the job of a compiler — system software, but not an OS function.',
+      'The five main functions are: providing interfaces, process management, resource management, security and protection, and executing application software. Compiling source code is the job of a compiler: system software, but not an OS function.',
     tags: ['os-functions'],
   },
   {
@@ -266,7 +266,7 @@ export const questionsM1M2: Question[] = [
       'Directories, files and data are described as "abstractions provided by the operating system". What does this mean?',
     options: [
       'They are difficult concepts that beginners find abstract',
-      'They do not exist in the hardware — the OS invents them and maintains the illusion',
+      'They do not exist in the hardware: the OS invents them and maintains the illusion',
       'They are stored in an abstract area of the hard disk',
       'They can only be accessed through abstract classes in programming',
     ],
@@ -274,7 +274,7 @@ export const questionsM1M2: Question[] = [
     optionFeedback: [
       'Abstraction here is a technical term, not a comment on difficulty.',
       null,
-      'There is no "abstract area" of a disk — only platters, tracks and sectors.',
+      'There is no "abstract area" of a disk: only platters, tracks and sectors.',
       'This is a programming-language concept, unrelated.',
     ],
     explanation:
@@ -315,7 +315,7 @@ export const questionsM1M2: Question[] = [
       'Time-sharing system',
     ],
     explanation:
-      'Each generation removes one more source of CPU idle time: manual loading → automatic job loading → overlapping I/O with computation → preemptive switching for interactivity.',
+      'Each step fixes the previous one’s biggest waste: manual loading → automatic job loading → overlapping I/O with computation → preemptive switching so users get fast responses.',
     tags: ['evolution'],
   },
   {
@@ -333,13 +333,13 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'The reverse is closer to the truth — time-sharing is what made interactive multi-user systems possible.',
+      'The reverse is closer to the truth: time-sharing is what made interactive multi-user systems possible.',
       null,
       'Time-sharing systems typically use *more* advanced memory techniques, including virtual memory.',
       'Exactly backwards: time-sharing is preemptive.',
     ],
     explanation:
-      'Multiprogramming switches only when the running process blocks (usually for I/O) — its goal is maximum CPU utilisation. Time-sharing switches even when a process is running perfectly well, because its time slice expired — its goal is minimum response time.',
+      'Multiprogramming switches only when the running process blocks (usually for I/O): its goal is maximum CPU utilisation. Time-sharing switches even when a process is running perfectly well, because its time slice expired: its goal is minimum response time.',
     remediation:
       'Multiprogramming makes the *machine* efficient. Time-sharing makes the *person* happy.',
     tags: ['multiprogramming', 'time-sharing'],
@@ -371,13 +371,13 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Speed is not the issue — coexistence is.',
+      'Speed is not the issue: coexistence is.',
       null,
       'Virtual memory came later, but its absence is not the reason protection is needed.',
       'Multi-programmed batch systems were still non-interactive; interaction came with time-sharing.',
     ],
     explanation:
-      'In a simple batch system only one user program is in memory at a time, so there is nothing to protect it from. Once memory is divided into partitions holding several jobs, one buggy job could write into another’s memory — so memory protection becomes necessary.',
+      'In a simple batch system only one user program is in memory at a time, so there is nothing to protect it from. Once memory is divided into partitions holding several jobs, one buggy job could write into another’s memory, so memory protection becomes necessary.',
     tags: ['multiprogramming', 'memory-protection'],
   },
 
@@ -436,11 +436,11 @@ export const questionsM1M2: Question[] = [
     optionFeedback: [
       'That would require running the spell-checker as a completely separate program with its own memory, which could not easily see your document.',
       null,
-      'Batch processing is non-interactive — the opposite of what is described.',
+      'Batch processing is non-interactive: the opposite of what is described.',
       'Spooling queues I/O jobs for slow devices; nothing here is being sent to a device.',
     ],
     explanation:
-      'This is thread-based multitasking: multiple threads inside one process. Because the threads share the process’s memory, the spell-check thread can read the same document the typing thread is editing — which would be far harder across separate processes.',
+      'This is thread-based multitasking: multiple threads inside one process. Because the threads share the process’s memory, the spell-check thread can read the same document the typing thread is editing, which would be far harder across separate processes.',
     tags: ['threads', 'multitasking'],
   },
 
@@ -453,7 +453,7 @@ export const questionsM1M2: Question[] = [
     prompt: 'A multi-user single-tasking operating system can exist.',
     correct: false,
     explanation:
-      'It cannot. When multiple users are active, the system must handle multiple tasks at the same time — and that is multitasking by definition. Only three combinations are valid: single-user single-tasking, single-user multi-tasking, and multi-user multi-tasking.',
+      'It cannot. When multiple users are active, the system must handle multiple tasks at the same time, and that is multitasking by definition. Only three combinations are valid: single-user single-tasking, single-user multi-tasking, and multi-user multi-tasking.',
     remediation: 'Multiple users necessarily implies multiple tasks. There is no fourth combination.',
     tags: ['classification'],
   },
@@ -472,7 +472,7 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Soft real-time means missing a deadline degrades performance but does not cause total failure — not the case here.',
+      'Soft real-time means missing a deadline degrades performance but does not cause total failure, not the case here.',
       null,
       'Time-sharing aims for a short response time but guarantees nothing.',
       'Batch systems are the opposite of time-critical.',
@@ -515,10 +515,10 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Not necessarily faster — *predictable*. A slow but guaranteed response can beat a usually-fast one.',
+      'Not necessarily faster: *predictable*. A slow but guaranteed response can beat a usually-fast one.',
       null,
       'The reverse: time-sharing systems support many users; an RTOS typically has minimal user interaction.',
-      'Exactly backwards — an RTOS uses priority scheduling, time-sharing uses Round Robin.',
+      'Exactly backwards: an RTOS uses priority scheduling, time-sharing uses Round Robin.',
     ],
     explanation:
       'In an RTOS, response times are predictable and guaranteed. A time-sharing system aims for minimal response time but without guaranteed limits. That guarantee is what makes an RTOS usable for airbags and pacemakers.',
@@ -540,10 +540,10 @@ export const questionsM1M2: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'A CLI has a steeper learning curve — that is a GUI advantage.',
+      'A CLI has a steeper learning curve: that is a GUI advantage.',
       null,
       'GUIs often give visual cues; CLI errors can be harder for beginners to interpret.',
-      'A CLI requires you to know the commands — that is its main barrier.',
+      'A CLI requires you to know the commands: that is its main barrier.',
     ],
     explanation:
       'A CLI is lightweight and uses fewer resources, which is exactly why servers often run with no GUI at all. It is also faster for experienced users and can be scripted to automate tasks.',
@@ -557,7 +557,7 @@ export const questionsM1M2: Question[] = [
     prompt: 'GUIs are often described using the acronym WIMP: windows, icons, menus and ___.',
     accepted: ['pointers', 'pointer'],
     explanation:
-      'WIMP — windows, icons, menus and pointers — is the classic shorthand for the elements that make up a graphical user interface.',
+      'WIMP (windows, icons, menus and pointers) is the classic shorthand for the elements that make up a graphical user interface.',
     tags: ['interfaces', 'gui'],
   },
   {
@@ -569,7 +569,7 @@ export const questionsM1M2: Question[] = [
     pairs: [
       { left: 'Command Line Interface', right: 'Bash, PowerShell' },
       { left: 'Voice User Interface', right: 'Siri, Alexa' },
-      { left: 'Virtual Reality interface', right: 'Oculus Rift, HTC Vive' },
+      { left: 'Virtual Reality interface', right: 'Meta Quest, HTC Vive' },
       { left: 'Gesture-Based Interface', right: 'Microsoft Kinect' },
     ],
     explanation:

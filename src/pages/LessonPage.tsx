@@ -22,10 +22,13 @@ import { Icon, MODULE_ICON } from '@/components/ui/Icon'
 import { NotFound } from './NotFound'
 import { cx } from '@/lib/utils'
 import { glossaryById } from '@/content/glossary'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { inline } from '@/lib/inline'
 
 export function LessonPage() {
   const { lessonId = '' } = useParams()
   const lesson = lessonById.get(lessonId)
+  useDocumentTitle(lesson ? lesson.title : 'Lesson not found')
   const openLesson = useProgress((s) => s.openLesson)
   const markRead = useProgress((s) => s.markRead)
   const bookmarks = useProgress((s) => s.bookmarks)
@@ -158,7 +161,7 @@ export function LessonPage() {
               <p className="mb-1 text-2xs font-semibold uppercase tracking-label text-accent-700 dark:text-accent-400">
                 Why does this matter?
               </p>
-              <p className="text-md leading-relaxed text-ink-2">{lesson.whyItMatters}</p>
+              <p className="text-md leading-relaxed text-ink-2">{inline(lesson.whyItMatters)}</p>
             </div>
           </div>
         </div>
@@ -272,7 +275,7 @@ export function LessonPage() {
           />
           <Metric
             label="Accuracy"
-            value={mastery.questionsAnswered === 0 ? '—' : `${Math.round(mastery.accuracy * 100)}%`}
+            value={mastery.questionsAnswered === 0 ? 'None yet' : `${Math.round(mastery.accuracy * 100)}%`}
           />
           <Metric
             label="Activities"
@@ -288,7 +291,8 @@ export function LessonPage() {
           {!showPractice ? (
             <Button variant="secondary" full onClick={() => setShowPractice(true)}>
               Try {practiceQuestions.length} harder practice question
-              {practiceQuestions.length === 1 ? '' : 's'} on this lesson →
+              {practiceQuestions.length === 1 ? '' : 's'} on this lesson
+              <Icon name="arrowRight" size={16} />
             </Button>
           ) : (
             <div className="rounded-2xl border border-line bg-card p-4 sm:p-5">
@@ -345,7 +349,7 @@ export function LessonPage() {
           </Button>
           {noteSaved && (
             <span className="text-sm text-success-700 dark:text-success-400">
-              Saved — find it under Notes.
+              Saved. Find it under Notes.
             </span>
           )}
         </div>
@@ -358,8 +362,9 @@ export function LessonPage() {
             to={`/lesson/${prev.id}`}
             className="group flex-1 rounded-xl border border-line p-4 transition hover:border-line-strong hover:bg-sunken"
           >
-            <span className="block text-2xs font-medium uppercase tracking-wide text-ink-3">
-              ← Previous
+            <span className="flex items-center gap-1 text-2xs font-medium uppercase tracking-wide text-ink-3">
+              <Icon name="arrowLeft" size={13} className="transition-transform group-hover:-translate-x-0.5" />
+              Previous
             </span>
             <span className="mt-0.5 block text-base font-medium text-ink">{prev.title}</span>
           </Link>
@@ -371,8 +376,9 @@ export function LessonPage() {
             to={`/lesson/${next.id}`}
             className="group flex-1 rounded-xl border border-brand-300 bg-brand-50 p-4 text-right transition hover:bg-brand-100 dark:border-brand-700 dark:bg-brand-950/60 dark:hover:bg-brand-900/60"
           >
-            <span className="block text-2xs font-medium uppercase tracking-wide text-brand-600 dark:text-brand-400">
-              Next →
+            <span className="flex items-center justify-end gap-1 text-2xs font-medium uppercase tracking-wide text-brand-600 dark:text-brand-400">
+              Next
+              <Icon name="arrowRight" size={13} className="transition-transform group-hover:translate-x-0.5" />
             </span>
             <span className="mt-0.5 block text-base font-medium text-ink">{next.title}</span>
           </Link>
@@ -381,8 +387,9 @@ export function LessonPage() {
             to="/exam"
             className="flex-1 rounded-xl border border-success-300 bg-success-50 p-4 text-right transition hover:bg-success-100 dark:border-success-700 dark:bg-success-900/40"
           >
-            <span className="block text-2xs font-medium uppercase tracking-wide text-success-700 dark:text-success-400">
-              Course complete →
+            <span className="flex items-center justify-end gap-1 text-2xs font-medium uppercase tracking-wide text-success-700 dark:text-success-400">
+              Course complete
+              <Icon name="arrowRight" size={13} />
             </span>
             <span className="mt-0.5 block text-base font-medium text-ink">
               Go to exam preparation

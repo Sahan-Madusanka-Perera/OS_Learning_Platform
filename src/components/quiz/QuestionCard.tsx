@@ -392,12 +392,19 @@ function NumericBody({
   const [value, setValue] = useState('')
 
   const check = () => {
-    const n = Number(value.replace(/[, ]/g, ''))
+    // Accept "24", "24 KB", "24kb" or "4 block": a number, optionally followed by
+    // the question's own unit (any case, singular or plural). A different unit,
+    // such as "24 MB" on a KB question, is still marked wrong.
+    const m = value.replace(/,/g, '').trim().match(/^([-+]?(?:\d+\.?\d*|\.\d+))\s*([a-zA-Z]*)$/)
+    const unit = (q.unit ?? '').toLowerCase()
+    const typed = m?.[2].toLowerCase() ?? ''
+    const unitOk = !typed || typed === unit || typed === unit.replace(/s$/, '')
+    const n = m && unitOk ? Number(m[1]) : NaN
     const tol = q.tolerance ?? 0
     const ok = Number.isFinite(n) && Math.abs(n - q.answer) <= tol
     onSubmit(
       ok,
-      `${value.trim() || '—'}${q.unit ? ` ${q.unit}` : ''}`,
+      `${value.trim() || '(blank)'}${q.unit ? ` ${q.unit}` : ''}`,
       `${q.answer}${q.unit ? ` ${q.unit}` : ''}`,
     )
   }
@@ -560,7 +567,7 @@ function MatchingBody({
     const ok = q.pairs.every((p, i) => picks[i] === p.right)
     onSubmit(
       ok,
-      q.pairs.map((p, i) => `${p.left} → ${picks[i] ?? '—'}`).join('; '),
+      q.pairs.map((p, i) => `${p.left} → ${picks[i] ?? '(none)'}`).join('; '),
       q.pairs.map((p) => `${p.left} → ${p.right}`).join('; '),
     )
   }
@@ -693,7 +700,7 @@ function StructuredBody({
           {showScheme && (
             <div className="mt-3 rounded-lg border border-line bg-card p-3.5">
               <p className="mb-2 text-2xs font-semibold uppercase tracking-[0.08em] text-ink-3">
-                Mark scheme — tick each point your answer made
+                Mark scheme: tick each point your answer made
               </p>
               <ul className="space-y-1.5">
                 {part.markScheme.map((point, si) => {

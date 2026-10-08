@@ -37,7 +37,7 @@ export function ActiveRecall({
         {inline(block.prompt)}
       </p>
       <p className="mt-1.5 text-sm text-ink-3">
-        Try to answer it in your head — or out loud — without scrolling back.
+        Try to answer it in your head, or out loud, without scrolling back.
       </p>
 
       {block.hint && !revealed && (
@@ -217,7 +217,7 @@ export function TeachBack({
             </p>
             {score === total ? (
               <p className="text-sm font-medium text-success-700 dark:text-success-400">
-                Excellent — you can teach this.
+                Excellent. You can teach this.
               </p>
             ) : (
               <p className="text-sm text-ink-3">
@@ -307,9 +307,10 @@ export function ConfusedHelp({ block }: { block: ConfusedBlock }) {
                 </p>
                 <Link
                   to={`/lesson/${block.prerequisite.lessonId}`}
-                  className="text-md font-medium text-brand-700 hover:underline dark:text-brand-300"
+                  className="inline-flex items-center gap-1.5 text-md font-medium text-brand-700 hover:underline dark:text-brand-300"
                 >
-                  → {block.prerequisite.label}
+                  <Icon name="arrowLeft" size={15} />
+                  {block.prerequisite.label}
                 </Link>
               </motion.div>
             )}
@@ -319,9 +320,10 @@ export function ConfusedHelp({ block }: { block: ConfusedBlock }) {
             <button
               type="button"
               onClick={() => setLayer((l) => l + 1)}
-              className="mt-3 text-sm font-medium text-brand-600 hover:underline dark:text-brand-400"
+              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand-600 hover:underline dark:text-brand-400"
             >
-              Still confused? Show me more →
+              Still confused? Show me more
+              <Icon name="chevronDown" size={15} />
             </button>
           )}
         </div>

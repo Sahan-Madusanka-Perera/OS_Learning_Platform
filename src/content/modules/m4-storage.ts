@@ -15,7 +15,7 @@ export const m4: Module = {
       moduleId: 'm4',
       title: 'Disk allocation methods',
       summary:
-        'Contiguous, linked and indexed allocation — three answers to "where do I put the blocks of this file?", each with a different price.',
+        'Contiguous, linked and indexed allocation: three answers to "where do I put the blocks of this file?", each with a different price.',
       whyItMatters:
         'This is the heart of competency 5.2. Questions ask you to explain each method and compare them, and the comparison table is only memorable if you understand the trade-off driving it.',
       objectives: [
@@ -38,7 +38,7 @@ export const m4: Module = {
           kind: 'prose',
           paragraphs: [
             'A file is a sequence of blocks. The OS must decide **where on the disk those blocks go**, and record enough information to find them again. There are three main methods, and each buys speed, flexibility or reliability at the cost of the other two.',
-            'Where that information gets recorded is the file’s **[[directory-entry|directory entry]]** — the row its folder keeps for it. Each of the three methods puts something different in that row, and comparing what they store is the fastest way to tell them apart.',
+            'Where that information gets recorded is the file’s **[[directory-entry|directory entry]]**: the row its folder keeps for it. Each of the three methods puts something different in that row, and comparing what they store is the fastest way to tell them apart.',
           ],
         },
         {
@@ -52,7 +52,7 @@ export const m4: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'A file is stored in **one continuous run of memory locations**. This technique needs to keep track of unused disk space. Accessing such a file is called sequential access, and the directory entry stores the file name, the starting block and (optionally) the length.',
+            'A file is stored in **one continuous run of blocks**. This technique needs to keep track of unused disk space. Both sequential access (reading block after block) and direct access (jumping straight to block *n*) are easy, and the directory entry stores the file name, the starting block and the length.',
           ],
         },
         {
@@ -60,11 +60,11 @@ export const m4: Module = {
           title: 'Advantages',
           style: 'check',
           items: [
-            'Very fast access — direct access is possible',
+            'Very fast access: direct access is possible',
             'Simple to implement',
             'No overhead (no extra memory used storing pointers rather than actual file data)',
             'The movements of the hard disk head are low',
-            'File size is equal to the storage size of the file',
+            'Minimal bookkeeping: only the starting block and length need recording',
           ],
         },
         {
@@ -84,7 +84,7 @@ export const m4: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'A file is stored as a **linked list of blocks scattered across the disk**. Each block contains data plus a pointer to the next block. Blocks can be anywhere on the disk, or adjacent — it makes no difference. This is used in **[[fat|FAT]]** systems, where it is called FAT chaining.',
+            'A file is stored as a **linked list of blocks scattered across the disk**. Each block contains data plus a pointer to the next block. Blocks can be anywhere on the disk, or adjacent: it makes no difference. This is used in **[[fat|FAT]]** systems, where it is called FAT chaining.',
           ],
         },
         {
@@ -93,7 +93,7 @@ export const m4: Module = {
           style: 'check',
           items: [
             'No external fragmentation occurs',
-            'File size can be easily adjusted — files grow easily',
+            'File size can be easily adjusted: files grow easily',
             'Efficient use of disk space',
           ],
         },
@@ -102,7 +102,7 @@ export const m4: Module = {
           title: 'Disadvantages',
           style: 'cross',
           items: [
-            'Slow access — sequential only',
+            'Slow access: sequential only',
             'Pointer storage overhead (space in every block goes to the pointer, not data)',
             'Risk of data loss if a pointer is corrupted',
           ],
@@ -122,7 +122,7 @@ export const m4: Module = {
             'No external fragmentation occurs',
             'Direct access and random access are both possible',
             'Files can grow dynamically',
-            'No corruption cascade — all indexes are in the index block',
+            'No corruption cascade: all indexes are in the index block',
           ],
         },
         {
@@ -151,8 +151,8 @@ export const m4: Module = {
             ['Access speed', 'Very fast', 'Slow', 'Fast'],
             [
               'Directory entry',
-              'File name + starting block + length (optional)',
-              'File name + starting block + size',
+              'File name + starting block + length',
+              'File name + starting block (each block points to the next)',
               'File name + index block',
             ],
             ['Block placement', 'Adjacent blocks', 'Anywhere on disk', 'Anywhere on disk'],
@@ -178,7 +178,7 @@ export const m4: Module = {
           kind: 'analogy',
           title: 'Three ways to store a book',
           everyday:
-            '**Contiguous** is keeping all 300 pages bound together on one shelf — instant to read, but if you want to add a chapter there had better be a gap of exactly the right size. **Linked** is writing each page on a separate card, with a note at the bottom saying which drawer the next page is in — you can add pages forever, but reading page 200 means walking through 199 drawers. **Indexed** is keeping the pages loose but writing a contents list saying exactly which drawer each page is in — one look at the list and you go straight there.',
+            '**Contiguous** is keeping all 300 pages bound together on one shelf: instant to read, but if you want to add a chapter there had better be a gap of exactly the right size. **Linked** is writing each page on a separate card, with a note at the bottom saying which drawer the next page is in: you can add pages forever, but reading page 200 means walking through 199 drawers. **Indexed** is keeping the pages loose but writing a contents list saying exactly which drawer each page is in: one look at the list and you go straight there.',
           mapsTo:
             'Contiguous = fast but inflexible. Linked = flexible but sequential. Indexed = flexible AND direct, at the cost of one extra block per file.',
         },
@@ -229,7 +229,7 @@ export const m4: Module = {
       summary:
         'What a file system actually does, the main ones you should know, and the FAT-chain calculation that turns up in MCQs.',
       whyItMatters:
-        'FAT chaining questions are worth marks and are entirely mechanical — but only if you chain correctly and remember to multiply by block size. Both halves trip students up.',
+        'FAT chaining questions are worth marks and are entirely mechanical, but only if you chain correctly and remember to multiply by block size. Both halves trip students up.',
       objectives: [
         'Define a file system and state what it stores and decides',
         'Describe FAT and NTFS and compare them',
@@ -252,22 +252,22 @@ export const m4: Module = {
           title: 'What every file system does',
           items: [
             'Stores **[[metadata|metadata]]** such as file name, size, type, permissions, creation date and modification date',
-            'Decides how disk space is assigned to files — contiguous, linked or indexed allocation',
+            'Decides how disk space is assigned to files: contiguous, linked or indexed allocation',
             'Imposes limits on maximum file size, partition size, and number of files',
             'Advanced file systems also support file permissions, encryption and access control lists (ACLs)',
             'Modern file systems are designed to improve speed, reliability and efficient storage usage',
           ],
         },
-        { kind: 'heading', text: 'FAT — File Allocation Table' },
+        { kind: 'heading', text: 'FAT: File Allocation Table' },
         {
           kind: 'prose',
           paragraphs: [
-            '**[[fat|FAT]]** was developed for MS-DOS to manage file storage using a File Allocation Table that tracks where files are stored on a disk. It is linked allocation, implemented as a table.',
+            '**[[fat|FAT]]** was created by Microsoft in the late 1970s and became famous as the file system of MS-DOS. It manages storage using a File Allocation Table that tracks where files are stored on a disk. It is linked allocation, implemented as a table.',
             'The FAT table and the root directory are placed at **fixed locations**, so the system can find boot files during startup. To prevent data loss, **two copies of the FAT are kept**, allowing one to serve as a backup if the other is damaged.',
-            'Its defining quality is universal compatibility. Because of its simplicity and long history, FAT is supported by almost every operating system and a huge number of devices — digital cameras, printers, smart TVs, gaming consoles, car infotainment systems. Many storage devices arrive preformatted with FAT.',
+            'Its defining quality is universal compatibility. Because of its simplicity and long history, FAT is supported by almost every operating system and a huge number of devices: digital cameras, printers, smart TVs, gaming consoles, car infotainment systems. Many storage devices arrive preformatted with FAT.',
           ],
         },
-        { kind: 'heading', text: 'FAT chaining — how the questions work' },
+        { kind: 'heading', text: 'FAT chaining: how the questions work' },
         {
           kind: 'callout',
           tone: 'info',
@@ -288,21 +288,21 @@ export const m4: Module = {
             'The block size of a disk is 8 KB. A portion of its FAT shows: 310→311, 311→315, 312→−1, 313→314, 314→316, 315→−1. Which gives the directory entry for `report.txt` and the disk space allocated to it, if the file starts at block 310?',
           steps: [
             {
-              title: 'Step 1 — identify the directory entry',
+              title: 'Step 1: identify the directory entry',
               detail:
                 'By rule ii, the directory entry is the block number of the FIRST block, which is 310. (Not the last, not the largest.)',
             },
             {
-              title: 'Step 2 — follow the chain from 310',
+              title: 'Step 2: follow the chain from 310',
               detail: '310 → 311. Look up 311: → 315. Look up 315: → −1, so 315 is the last block.',
             },
             {
-              title: 'Step 3 — count the blocks used',
+              title: 'Step 3: count the blocks used',
               detail:
-                'The chain is 310, 311, 315 = 3 blocks. Rows 312, 313 and 314 are not on this chain — they belong to other files and must be ignored.',
+                'The chain is 310, 311, 315 = 3 blocks. Rows 312, 313 and 314 are not on this chain: they belong to other files and must be ignored.',
             },
             {
-              title: 'Step 4 — multiply by the block size',
+              title: 'Step 4: multiply by the block size',
               detail: '3 blocks × 8 KB = 24 KB',
             },
           ],
@@ -319,7 +319,7 @@ export const m4: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            '**[[ntfs|NTFS]]** (New Technology File System) was developed by Microsoft and first introduced in 1993 with Windows NT 3.1. It is an improved version of FAT, designed to replace it because of FAT’s limitations in file size and performance.',
+            '**[[ntfs|NTFS]]** (New Technology File System) was developed by Microsoft and first introduced in 1993 with Windows NT 3.1. It is a completely new design (not a version of FAT), built to replace FAT because of FAT’s limitations in file size, reliability and security.',
           ],
         },
         {
@@ -333,7 +333,7 @@ export const m4: Module = {
             'Provides stronger security through file permissions and encryption',
             'Supports built-in file and folder compression to save disk space',
             'Supports Unicode, and handles larger hard drives more efficiently',
-            'Supports very large file and partition sizes — far beyond FAT32’s 4 GB file limit',
+            'Supports very large file and partition sizes: far beyond FAT32’s 4 GB file limit',
           ],
         },
         {
@@ -341,10 +341,10 @@ export const m4: Module = {
           title: 'Other file systems worth naming',
           headers: ['File system', 'Introduced', 'Notes'],
           rows: [
-            ['**exFAT**', '—', 'An extended FAT designed for large files on flash media, keeping FAT’s compatibility.'],
+            ['**exFAT**', '2006, Microsoft', 'An extended FAT designed for large files on flash media, keeping FAT’s compatibility. The standard for SD cards over 32 GB.'],
             [
               '**HFS+**',
-              '1998, macOS',
+              '1998, Mac OS 8.1',
               'Uses B-tree structures for file management; designed for older Mac systems. NTFS provides more built-in security and advanced capability.',
             ],
             [
@@ -355,7 +355,12 @@ export const m4: Module = {
             [
               '**ReiserFS**',
               '2001, Linux',
-              'A journaling file system using a B*-tree structure for efficient storage, especially of small files — unlike NTFS which uses an MFT.',
+              'A journaling file system using a B*-tree structure for efficient storage of small files, unlike NTFS which uses an MFT. Removed from the Linux kernel in 2025.',
+            ],
+            [
+              '**ext4**',
+              '2008, Linux',
+              'The default file system on most Linux distributions today. Uses inodes, which are a form of indexed allocation.',
             ],
           ],
         },
@@ -399,7 +404,7 @@ export const m4: Module = {
           kind: 'prose',
           paragraphs: [
             '**Disk fragmentation** occurs when a file is stored in non-contiguous blocks. Instead of being saved in one continuous sequence of storage locations, parts of the file are scattered across different areas of the disk.',
-            'It happens naturally over time. If a new file is too large to fit into one continuous free space, the OS splits it into smaller parts and stores them wherever space is available. And as files are deleted, gaps appear — new files may not fit perfectly into those gaps, so the system splits them to fit the available spaces.',
+            'It happens naturally over time. If a new file is too large to fit into one continuous free space, the OS splits it into smaller parts and stores them wherever space is available. And as files are deleted, gaps appear: new files may not fit perfectly into those gaps, so the system splits them to fit the available spaces.',
           ],
         },
         {
@@ -419,11 +424,11 @@ export const m4: Module = {
           title: 'Drawbacks of disk fragmentation',
           style: 'number',
           items: [
-            '**Slower performance** — the read/write head must move to different locations to access scattered file parts, increasing seek time.',
-            '**Longer file access time** — opening, saving or modifying files takes more time; large files are especially affected.',
-            '**Inefficient use of space** — free space becomes broken into small pieces, making it harder to store large files.',
-            '**Need for defragmentation** — periodic defragmentation consumes time and system resources.',
-            '**Increased backup and scanning time** — backup software and antivirus programs must access many scattered locations to read a single file.',
+            '**Slower performance**: the read/write head must move to different locations to access scattered file parts, increasing seek time.',
+            '**Longer file access time**: opening, saving or modifying files takes more time; large files are especially affected.',
+            '**Inefficient use of space**: free space becomes broken into small pieces, making it harder to store large files.',
+            '**Need for defragmentation**: periodic defragmentation consumes time and system resources.',
+            '**Increased backup and scanning time**: backup software and antivirus programs must access many scattered locations to read a single file.',
           ],
         },
         { kind: 'heading', text: 'Defragmentation' },
@@ -472,11 +477,11 @@ export const m4: Module = {
               'Directly improves read/write speed on HDDs',
               'Improves efficiency; may indirectly improve performance',
             ],
-            ['Creates contiguous files?', 'Yes — that is the main objective', 'Not necessarily'],
+            ['Creates contiguous files?', 'Yes: that is the main objective', 'Not necessarily'],
             [
               'Free space handling',
               'May consolidate free space as a side effect',
-              'Creates one large contiguous free space — the main objective',
+              'Creates one large contiguous free space: the main objective',
             ],
           ],
         },
@@ -499,14 +504,14 @@ export const m4: Module = {
           kind: 'misconception',
           wrong: 'You should defragment an SSD regularly to keep it fast.',
           right:
-            'Never defragment an SSD. Defragmentation exists to reduce **seek time** — the physical movement of a read/write head. An SSD has no moving head, so there is nothing to gain, and the extra writes shorten its lifespan.',
+            'Never defragment an SSD. Defragmentation exists to reduce **seek time**: the physical movement of a read/write head. An SSD has no moving head, so there is nothing to gain, and the extra writes shorten its lifespan.',
         },
         {
           kind: 'recall',
           prompt:
             'In one sentence each: what does defragmentation focus on, and what does compaction focus on?',
           answer:
-            'Defragmentation focuses on file blocks — putting each file’s pieces back into contiguous order. Compaction focuses on free space — merging scattered gaps into one large continuous free area.',
+            'Defragmentation focuses on file blocks, putting each file’s pieces back into contiguous order. Compaction focuses on free space, merging scattered gaps into one large continuous free area.',
         },
         {
           kind: 'quickCheck',
@@ -515,7 +520,7 @@ export const m4: Module = {
       ],
       takeaways: [
         'Fragmentation happens when files are stored in non-contiguous blocks; it increases seek time.',
-        'Defragmentation rearranges file blocks into contiguous order — HDDs only, never SSDs.',
+        'Defragmentation rearranges file blocks into contiguous order: HDDs only, never SSDs.',
         'Compaction merges scattered free space into one large continuous region.',
         'Defragmentation targets file blocks; compaction targets free space.',
       ],
@@ -562,7 +567,7 @@ export const m4: Module = {
             ],
             [
               'File system flexibility',
-              'Different partitions can use different file systems — NTFS, FAT32, EXT4.',
+              'Different partitions can use different file systems: NTFS, FAT32, EXT4.',
             ],
             [
               'Easier backup & recovery',
@@ -575,11 +580,11 @@ export const m4: Module = {
           title: 'Disadvantages of partitioning',
           style: 'cross',
           items: [
-            '**Space management problems** — if one partition fills up you cannot use free space from another unless you resize it',
-            '**More complex setup** — requires planning and technical knowledge',
-            '**Risk of data loss** — incorrect partitioning can delete existing data',
-            '**Limited flexibility after setup** — changing partition sizes later can be difficult',
-            '**Slight performance overhead** — improper partition alignment can reduce SSD performance',
+            '**Space management problems**: if one partition fills up you cannot use free space from another unless you resize it',
+            '**More complex setup**: requires planning and technical knowledge',
+            '**Risk of data loss**: incorrect partitioning can delete existing data',
+            '**Limited flexibility after setup**: changing partition sizes later can be difficult',
+            '**Slight performance overhead**: improper partition alignment can reduce SSD performance',
           ],
         },
         { kind: 'heading', text: 'Disk formatting' },
@@ -588,7 +593,7 @@ export const m4: Module = {
           term: 'Disk formatting',
           simple: 'Preparing a drive to hold files by setting up a file system on it.',
           technical:
-            'The process of preparing a storage device — HDD, SSD, USB flash drive or memory card — for data storage. It involves initialising the storage medium and creating a file system that the operating system can use to organise and store data.',
+            'The process of preparing a storage device (HDD, SSD, USB flash drive or memory card) for data storage. It involves initialising the storage medium and creating a file system that the operating system can use to organise and store data.',
         },
         {
           kind: 'list',
@@ -629,23 +634,23 @@ export const m4: Module = {
           kind: 'compare',
           headers: ['Advantages', 'Disadvantages'],
           rows: [
-            ['Protection from hardware failure', 'Storage cost — devices, cloud subscriptions, maintenance'],
-            ['Recovery from accidental deletion', 'Time consumption — large backups may take hours or days'],
-            ['Protection against ransomware', 'Storage space required — extra systems or cloud space'],
+            ['Protection from hardware failure', 'Storage cost: devices, cloud subscriptions, maintenance'],
+            ['Recovery from accidental deletion', 'Time consumption: large backups may take hours or days'],
+            ['Protection against ransomware', 'Storage space required: extra systems or cloud space'],
             ['Business continuity', 'Security risk if the backup is not encrypted'],
-            ['Disaster recovery', 'Management complexity — requires monitoring, updating and testing'],
-            ['—', 'Possible backup failure if not checked regularly'],
+            ['Disaster recovery', 'Management complexity: requires monitoring, updating and testing'],
+            ['', 'Possible backup failure if not checked regularly'],
           ],
         },
         {
           kind: 'list',
           title: 'How large companies use backups',
           items: [
-            '**Redundancy** — data is stored in multiple servers (replication)',
-            '**Distributed data centres** — data is copied across multiple global data centres',
-            '**Automated backup systems** — regularly scheduled, without manual intervention',
-            '**Incremental backups** — only changed data is backed up, to save space',
-            '**Disaster recovery plans** — if one data centre fails, another takes over immediately, ensuring high availability and minimal downtime',
+            '**Redundancy**: data is stored in multiple servers (replication)',
+            '**Distributed data centres**: data is copied across multiple global data centres',
+            '**Automated backup systems**: regularly scheduled, without manual intervention',
+            '**Incremental backups**: only changed data is backed up, to save space',
+            '**Disaster recovery plans**: if one data centre fails, another takes over immediately, ensuring high availability and minimal downtime',
           ],
         },
         {
@@ -692,7 +697,7 @@ export const m4: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            '**[[secondary-storage|Secondary storage]]** is the non-volatile medium holding the user’s and system’s data and programs — popular programs, executable programs, data for programming, and temporary data. Maintaining it properly extends its lifespan, protects your data and keeps performance stable.',
+            '**[[secondary-storage|Secondary storage]]** is the non-volatile medium holding the user’s and system’s data and programs: popular programs, executable programs, data for programming, and temporary data. Maintaining it properly extends its lifespan, protects your data and keeps performance stable.',
           ],
         },
         {
@@ -719,7 +724,7 @@ export const m4: Module = {
             {
               title: 'Maintain performance',
               detail:
-                'Run disk cleanup regularly, and disk defragmentation — **for HDDs only, never SSDs**.',
+                'Run disk cleanup regularly, and disk defragmentation: **for HDDs only, never SSDs**.',
             },
           ],
         },
@@ -727,7 +732,7 @@ export const m4: Module = {
           kind: 'callout',
           tone: 'danger',
           title: 'Signs your storage is failing',
-          text: 'Slow performance · files getting corrupted · strange noises (HDD clicking or grinding) · frequent crashes · disk errors. If you see these, back up **now** — recovery after a full failure is expensive and often incomplete.',
+          text: 'Slow performance · files getting corrupted · strange noises (HDD clicking or grinding) · frequent crashes · disk errors. If you see these, back up **now**: recovery after a full failure is expensive and often incomplete.',
         },
         {
           kind: 'quickCheck',
@@ -737,7 +742,7 @@ export const m4: Module = {
       takeaways: [
         'Partitioning divides one physical drive into logical parts, each with its own drive letter and possibly its own file system.',
         'Formatting initialises the medium and creates a file system on it.',
-        'Wiping overwrites data repeatedly so recovery is nearly impossible — formatting does not.',
+        'Wiping overwrites data repeatedly so recovery is nearly impossible. Formatting does not.',
         'Backups protect against hardware failure, deletion, ransomware and disaster; they cost storage, time and management effort.',
       ],
     },
@@ -791,18 +796,18 @@ export const m4: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Availability is a security property too',
-          text: 'Students often forget the third one. If ransomware encrypts your files, confidentiality may be intact and integrity may be intact — but you cannot open them. That is an availability failure, and it is still a security breach.',
+          text: 'Students often forget the third one. If ransomware encrypts your files, confidentiality may be intact and integrity may be intact, but you cannot open them. That is an availability failure, and it is still a security breach.',
         },
         { kind: 'heading', text: 'File security methods' },
         {
           kind: 'list',
           style: 'number',
           items: [
-            '**Access control** — permissions (read, write, execute), user and group ownership, and Access Control Lists ([[acl|ACLs]])',
-            '**[[authentication|Authentication]]** — passwords and multi-factor authentication',
-            '**[[encryption|Encryption]]** — encrypting files so they cannot be read without a key',
-            '**Backup and recovery** — creating copies to prevent permanent loss',
-            '**Digital signatures and hashing** — ensuring file integrity',
+            '**Access control**: permissions (read, write, execute), user and group ownership, and Access Control Lists ([[acl|ACLs]])',
+            '**[[authentication|Authentication]]**: passwords and multi-factor authentication',
+            '**[[encryption|Encryption]]**: encrypting files so they cannot be read without a key',
+            '**Backup and recovery**: creating copies to prevent permanent loss',
+            '**Digital signatures and hashing**: ensuring file integrity',
           ],
         },
         { kind: 'heading', text: 'How the OS contributes' },
@@ -820,7 +825,7 @@ export const m4: Module = {
             ],
             [
               '**Encryption support**',
-              'Provides file system encryption (BitLocker in Windows, eCryptfs in Linux), key management systems, and secure storage mechanisms.',
+              'Provides disk and file encryption (BitLocker in Windows, FileVault in macOS, LUKS in Linux), key management, and secure storage mechanisms.',
             ],
             [
               '**Process isolation**',
@@ -838,7 +843,7 @@ export const m4: Module = {
           everyday:
             'A bank does not rely on one measure. There is a locked door (access control), an ID check at the counter (authentication), the safe itself (encryption), separate rooms so one customer cannot wander into another’s deposit box (process isolation), and a duplicate ledger in another branch (backup).',
           mapsTo:
-            'The OS layers the same five defences. Any one of them alone can be defeated; together they make casual compromise very hard — which is exactly the argument for defence in depth.',
+            'The OS layers the same five defences. Any one of them alone can be defeated; together they make casual compromise very hard, which is exactly the argument for defence in depth.',
         },
         { kind: 'heading', text: 'The File Control Block' },
         {
@@ -852,7 +857,7 @@ export const m4: Module = {
           kind: 'list',
           title: 'What an FCB contains',
           items: [
-            'Driver name',
+            'Drive name (which disk the file is on)',
             'File name',
             'File type / extension',
             'Current block number',
@@ -865,23 +870,23 @@ export const m4: Module = {
           title: 'What the FCB is used for',
           style: 'check',
           items: [
-            '**Locate files** — helps the OS find a file’s exact position on the disk',
-            '**Manage access control** — stores permission information controlling who can read, write or execute',
-            '**Track file information** — maintains details such as file size and timestamps',
-            '**Support file operations** — enables opening, reading, writing and deleting files',
+            '**Locate files**: helps the OS find a file’s exact position on the disk',
+            '**Manage access control**: stores permission information controlling who can read, write or execute',
+            '**Track file information**: maintains details such as file size and timestamps',
+            '**Support file operations**: enables opening, reading, writing and deleting files',
           ],
         },
         {
           kind: 'keyIdea',
           title: 'A pattern to notice',
-          text: 'The FCB is to a **file** exactly what the [[pcb|Process Control Block]] is to a **process** — the OS’s bookkeeping record for one managed thing. When you meet the PCB in the next module, this is the shape it will have.',
+          text: 'The FCB is to a **file** exactly what the [[pcb|Process Control Block]] is to a **process**: the OS’s bookkeeping record for one managed thing. When you meet the PCB in the next module, this is the shape it will have.',
         },
         {
           kind: 'recall',
           prompt:
             'Name the three core principles of file security, and give an example of a threat to each.',
           answer:
-            'Confidentiality — someone reading a file they should not (data theft). Integrity — someone altering a file without permission (tampering). Availability — an authorised user unable to access a file when needed (ransomware, disk failure).',
+            'Confidentiality: someone reading a file they should not (data theft). Integrity: someone altering a file without permission (tampering). Availability: an authorised user unable to access a file when needed (ransomware, disk failure).',
         },
         {
           kind: 'quickCheck',

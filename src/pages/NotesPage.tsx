@@ -7,10 +7,12 @@ import { Card, SectionHeading } from '@/components/ui/Card'
 import { Modal } from '@/components/ui/Modal'
 import { formatDate, cx } from '@/lib/utils'
 import { Icon, type IconName } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 type Tab = 'notes' | 'bookmarks' | 'saved'
 
 export function NotesPage() {
+  useDocumentTitle('Notes')
   const notes = useProgress((s) => s.notes)
   const bookmarks = useProgress((s) => s.bookmarks)
   const savedQuestions = useProgress((s) => s.savedQuestions)
@@ -45,7 +47,7 @@ export function NotesPage() {
         </h1>
         <p className="mt-2 max-w-2xl text-md leading-relaxed text-ink-2">
           Everything you have saved while working through the course. All of it is stored on this
-          device only — nothing is sent anywhere.
+          device only. Nothing is sent anywhere.
         </p>
       </header>
 
@@ -77,7 +79,7 @@ export function NotesPage() {
           <Empty
             icon="notes"
             title="No notes yet"
-            body="At the bottom of every lesson there is a box where you can jot down anything you want to remember — or a question to ask your teacher. They all collect here."
+            body="At the bottom of every lesson there is a box where you can jot down anything you want to remember, or a question to ask your teacher. They all collect here."
           />
         ) : (
           <div className="space-y-6">
@@ -91,9 +93,10 @@ export function NotesPage() {
                       lesson && (
                         <Link
                           to={`/lesson/${lessonId}`}
-                          className="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-brand-600 hover:underline dark:text-brand-400"
                         >
-                          Open lesson →
+                          Open lesson
+                          <Icon name="arrowRight" size={14} />
                         </Link>
                       )
                     }
@@ -172,7 +175,8 @@ export function NotesPage() {
         ) : (
           <>
             <Button to="/practice" className="mb-4">
-              Practise these {savedQuestions.length} questions →
+              Practise these {savedQuestions.length} questions
+              <Icon name="arrowRight" size={16} />
             </Button>
             <ul className="space-y-2">
               {savedQuestions.map((id) => {

@@ -8,6 +8,14 @@ function apply(theme: Theme) {
   const root = document.documentElement
   if (theme === 'system') root.removeAttribute('data-theme')
   else root.setAttribute('data-theme', theme)
+
+  // Keep the phone's browser bar the same colour as the header.
+  const dark =
+    theme === 'dark' ||
+    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  document
+    .querySelectorAll('meta[name="theme-color"]')
+    .forEach((m) => m.setAttribute('content', dark ? '#181d27' : '#ffffff'))
 }
 
 export function ThemeToggle() {

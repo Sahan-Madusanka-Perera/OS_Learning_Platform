@@ -47,7 +47,7 @@ export function AnswerFeedback({
           <Icon name={correct ? 'check' : 'warn'} size={15} strokeWidth={2.2} />
         </motion.span>
         <p className="font-semibold text-ink">
-          {correct ? 'Correct!' : 'Not quite — and that’s useful.'}
+          {correct ? 'Correct!' : 'Not quite, and that’s useful.'}
         </p>
         <span
           className={`ml-auto text-2xs font-medium uppercase tracking-wide ${
@@ -97,7 +97,7 @@ export function AnswerFeedback({
 
         {!correct && (
           <p className="text-sm text-ink-3">
-            This question has been added to your review queue — you'll see it again.
+            This question has been added to your review queue, so you'll see it again.
           </p>
         )}
       </div>

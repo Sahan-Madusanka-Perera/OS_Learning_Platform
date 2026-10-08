@@ -35,7 +35,7 @@ export function SpoolingDemo() {
   // With spooling the CPU writes to the spool file and moves on.
   const spoolCpuBusy = tick > 0 && tick < TOTAL
   const jobsQueued = Math.min(3, Math.floor(tick / 2))
-  const jobsPrinted = Math.min(3, Math.floor((tick - 2) / 5))
+  const jobsPrinted = Math.max(0, Math.min(3, Math.floor((tick - 2) / 5)))
 
   return (
     <div className="rounded-xl border border-line bg-card p-4 sm:p-5">
@@ -55,7 +55,7 @@ export function SpoolingDemo() {
           tone="success"
           cpuBusy={spoolCpuBusy}
           cpuLabel={spoolCpuBusy ? 'Working on other processes' : 'Idle'}
-          note="Print jobs are written to spool files on disk. The spooler feeds them to the printer one at a time while the CPU gets on with other processes — and the user keeps using the computer."
+          note="Print jobs are written to spool files on disk. The spooler feeds them to the printer one at a time while the CPU gets on with other processes, and the user keeps using the computer."
           queue={Array.from({ length: Math.max(0, jobsQueued - jobsPrinted) }, (_, i) => `Job ${jobsPrinted + i + 1}`)}
           printing={tick > 2 && jobsPrinted < 3}
           reduce={reduce}
@@ -70,7 +70,8 @@ export function SpoolingDemo() {
             setRunning((r) => !r)
           }}
         >
-          {running ? '⏸ Pause' : tick >= TOTAL ? '↻ Run again' : '▶ Send 3 print jobs'}
+          <Icon name={running ? 'pause' : tick >= TOTAL ? 'reset' : 'play'} size={15} />
+          {running ? 'Pause' : tick >= TOTAL ? 'Run again' : 'Send 3 print jobs'}
         </Button>
         {tick > 0 && (
           <Button
@@ -179,13 +180,23 @@ function Column({
    Context switch — what actually moves, and what it costs
    ============================================================ */
 
-const PCB_FIELDS = [
-  ['Process state', 'Running → Ready'],
-  ['Program counter', '0x004A1C'],
-  ['CPU registers', 'AX, BX, SP, …'],
-  ['Memory info', 'page table ptr'],
-  ['I/O status', 'file handles'],
-]
+/* Each process has its own record: P0 is being switched out, P1 back in. */
+const PCB_FIELDS: Record<string, [string, string][]> = {
+  P0: [
+    ['Process state', 'Running → Ready'],
+    ['Program counter', '0x004A1C'],
+    ['CPU registers', 'AX, BX, SP, …'],
+    ['Memory info', 'page table ptr'],
+    ['I/O status', 'file handles'],
+  ],
+  P1: [
+    ['Process state', 'Ready → Running'],
+    ['Program counter', '0x0091F0'],
+    ['CPU registers', 'AX, BX, SP, …'],
+    ['Memory info', 'page table ptr'],
+    ['I/O status', 'file handles'],
+  ],
+}
 
 export function ContextSwitchDemo() {
   const [phase, setPhase] = useState(0)
@@ -194,7 +205,7 @@ export function ContextSwitchDemo() {
   const PHASES = [
     { title: 'P0 is running', detail: 'Process P0 holds the CPU. Its registers and program counter live in the CPU itself.', active: 'P0' },
     { title: 'An interrupt arrives', detail: 'An interrupt (a timeout, an I/O completion, a system call) tells the CPU that something needs attention. P0 is stopped where it stands.', active: 'none' },
-    { title: 'P0’s state is saved', detail: 'Everything the CPU held for P0 — program counter, registers, memory management information — is written into P0’s Process Control Block. This is the overhead of switching.', active: 'none' },
+    { title: 'P0’s state is saved', detail: 'Everything the CPU held for P0 (program counter, registers, memory management information) is written into P0’s Process Control Block. This is the overhead of switching.', active: 'none' },
     { title: 'P1’s state is restored', detail: 'The OS reads P1’s PCB and loads its saved program counter and registers back into the CPU, exactly as they were when P1 last stopped.', active: 'none' },
     { title: 'P1 is running', detail: 'P1 resumes from precisely the instruction it was on. It has no idea it was ever paused. Later the reverse happens and P0 continues where it left off.', active: 'P1' },
   ]
@@ -241,13 +252,15 @@ export function ContextSwitchDemo() {
 
       <div className="mt-3 flex flex-wrap gap-2">
         <Button size="sm" variant="secondary" disabled={phase === 0} onClick={() => setPhase((v) => v - 1)}>
-          ← Back
+          <Icon name="arrowLeft" size={16} />
+          Back
         </Button>
         <Button
           size="sm"
           onClick={() => setPhase((v) => (v + 1) % PHASES.length)}
         >
-          {phase === PHASES.length - 1 ? '↻ Start again' : 'Next →'}
+          <Icon name={phase === PHASES.length - 1 ? 'reset' : 'arrowRight'} size={16} />
+          {phase === PHASES.length - 1 ? 'Start again' : 'Next'}
         </Button>
       </div>
 
@@ -295,7 +308,7 @@ function PcbCard({
         )}
       </p>
       <dl className="space-y-1">
-        {PCB_FIELDS.map(([k, v]) => (
+        {PCB_FIELDS[name].map(([k, v]) => (
           <div key={k} className="flex justify-between gap-2 text-2xs">
             <dt className="text-ink-3">{k}</dt>
             <dd className="truncate font-mono text-ink-2">{v}</dd>
