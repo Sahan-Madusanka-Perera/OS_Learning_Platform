@@ -62,7 +62,7 @@ export function DirectoryTreeExplorer() {
   const [cwd, setCwd] = useState<string[]>(['C:', 'Users', 'Nimal', 'Documents'])
   const reduce = useReducedMotion()
 
-  const absolute = selected.join('\\').replace('C:\\', 'C:\\')
+  const absolute = winPath(selected)
   const relative = relativePath(cwd, selected)
 
   return (
@@ -94,7 +94,7 @@ export function DirectoryTreeExplorer() {
               Current working directory
             </p>
             <p className="rounded-lg bg-card px-3 py-2 font-mono text-sm text-ink">
-              {cwd.join('\\')}
+              {winPath(cwd)}
             </p>
           </div>
           <div>
@@ -116,13 +116,19 @@ export function DirectoryTreeExplorer() {
               {relative}
             </p>
             <p className="mt-1 text-xs leading-relaxed text-ink-3">
-              Starts from the current directory. Shorter — but it changes meaning if you move.
+              Starts from the current directory. Shorter, but it changes meaning if you move.
             </p>
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+/* `C:` on its own means "the current folder on drive C", not the root, so the
+   root itself is always written `C:\\`. */
+function winPath(parts: string[]): string {
+  return parts.length === 1 ? `${parts[0]}\\` : parts.join('\\')
 }
 
 function relativePath(cwd: string[], target: string[]): string {
@@ -227,7 +233,7 @@ export function DirectoryStructures() {
   const INFO = {
     single: {
       title: 'Single-level directory',
-      text: 'All files live in one directory with no subdirectories. Simplest possible organisation — fine for a small system, but every file in the whole machine must have a unique name, and finding anything becomes impossible as the count grows.',
+      text: 'All files live in one directory with no subdirectories. Simplest possible organisation: fine for a small system, but every file in the whole machine must have a unique name, and finding anything becomes impossible as the count grows.',
     },
     two: {
       title: 'Two-level directory',
@@ -381,19 +387,19 @@ const SEGMENTS = [
     name: 'Heap',
     color: 'var(--color-accent-700)',
     grow: 'grows upward ↑',
-    text: 'Used for dynamic memory allocation during execution — memory the program requests while it is running, whose size was not known in advance.',
+    text: 'Used for dynamic memory allocation during execution: memory the program requests while it is running, whose size was not known in advance.',
   },
   {
     name: 'Data / Global segment',
     color: 'var(--color-success-700)',
     grow: 'fixed size',
-    text: 'Stores global and static variables — the ones that exist for the entire lifetime of the program.',
+    text: 'Stores global and static variables: the ones that exist for the entire lifetime of the program.',
   },
   {
     name: 'Code (Text segment)',
     color: 'var(--color-brand-600)',
     grow: 'fixed size',
-    text: 'Stores the program instructions themselves — the compiled machine code the CPU fetches and executes.',
+    text: 'Stores the program instructions themselves: the compiled machine code the CPU fetches and executes.',
   },
 ]
 
@@ -439,7 +445,7 @@ export function MemoryLayoutDiagram() {
           <p className="text-base leading-relaxed text-ink-2">{SEGMENTS[active].text}</p>
           <p className="mt-3 rounded-lg bg-sunken px-3.5 py-2.5 text-sm leading-relaxed text-ink-2">
             From the program’s point of view it owns this entire continuous range of addresses,
-            starting at 0 — even though many programs are running at once. This is the{' '}
+            starting at 0, even though many programs are running at once. This is the{' '}
             <span className="font-medium text-ink">logical (virtual) address space</span>, and the
             MMU maps it onto whatever physical frames are actually free.
           </p>

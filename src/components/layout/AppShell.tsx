@@ -8,7 +8,9 @@ import { useProgress } from '@/store/progress'
 import { dueItems } from '@/lib/srs'
 import { MasteryRing } from '@/components/ui/Progress'
 import { Icon, MODULE_ICON, type IconName } from '@/components/ui/Icon'
+import { BrandMark } from '@/components/ui/BrandMark'
 import { SearchPanel } from './SearchPanel'
+import { SiteFooter } from './SiteFooter'
 import { ThemeToggle } from './ThemeToggle'
 
 const NAV: { to: string; label: string; icon: IconName; end?: boolean }[] = [
@@ -20,6 +22,12 @@ const NAV: { to: string; label: string; icon: IconName; end?: boolean }[] = [
   { to: '/glossary', label: 'Glossary', icon: 'glossary' },
   { to: '/notes', label: 'Notes', icon: 'notes' },
 ]
+
+/* Most students here are on Windows or Android, where the shortcut is Ctrl+K. */
+const SHORTCUT =
+  typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)
+    ? '⌘K'
+    : 'Ctrl K'
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false)
@@ -64,18 +72,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Icon name={navOpen ? 'close' : 'menu'} size={20} />
           </button>
 
-          <Link to="/" className="flex items-center gap-2.5">
-            <span
-              aria-hidden="true"
-              className="grid h-8 w-8 place-items-center rounded-lg bg-brand-600 text-md font-bold text-white"
-            >
-              OS
-            </span>
-            <span className="hidden sm:block">
-              <span className="block text-base font-semibold leading-tight tracking-tight text-ink">
+          <Link
+            to="/"
+            aria-label="Operating Systems, A/L ICT: home"
+            className="flex min-w-0 items-center gap-2.5 rounded-lg"
+          >
+            <BrandMark size={32} className="shrink-0" />
+            <span className="min-w-0">
+              <span className="block truncate text-sm font-semibold leading-tight tracking-tight text-ink sm:text-base">
                 Operating Systems
               </span>
-              <span className="block text-2xs leading-tight text-ink-3">
+              <span className="hidden text-2xs leading-tight text-ink-3 sm:block">
                 A/L ICT · Competency 5
               </span>
             </span>
@@ -84,12 +91,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
-            className="ml-auto flex items-center gap-2 rounded-xl border border-line bg-sunken px-3 py-1.5 text-sm text-ink-3 transition hover:border-line-strong hover:text-ink-2 sm:w-64"
+            aria-label="Search the course"
+            className="ml-auto flex min-h-[36px] shrink-0 items-center gap-2 rounded-xl border border-line bg-sunken px-3 py-1.5 text-sm text-ink-3 transition hover:border-line-strong hover:text-ink-2 sm:w-64"
           >
             <Icon name="search" size={16} />
             <span className="hidden sm:inline">Search the course…</span>
             <kbd className="ml-auto hidden rounded border border-line bg-card px-1.5 py-0.5 font-mono text-2xs sm:block">
-              ⌘K
+              {SHORTCUT}
             </kbd>
           </button>
 
@@ -131,8 +139,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
 
         {/* ---------- Main ---------- */}
-        <main id="main" className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
-          {children}
+        <main id="main" className="flex min-h-[calc(100dvh-3.5rem)] min-w-0 flex-1 flex-col px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+          <div className="flex-1">{children}</div>
+          <SiteFooter />
         </main>
       </div>
 

@@ -282,12 +282,12 @@ export function DataTable({
           </thead>
           <tbody>
             {block.rows.map((row, ri) => (
-              <tr key={ri} className="even:bg-sunken/45">
+              <tr key={ri} className="border-b border-line last:border-b-0 even:bg-sunken/45">
                 {row.map((cell, ci) => (
                   <td
                     key={ci}
                     className={cx(
-                      'border-b border-line px-3.5 py-2.5 align-top leading-relaxed last:border-b-0',
+                      'px-3.5 py-2.5 align-top leading-relaxed',
                       ci === 0 && emphasiseFirstColumn !== false
                         ? 'font-medium text-ink'
                         : 'text-ink-2',
@@ -357,7 +357,7 @@ export function WorkedExample({ block }: { block: WorkedExampleBlock }) {
             onClick={() => setRevealed((r) => r + 1)}
             className="mt-4 w-full rounded-xl border border-dashed border-brand-300 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-50 dark:border-brand-700 dark:text-brand-300 dark:hover:bg-brand-950/60"
           >
-            {revealed === 0 ? 'Try it yourself first — then show step 1' : `Show step ${revealed + 1}`}
+            {revealed === 0 ? 'Try it yourself first, then show step 1' : `Show step ${revealed + 1}`}
             <span className="ml-1.5 text-ink-3">
               ({revealed}/{block.steps.length})
             </span>

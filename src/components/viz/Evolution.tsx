@@ -29,6 +29,8 @@ interface Era {
   cons: string[]
   /** Timeline of CPU activity: 1 = working, 0 = idle. */
   cpu: number[]
+  /** Shown under the activity strip when the strip alone could mislead. */
+  cpuNote?: string
 }
 
 export const ERAS: Era[] = [
@@ -38,17 +40,17 @@ export const ERAS: Era[] = [
     period: 'Late 1940s – mid 1950s',
     problem:
       'General-purpose computers had arrived, but every program had to be loaded by hand. The processor sat idle while a human mounted tapes and loaded cards.',
-    fix: 'Nothing yet — this is the problem the OS was invented to solve.',
+    fix: 'Nothing yet: this is the problem the OS was invented to solve.',
     input: 'Punch cards',
     output: 'Display lights',
     memory:
       'All of main memory goes to one program. No memory protection, no partitions, no OS code in memory. Programs load at a fixed address, which makes the system very inflexible.',
     scheduling:
       'None. A human operator decides which program runs next by physically loading it into the machine.',
-    users: 'One user, one program — no simultaneous use of any kind.',
+    users: 'One user, one program: no simultaneous use of any kind.',
     tasking: 'Single-tasking, single-user',
     examples: 'ENIAC (1946), EDSAC (1949), UNIVAC I (1951)',
-    pros: ['Conceptually simple — no OS overhead', 'The whole machine belongs to one program'],
+    pros: ['Conceptually simple: no OS overhead', 'The whole machine belongs to one program'],
     cons: ['Human error is common', 'Very poor turnaround time', 'No protection between programs'],
     cpu: [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
   },
@@ -58,11 +60,11 @@ export const ERAS: Era[] = [
     period: 'Mid 1950s – late 1960s',
     problem:
       'Loading each program by hand wasted enormous amounts of processor time between jobs.',
-    fix: 'A resident monitor automatically loads the next job the moment the previous one finishes — removing the human from between jobs.',
+    fix: 'A resident monitor automatically loads the next job the moment the previous one finishes, removing the human from between jobs.',
     input: 'Card readers',
     output: 'Line printers, magnetic tape',
     memory:
-      'A small part of memory is reserved for the resident monitor. The rest holds one user program — only one job can be in memory at a time.',
+      'A small part of memory is reserved for the resident monitor. The rest holds one user program: only one job can be in memory at a time.',
     scheduling:
       'First-Come, First-Served. Once a job starts it runs to completion without interruption, so scheduling is non-preemptive.',
     users:
@@ -71,7 +73,7 @@ export const ERAS: Era[] = [
     examples: 'IBM 7094, FORTRAN Monitor System (FMS)',
     pros: ['Less operator intervention than no OS', 'Better throughput', 'More consistent execution'],
     cons: [
-      'Long turnaround — you submit and wait',
+      'Long turnaround: you submit and wait',
       'CPU still idle during I/O (reading tape, printing)',
       'Debugging is painful: each change means resubmitting',
     ],
@@ -92,14 +94,14 @@ export const ERAS: Era[] = [
     scheduling:
       'Two levels: job scheduling decides which jobs enter memory, and CPU scheduling decides which resident job runs next. A process switches when it blocks.',
     users:
-      'Many users can submit jobs and several jobs can be resident at once — but users still cannot interact.',
+      'Many users can submit jobs and several jobs can be resident at once, but users still cannot interact.',
     tasking: 'Multitasking via multiprogramming, but not interactive multiuser',
     examples: 'IBM System/360 (mid-1960s), CDC 6600, Burroughs B5500',
     pros: ['Much higher CPU utilisation', 'Higher throughput than simple batch', 'Better overall efficiency'],
     cons: [
       'Far more complex OS: memory management, protection, deadlock',
       'Debugging and tuning are harder',
-      'Still poor for interactive work — users still submit and wait',
+      'Still poor for interactive work: users still submit and wait',
     ],
     cpu: [1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0],
   },
@@ -108,10 +110,10 @@ export const ERAS: Era[] = [
     name: 'Time-sharing system',
     period: 'From the 1960s',
     problem:
-      'Even with the CPU kept busy, a user had no way to interact with a running program — response times were hopeless.',
+      'Even with the CPU kept busy, a user had no way to interact with a running program: response times were hopeless.',
     fix:
       'Switch between programs after a fixed time quantum, whether or not they are blocked. Rapid switching creates the illusion that everyone has their own computer.',
-    input: 'Keyboard, mouse (terminals)',
+    input: 'Keyboards on terminals (teletypes, later screens)',
     output: 'Screens, line printers, magnetic tape',
     memory:
       'Advanced techniques: swapping, paging or segmentation, usually with virtual memory. Strong memory protection is essential with many users on one machine.',
@@ -120,7 +122,7 @@ export const ERAS: Era[] = [
     users:
       'Dozens or even hundreds of simultaneous users via terminals, each feeling as if the machine is theirs.',
     tasking: 'Fully multitasking and multiuser',
-    examples: 'UNIX, Multics, IBM OS/360, VMS, Windows NT',
+    examples: 'CTSS (1961), Multics, UNIX, VMS, Windows NT',
     pros: [
       'Fast response time for users',
       'Efficient sharing of expensive hardware',
@@ -131,7 +133,9 @@ export const ERAS: Era[] = [
       'Security becomes critical with many users',
       'Performance degrades under heavy load',
     ],
-    cpu: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    cpu: [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+    cpuNote:
+      'About the same as multiprogramming. Time-sharing did not make the machine busier: it made it responsive, by switching every few milliseconds so each user gets a turn.',
   },
 ]
 
@@ -220,6 +224,9 @@ export function EvolutionTimeline() {
                 />
               ))}
             </div>
+            {era.cpuNote && (
+              <p className="mt-2 text-sm leading-relaxed text-ink-2">{era.cpuNote}</p>
+            )}
             <div className="mt-1.5 flex gap-4 text-2xs text-ink-3">
               <span className="flex items-center gap-1.5">
                 <span aria-hidden="true" className="h-2.5 w-2.5 rounded-sm bg-success-500" /> working
@@ -229,7 +236,7 @@ export function EvolutionTimeline() {
                   aria-hidden="true"
                   className="h-2.5 w-2.5 rounded-sm border border-dashed border-danger-300 bg-danger-100 dark:bg-danger-900/40"
                 />{' '}
-                idle — wasted
+                idle (wasted)
               </span>
             </div>
           </div>

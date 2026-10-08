@@ -215,7 +215,7 @@ function nextStepFor(
   questionCount: number,
   answered: number,
 ): string {
-  if (stage === 'mastered') return 'Keep it fresh — revisit in a few days.'
+  if (stage === 'mastered') return 'Keep it fresh: revisit in a few days.'
   if (!progress.read) return 'Read through the lesson.'
   if (progress.activitiesTotal > progress.activitiesDone.length)
     return 'Finish the lesson activities.'

@@ -32,9 +32,26 @@ const FILES: FileSpec[] = [
   { name: 'song.mp3', blocks: 5, color: 'var(--color-success-700)' },
 ]
 
+/* "Months of use": older files (and the gaps their deleted neighbours left)
+   are scattered across the disk. Runs alternate used, free, used, free…
+   The free gaps add up to 27 blocks, but none is longer than 4. */
+const AGED_RUNS = [2, 4, 3, 3, 2, 4, 3, 2, 3, 3, 2, 4, 3, 3, 2, 2, 3, 2]
+
+function agedOccupancy(): Set<number> {
+  const used = new Set<number>()
+  let at = 0
+  AGED_RUNS.forEach((len, i) => {
+    if (i % 2 === 0) for (let b = at; b < at + len; b++) used.add(b)
+    at += len
+  })
+  return used
+}
+
 interface Layout {
   /** blockIndex → { file, order } */
   cells: Map<number, { file: number; order: number }>
+  /** Blocks held by older files on an aged disk. */
+  others: Set<number>
   /** blockIndex of each file's index block, for indexed allocation. */
   indexBlocks: Map<number, number>
   fileBlocks: number[][]
@@ -44,22 +61,31 @@ function buildLayout(method: Method, fragmented: boolean): Layout {
   const cells = new Map<number, { file: number; order: number }>()
   const indexBlocks = new Map<number, number>()
   const fileBlocks: number[][] = []
+  const others = method === 'contiguous' && fragmented ? agedOccupancy() : new Set<number>()
 
   if (method === 'contiguous') {
-    // Contiguous needs one unbroken run per file. With a fragmented
-    // disk the free space is chopped up, so the third file will not fit.
-    let cursor = fragmented ? 2 : 0
+    // Contiguous needs one unbroken run per file: first fit, the first gap
+    // big enough wins. On the aged disk only notes.txt finds one.
     FILES.forEach((f, fi) => {
+      let start = -1
+      for (let b = 0; b + f.blocks <= TOTAL && start < 0; b++) {
+        let fits = true
+        for (let k = b; k < b + f.blocks; k++) {
+          if (others.has(k) || cells.has(k)) {
+            fits = false
+            break
+          }
+        }
+        if (fits) start = b
+      }
       const blocks: number[] = []
-      for (let i = 0; i < f.blocks; i++) {
-        const idx = cursor + i
-        if (idx < TOTAL) {
-          cells.set(idx, { file: fi, order: i })
-          blocks.push(idx)
+      if (start >= 0) {
+        for (let i = 0; i < f.blocks; i++) {
+          cells.set(start + i, { file: fi, order: i })
+          blocks.push(start + i)
         }
       }
       fileBlocks.push(blocks)
-      cursor += f.blocks + (fragmented ? 3 : 0)
     })
   } else {
     // Linked and indexed scatter freely — that is the whole point.
@@ -78,7 +104,25 @@ function buildLayout(method: Method, fragmented: boolean): Layout {
       }
     })
   }
-  return { cells, indexBlocks, fileBlocks }
+  return { cells, indexBlocks, fileBlocks, others }
+}
+
+/** Free blocks in total, and the longest unbroken run of them. */
+function freeSpace(layout: Layout) {
+  let total = 0
+  let run = 0
+  let longest = 0
+  for (let b = 0; b < TOTAL; b++) {
+    const free = !layout.cells.has(b) && !layout.others.has(b)
+    if (free) {
+      total += 1
+      run += 1
+      longest = Math.max(longest, run)
+    } else {
+      run = 0
+    }
+  }
+  return { total, longest }
 }
 
 const METHOD_INFO: Record<
@@ -88,14 +132,14 @@ const METHOD_INFO: Record<
   contiguous: {
     title: 'Contiguous allocation',
     directory: 'file name + start block + length',
-    pros: ['Very fast — direct access', 'No pointer overhead', 'Disk head barely moves'],
+    pros: ['Very fast: direct access', 'No pointer overhead', 'Disk head barely moves'],
     cons: ['External fragmentation', 'Growing a file is difficult', 'Needs a big enough gap'],
   },
   linked: {
     title: 'Linked allocation',
-    directory: 'file name + start block (+ size)',
+    directory: 'file name + start block',
     pros: ['No external fragmentation', 'Files grow easily', 'Efficient use of free space'],
-    cons: ['Sequential access only — slow', 'A pointer in every block', 'One corrupt pointer loses the rest'],
+    cons: ['Sequential access only: slow', 'A pointer in every block', 'One corrupt pointer loses the rest'],
   },
   indexed: {
     title: 'Indexed allocation',
@@ -114,8 +158,8 @@ export function DiskAllocationLab() {
   const layout = useMemo(() => buildLayout(method, fragmented), [method, fragmented])
   const info = METHOD_INFO[method]
 
-  const contiguousFails =
-    method === 'contiguous' && layout.fileBlocks.some((b, i) => b.length < FILES[i].blocks)
+  const failed = FILES.filter((f, i) => method === 'contiguous' && layout.fileBlocks[i].length < f.blocks)
+  const space = freeSpace(layout)
 
   return (
     <div className="overflow-hidden rounded-xl border border-line bg-card">
@@ -143,8 +187,8 @@ export function DiskAllocationLab() {
       <div className="p-4 sm:p-5">
         <p className="mb-1 font-semibold text-ink">{info.title}</p>
         <p className="mb-4 text-sm text-ink-2">
-          The row this file’s folder keeps for it — its{' '}
-          <span className="font-medium text-ink">directory entry</span> — stores:{' '}
+          The row this file’s folder keeps for it (its{' '}
+          <span className="font-medium text-ink">directory entry</span>) stores:{' '}
           <span className="font-mono text-ink">{info.directory}</span>
         </p>
 
@@ -169,7 +213,9 @@ export function DiskAllocationLab() {
                 style={{ background: f.color }}
               />
               {f.name}
-              <span className="text-ink-3">({f.blocks} blocks)</span>
+              <span className="text-ink-3">
+                ({f.blocks} blocks{failed.includes(f) ? ', no room' : ''})
+              </span>
             </button>
           ))}
         </div>
@@ -184,6 +230,7 @@ export function DiskAllocationLab() {
           >
             {Array.from({ length: TOTAL }, (_, i) => {
               const cell = layout.cells.get(i)
+              const other = layout.others.has(i)
               const indexOwner = [...layout.indexBlocks.entries()].find(([, b]) => b === i)?.[0]
               const dim = selected !== null && cell && cell.file !== selected
               const indexDim = selected !== null && indexOwner !== undefined && indexOwner !== selected
@@ -196,7 +243,8 @@ export function DiskAllocationLab() {
                   transition={{ duration: reduce ? 0 : 0.25, delay: reduce ? 0 : i * 0.006 }}
                   className={cx(
                     'relative grid aspect-square place-items-center rounded text-2xs font-semibold',
-                    !cell && indexOwner === undefined && 'border border-dashed border-line-strong text-ink-3',
+                    !cell && !other && indexOwner === undefined && 'border border-dashed border-line-strong text-ink-3',
+                    other && 'bg-line-strong text-ink-2',
                   )}
                   style={
                     cell
@@ -211,10 +259,12 @@ export function DiskAllocationLab() {
                   }
                   title={
                     cell
-                      ? `Block ${i} — ${FILES[cell.file].name}, part ${cell.order + 1}`
+                      ? `Block ${i}: ${FILES[cell.file].name}, part ${cell.order + 1}`
                       : indexOwner !== undefined
-                        ? `Block ${i} — index block for ${FILES[indexOwner].name}`
-                        : `Block ${i} — free`
+                        ? `Block ${i}: index block for ${FILES[indexOwner].name}`
+                        : other
+                          ? `Block ${i}: an older file`
+                          : `Block ${i}: free`
                   }
                 >
                   {cell ? (
@@ -247,19 +297,23 @@ export function DiskAllocationLab() {
             </Button>
             {fragmented && (
               <div
-                className={cx(
-                  'mt-3 rounded-lg border p-3.5',
-                  contiguousFails
-                    ? 'border-danger-300 bg-danger-50 dark:border-danger-700/60 dark:bg-danger-900/25'
-                    : 'border-warn-300 bg-warn-50 dark:border-warn-700/60 dark:bg-warn-900/25',
-                )}
+                className="mt-3 rounded-lg border border-danger-300 bg-danger-50 p-3.5 dark:border-danger-700/60 dark:bg-danger-900/25"
               >
                 <p className="text-base leading-relaxed text-ink-2">
                   <span className="font-semibold text-ink">External fragmentation. </span>
-                  Deleted files have left gaps. Plenty of blocks are free in total, but they are
-                  scattered — so a file that needs an unbroken run may not fit even though the
-                  free space adds up to more than enough. That is the fatal weakness of contiguous
-                  allocation.
+                  Older files (grey) and the gaps left by deleted ones are scattered across the
+                  disk. {space.total} blocks are free in total, but the longest unbroken gap is only{' '}
+                  {space.longest}.{' '}
+                  {failed.length > 0 && (
+                    <>
+                      So{' '}
+                      <span className="font-medium text-ink">
+                        {failed.map((f) => `${f.name} (${f.blocks})`).join(' and ')}
+                      </span>{' '}
+                      cannot be stored, even though there is more than enough free space. That is
+                      the fatal weakness of contiguous allocation.
+                    </>
+                  )}
                 </p>
               </div>
             )}
@@ -270,7 +324,7 @@ export function DiskAllocationLab() {
           <p className="mt-3 rounded-lg bg-sunken px-4 py-3 text-base leading-relaxed text-ink-2">
             Each block carries a pointer (the small <span className="font-mono">→n</span> label) to
             the next one. The last block holds <span className="font-mono">−1</span>. To read block
-            4 of a file you must walk blocks 1, 2 and 3 first — which is why linked allocation gives{' '}
+            4 of a file you must walk blocks 1, 2 and 3 first, which is why linked allocation gives{' '}
             <span className="font-medium text-ink">sequential access only</span>. This is exactly
             how the FAT chain works.
           </p>
@@ -281,7 +335,7 @@ export function DiskAllocationLab() {
             <p className="text-base leading-relaxed text-ink-2">
               Each file gets one <span className="font-medium text-ink">index block</span> (outlined
               above) holding the addresses of all its data blocks. To reach block 4 you read the
-              index and jump straight there — direct and random access, with no chain to walk.
+              index and jump straight there: direct and random access, with no chain to walk.
             </p>
             {selected !== null && (
               <p className="mt-2 font-mono text-xs text-ink-3">

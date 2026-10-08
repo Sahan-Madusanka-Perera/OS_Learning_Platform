@@ -17,7 +17,7 @@ export const m6: Module = {
       summary:
         'What main memory does, what each running program thinks its memory looks like, and why sharing RAM is harder than it sounds.',
       whyItMatters:
-        '"Briefly explains the need of memory management" is a named learning outcome. It also sets up paging — you cannot appreciate the solution without first feeling the problem.',
+        '"Briefly explains the need of memory management" is a named learning outcome. It also sets up paging: you cannot appreciate the solution without first feeling the problem.',
       objectives: [
         'State what the OS does for memory management',
         'Describe the core functions of main memory',
@@ -41,7 +41,7 @@ export const m6: Module = {
           title: 'What the OS actually does',
           style: 'check',
           items: [
-            'Keeps track of primary memory — which parts are in use and by whom, and which are free',
+            'Keeps track of primary memory, which parts are in use and by whom, and which are free',
             'In multiprogramming, decides which process gets memory, when, and how much',
             'Allocates a portion of available memory when a process requires it',
             'Deallocates that memory when the process no longer needs it, making it available for other processes',
@@ -70,14 +70,14 @@ export const m6: Module = {
           kind: 'callout',
           tone: 'warn',
           title: 'RAM is volatile',
-          text: 'Its contents disappear when power is turned off. That is why unsaved work is lost in a power cut — the document existed only in RAM, and RAM forgets.',
+          text: 'Its contents disappear when power is turned off. That is why unsaved work is lost in a power cut: the document existed only in RAM, and RAM forgets.',
         },
         { kind: 'heading', text: 'What a program thinks its memory looks like' },
         {
           kind: 'prose',
           paragraphs: [
             'A running program views memory as **its own continuous sequence of addresses**, starting from address 0 up to a maximum limit. This view is called the **logical (or virtual) address space**.',
-            'From the program’s perspective it has full and private access to this memory space — even though many programs may be running at the same time. Each process has its own virtual address space, and those spaces are isolated from each other, so one process cannot directly access the memory of another.',
+            'From the program’s perspective it has full and private access to this memory space, even though many programs may be running at the same time. Each process has its own virtual address space, and those spaces are isolated from each other, so one process cannot directly access the memory of another.',
           ],
         },
         {
@@ -88,13 +88,13 @@ export const m6: Module = {
         },
         {
           kind: 'keyIdea',
-          text: 'In reality the operating system manages memory and maps the logical address space onto physical memory using the **[[mmu|Memory Management Unit (MMU)]]**. Every program is living in a convincing illusion — and that illusion is what makes safe multitasking possible.',
+          text: 'In reality the operating system manages memory and maps the logical address space onto physical memory using the **[[mmu|Memory Management Unit (MMU)]]**. Every program is living in a convincing illusion, and that illusion is what makes safe multitasking possible.',
         },
         { kind: 'heading', text: 'The problem with the obvious approach' },
         {
           kind: 'prose',
           paragraphs: [
-            'The simplest memory management gives each process **one continuous block** of memory. This is called **contiguous allocation** — and it is exactly the same idea, with exactly the same weakness, as contiguous disk allocation.',
+            'The simplest memory management gives each process **one continuous block** of memory. This is called **contiguous allocation**, and it is exactly the same idea, with exactly the same weakness, as contiguous disk allocation.',
           ],
         },
         {
@@ -102,25 +102,25 @@ export const m6: Module = {
           title: 'What goes wrong over time',
           style: 'number',
           items: [
-            '**[[external-fragmentation|External fragmentation]]** — free memory becomes scattered into many small blocks. Finding a large continuous free block becomes difficult, even when the total free memory is sufficient.',
-            '**Limited program size** — a process must fit entirely in physical RAM. Programs larger than available RAM simply cannot run.',
-            '**Reduced multiprogramming** — entire processes must stay in memory, so fewer processes can run simultaneously.',
-            '**Complex memory allocation** — the OS must search for large contiguous free blocks, making allocation inefficient.',
-            '**Weak memory protection** — without structured address mapping it is harder to isolate processes, increasing the risk of memory corruption.',
+            '**[[external-fragmentation|External fragmentation]]**: free memory becomes scattered into many small blocks. Finding a large continuous free block becomes difficult, even when the total free memory is sufficient.',
+            '**Limited program size**: a process must fit entirely in physical RAM. Programs larger than available RAM simply cannot run.',
+            '**Reduced multiprogramming**: entire processes must stay in memory, so fewer processes can run simultaneously.',
+            '**Complex memory allocation**: the OS must search for large contiguous free blocks, making allocation inefficient.',
+            '**Weak memory protection**: without structured address mapping it is harder to isolate processes, increasing the risk of memory corruption.',
           ],
         },
         {
           kind: 'callout',
           tone: 'info',
           title: 'Memory compaction is a partial fix only',
-          text: 'Compaction can combine scattered free spaces into one region — but the process is time-consuming, and it does nothing about the "program bigger than RAM" problem. Something better was needed. That something is **paging**, and it is coming in lesson 6.3.',
+          text: 'Compaction can combine scattered free spaces into one region, but the process is time-consuming, and it does nothing about the "program bigger than RAM" problem. Something better was needed. That something is **paging**, and it is coming in lesson 6.3.',
         },
         {
           kind: 'recall',
           prompt:
             'Why can a program not simply execute from the hard disk, saving RAM entirely?',
           answer:
-            'Because the CPU can only execute instructions from main memory — it cannot fetch and execute directly from secondary storage, which is far too slow and not directly addressable. The OS must load the program into RAM first.',
+            'Because the CPU can only execute instructions from main memory: it cannot fetch and execute directly from secondary storage, which is far too slow and not directly addressable. The OS must load the program into RAM first.',
         },
         {
           kind: 'quickCheck',
@@ -189,7 +189,7 @@ export const m6: Module = {
             ['36 bits', '2³⁶ = 64 GB'],
           ],
           caption:
-            'This is why 32-bit systems cannot use more than 4 GB of RAM — the address bus physically cannot express a larger address.',
+            'This is why a 32-bit address can reach at most 4 GB: there are only 2³² different addresses to give out. (Some 32-bit PCs used extra address lines to reach more RAM, but each program could still see only 4 GB.)',
         },
         {
           kind: 'table',
@@ -205,7 +205,7 @@ export const m6: Module = {
             ['1 TeraByte (TB)', '1024 GB'],
           ],
           caption:
-            'In computer architecture, memory sizes are expressed using powers of 2 because digital systems operate using binary addressing.',
+            'In computer architecture, memory sizes are expressed using powers of 2 because digital systems operate using binary addressing. Storage makers use 1 KB = 1000 bytes instead, which is why a “1 TB” drive shows up as about 931 GB in Windows. The syllabus uses 1024.',
         },
         { kind: 'heading', text: 'The system bus' },
         {
@@ -221,18 +221,18 @@ export const m6: Module = {
             [
               '**[[data-bus|Data bus]]**',
               'The actual data between CPU, memory and I/O devices',
-              '**Bidirectional** — data travels both to and from the CPU',
+              '**Bidirectional**: data travels both to and from the CPU',
               'Its width (8, 16, 32, 64 bits) determines how many bits transfer at once. A wider data bus increases transfer speed.',
             ],
             [
               '**[[address-bus|Address bus]]**',
               'Memory addresses from the CPU to memory or I/O devices',
-              '**Unidirectional** — signals travel only outward from the CPU',
+              '**Unidirectional**: signals travel only outward from the CPU',
               'The number of address lines determines the maximum addressable memory. Each address line represents one bit of the address.',
             ],
             [
               '**[[control-bus|Control bus]]**',
-              'Control signals — Read, Write, Interrupt, Clock, Reset',
+              'Control signals: Read, Write, Interrupt, Clock, Reset',
               'Coordinating',
               'Ensures data transfer happens at the correct time and in the correct direction, and synchronises hardware components.',
             ],
@@ -242,7 +242,7 @@ export const m6: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Bus width, precisely',
-          text: 'The number of wires or address lines is known as the **bus width**. The maximum length of a memory address equals the bus width — memory addresses longer than the bus width cannot exist. Addresses may be *shorter* than the bus width when high-capacity memory is not installed.',
+          text: 'The number of wires or address lines is known as the **bus width**. The maximum length of a memory address equals the bus width: memory addresses longer than the bus width cannot exist. Addresses may be *shorter* than the bus width when high-capacity memory is not installed.',
         },
         {
           kind: 'worked',
@@ -251,19 +251,19 @@ export const m6: Module = {
             'A computer has physical memory divided into 16384 frames. The frame number and offset use an equal number of bits. What is the physical memory capacity?',
           steps: [
             {
-              title: 'Step 1 — bits for the frame number',
+              title: 'Step 1: bits for the frame number',
               detail: '2^(frame number bits) = number of frames = 16384 = 2¹⁴, so frame number bits = 14.',
             },
             {
-              title: 'Step 2 — offset bits',
+              title: 'Step 2: offset bits',
               detail: 'The question says both are equal, so offset bits = 14 too.',
             },
             {
-              title: 'Step 3 — total address length = bus width',
+              title: 'Step 3: total address length = bus width',
               detail: '14 + 14 = 28 bits.',
             },
             {
-              title: 'Step 4 — apply the equation',
+              title: 'Step 4: apply the equation',
               detail:
                 'Capacity = 2²⁸ bytes = 2⁸ × 2¹⁰ × 2¹⁰ = 2⁸ × 2¹⁰ KB = 2⁸ MB = 256 MB.',
             },
@@ -278,7 +278,7 @@ export const m6: Module = {
             [
               'How data moves',
               'One bit at a time through a single communication line',
-              'Multiple bits simultaneously through multiple lines — each bit of a byte through a separate wire at the same time',
+              'Multiple bits simultaneously through multiple lines: each bit of a byte through a separate wire at the same time',
             ],
             ['Wiring', 'Fewer wires, simpler hardware connections', 'More wires and more complex hardware'],
             [
@@ -325,7 +325,7 @@ export const m6: Module = {
       moduleId: 'm6',
       title: 'Virtual memory and paging',
       summary:
-        'Chopping memory into equal-sized pieces so a program never needs one unbroken block — and can even be bigger than RAM.',
+        'Chopping memory into equal-sized pieces so a program never needs one unbroken block, and can even be bigger than RAM.',
       whyItMatters:
         'Paging is the single biggest idea in competency 5.4, and every calculation question builds on the page/frame relationship. Understand the relationship and the arithmetic follows.',
       objectives: [
@@ -387,7 +387,7 @@ export const m6: Module = {
             },
             {
               title: 'Pages of a process are placed into available frames',
-              detail: 'They need not be next to each other — any free frame will do.',
+              detail: 'They need not be next to each other: any free frame will do.',
             },
             {
               title: 'Since page size equals frame size, pages fit exactly into frames',
@@ -410,12 +410,12 @@ export const m6: Module = {
           rows: [
             ['Eliminates external fragmentation', '**Internal** fragmentation still occurs'],
             [
-              'Enables virtual memory — programs larger than physical RAM can run',
+              'Enables virtual memory: programs larger than physical RAM can run',
               'The page table itself consumes memory',
             ],
             ['Allows non-contiguous memory allocation', 'Page faults slow down execution, because disk access is slow'],
             ['Supports memory protection and isolation', 'Thrashing can occur if memory is insufficient'],
-            ['Allows sharing of common code, such as shared libraries', '—'],
+            ['Allows sharing of common code, such as shared libraries', ''],
           ],
         },
         {
@@ -431,20 +431,20 @@ export const m6: Module = {
           headers: ['', 'Page', 'Frame'],
           rows: [
             ['Lives in', 'Logical (virtual) memory', 'Physical memory (RAM)'],
-            ['Contains', 'A portion of the program — instructions or data', 'A page that has been loaded'],
+            ['Contains', 'A portion of the program: instructions or data', 'A page that has been loaded'],
             [
               'How many',
               'Depends on **virtual** memory size',
               'Depends on **physical** memory size',
             ],
-            ['Size', 'A power of two — typically 4 KB, 8 KB or 16 KB', 'Exactly the same as page size'],
+            ['Size', 'A power of two: typically 4 KB, 8 KB or 16 KB', 'Exactly the same as page size'],
           ],
         },
         {
           kind: 'callout',
           tone: 'warn',
           title: 'Four rules examiners test',
-          text: '**1.** Frame size and page size are always powers of 2, and so are the number of pages and frames — because memory sizes are powers of 2. **2.** The number of pages depends on virtual memory size and the number of frames on physical memory size, so **they are not necessarily equal**. **3.** Page size must equal frame size to ensure proper placement; if not, it causes internal fragmentation. **4.** A process reserves either many pages or a single page, and correspondingly receives either many frames or a single frame.',
+          text: '**1.** Frame size and page size are always powers of 2, and so are the number of pages and frames, because memory sizes are powers of 2. **2.** The number of pages depends on virtual memory size and the number of frames on physical memory size, so **they are not necessarily equal**. **3.** Page size must equal frame size to ensure proper placement; if not, it causes internal fragmentation. **4.** A process reserves either many pages or a single page, and correspondingly receives either many frames or a single frame.',
         },
         {
           kind: 'viz',
@@ -542,7 +542,7 @@ export const m6: Module = {
           question:
             'If a program is bigger than my RAM, where do the extra pages actually live?',
           simpler:
-            'On the disk, in a file the OS reserves for the purpose (the swap file or page file). Only the pages you are currently using sit in RAM. When you need one that is not there, the OS fetches it from disk and — if RAM is full — sends a different page back out.',
+            'On the disk, in a file the OS reserves for the purpose (the swap file or page file). Only the pages you are currently using sit in RAM. When you need one that is not there, the OS fetches it from disk and, if RAM is full, sends a different page back out.',
           picture:
             'Your desk holds five books at a time; the bookshelf holds five hundred. You are "working with" all five hundred, but only five are physically in front of you. Fetching a sixth means putting one back.',
           prerequisite: { label: 'Why memory needs managing', lessonId: 'l6-1' },
@@ -574,7 +574,7 @@ export const m6: Module = {
       moduleId: 'm6',
       title: 'Page tables, address translation and the MMU',
       summary:
-        'How a virtual address becomes a real one — and the one part of it that never changes.',
+        'How a virtual address becomes a real one, and the one part of it that never changes.',
       whyItMatters:
         'Address translation questions are worth several marks and students routinely throw them away by altering the offset. Do this lesson properly and those marks are free.',
       objectives: [
@@ -613,7 +613,7 @@ export const m6: Module = {
             ],
             [
               '**[[offset|Offset (displacement)]]**',
-              'The address of a particular byte within that page — the distance from the start of the page to the required data. If the page size is 2ⁿ bytes, the offset requires n bits.',
+              'The address of a particular byte within that page: the distance from the start of the page to the required data. If the page size is 2ⁿ bytes, the offset requires n bits.',
             ],
           ],
         },
@@ -625,27 +625,27 @@ export const m6: Module = {
             ['**Frame number**', 'Which frame in physical memory (RAM).'],
             [
               '**Offset (displacement)**',
-              'The exact position within that frame — **the same value as the virtual offset**.',
+              'The exact position within that frame: **the same value as the virtual offset**.',
             ],
           ],
         },
         {
           kind: 'keyIdea',
           title: 'The rule that earns you the marks',
-          text: 'During translation the **page number is replaced by the frame number**, while the **offset remains completely unchanged**. Larger pages have larger possible offsets; smaller pages have smaller ranges — but within one translation the offset is never touched.',
+          text: 'During translation the **page number is replaced by the frame number**, while the **offset remains completely unchanged**. Larger pages have larger possible offsets; smaller pages have smaller ranges, but within one translation the offset is never touched.',
         },
         {
           kind: 'viz',
           viz: 'addressTranslation',
           title: 'Translate an address yourself',
           caption:
-            'Move the page number and offset sliders. Watch the orange offset bits stay byte-for-byte identical top and bottom.',
+            'It starts on page 5, offset 745: the binary worked example further down. Move the page number and offset, and watch the orange offset bits stay byte-for-byte identical top and bottom.',
         },
         {
           kind: 'confused',
           question: 'Why does the offset not change? It feels like it should.',
           simpler:
-            'Because a page and a frame are exactly the same size. If a byte was 232 bytes from the start of its page, then after the page is copied into a frame that byte is still 232 bytes from the start of the frame. Nothing inside was rearranged — the whole page moved as one lump.',
+            'Because a page and a frame are exactly the same size. If a byte was 232 bytes from the start of its page, then after the page is copied into a frame that byte is still 232 bytes from the start of the frame. Nothing inside was rearranged: the whole page moved as one lump.',
           picture:
             'Move a full box of books from one shelf to another. The book that was 12th from the left is still 12th from the left. Only the shelf number changed.',
         },
@@ -680,14 +680,14 @@ export const m6: Module = {
             ],
             [
               '**Protection bits**',
-              'Specify the allowed operations on the page — reading data, writing data, or executing instructions — ensuring memory protection and access control.',
+              'Specify the allowed operations on the page (reading data, writing data, or executing instructions) ensuring memory protection and access control.',
             ],
           ],
         },
         { kind: 'heading', text: 'Translation, two ways' },
         {
           kind: 'worked',
-          title: 'Method 1 — arithmetic',
+          title: 'Method 1: arithmetic',
           problem:
             'Logical address = byte 1000. Page size = 256 bytes. Find the page number and offset.',
           steps: [
@@ -702,7 +702,7 @@ export const m6: Module = {
             {
               title: 'Interpret the result',
               detail:
-                'Address 1000 sits at page 3, offset 232 — the 232nd byte inside the fourth page.',
+                'Address 1000 sits at page 3, offset 232. Counting from 0, that is byte 232 of the fourth page (pages are numbered 0, 1, 2, 3).',
             },
             {
               title: 'To finish the translation',
@@ -714,32 +714,32 @@ export const m6: Module = {
         },
         {
           kind: 'worked',
-          title: 'Method 2 — binary substitution',
+          title: 'Method 2: binary substitution',
           problem:
             'A CPU has a 14-bit logical address space: 4 bits for the page number and 10 bits for the displacement. A program requests virtual address `01011011101001`. The page table says page 5 → frame 111₂ (frame numbers are 3 bits). Find the physical address.',
           steps: [
             {
-              title: 'Step 1 — split the address',
+              title: 'Step 1: split the address',
               detail:
                 'First 4 bits = page number = `0101` (= 5 in decimal). Remaining 10 bits = offset = `1011101001`.',
             },
             {
-              title: 'Step 2 — look up the page table',
+              title: 'Step 2: look up the page table',
               detail:
-                'Page 5 maps to frame `111`₂ = 7 in decimal, and the present bit is 1 — so page 5 really is in physical memory, in frame 7.',
+                'Page 5 maps to frame `111`₂ = 7 in decimal, and the present bit is 1, so page 5 really is in physical memory, in frame 7.',
             },
             {
-              title: 'Step 3 — substitute the frame number for the page number',
+              title: 'Step 3: substitute the frame number for the page number',
               detail: 'Replace `0101` with `111`, keeping the offset exactly as it was.',
             },
             {
-              title: 'Step 4 — the physical address',
+              title: 'Step 4: the physical address',
               detail:
                 '`111` + `1011101001` = `1111011101001` (13 bits: 3 frame bits + 10 offset bits).',
             },
           ],
           answer:
-            'Physical address = `1111011101001`. Note that the displacement of both the page and the frame are identical — it has not changed during translation.',
+            'Physical address = `1111011101001`. Note that the displacement of both the page and the frame are identical: it has not changed during translation.',
         },
         {
           kind: 'worked',
@@ -748,16 +748,16 @@ export const m6: Module = {
             'The CPU wants to access virtual address `0x4F5DE`. The page number is `0x4F`, and the frame number that corresponds to page `0x4F` is `0x35`. What is the physical address?',
           steps: [
             {
-              title: 'Step 1 — split at the given boundary',
+              title: 'Step 1: split at the given boundary',
               detail:
                 'The page number is `0x4F`, so the first 8 bits (two hex digits) are the page number and the remaining digits `5DE` are the offset.',
             },
             {
-              title: 'Step 2 — substitute',
+              title: 'Step 2: substitute',
               detail: 'Page `0x4F` maps to frame `0x35`. Replace `4F` with `35`; keep `5DE` intact.',
             },
             {
-              title: 'Step 3 — read off the answer',
+              title: 'Step 3: read off the answer',
               detail: '`0x35` + `5DE` = `0x355DE`',
             },
           ],
@@ -767,7 +767,7 @@ export const m6: Module = {
         {
           kind: 'definition',
           term: 'Memory Management Unit (MMU)',
-          simple: 'The hardware chip that converts virtual addresses into real ones.',
+          simple: 'The hardware (built into the CPU on modern computers) that converts virtual addresses into real ones.',
           technical:
             'A hardware component responsible for handling memory access requests and managing the system’s memory resources.',
         },
@@ -776,11 +776,11 @@ export const m6: Module = {
           title: 'Functions of the MMU',
           style: 'number',
           items: [
-            '**Address translation** — translates virtual addresses generated by the CPU into physical addresses in main memory',
-            '**Memory protection** — prevents processes from accessing memory areas not allocated to them',
-            '**Relocation** — allows programs to run in different memory locations without modifying their addresses',
-            '**Virtual memory support** — supports techniques such as paging and segmentation',
-            '**Access control** — ensures each process accesses only its assigned memory space',
+            '**Address translation**: translates virtual addresses generated by the CPU into physical addresses in main memory',
+            '**Memory protection**: prevents processes from accessing memory areas not allocated to them',
+            '**Relocation**: allows programs to run in different memory locations without modifying their addresses',
+            '**Virtual memory support**: supports techniques such as paging and segmentation',
+            '**Access control**: ensures each process accesses only its assigned memory space',
           ],
         },
         { kind: 'heading', text: 'Calculating page table size', level: 'sub' },
@@ -800,20 +800,20 @@ export const m6: Module = {
             'Virtual address space = 4 GB (2³² bytes). Page size = 4 KB (2¹² bytes). Each PTE is 4 bytes. Calculate the total size of the page table.',
           steps: [
             {
-              title: 'Step 1 — number of virtual pages',
+              title: 'Step 1: number of virtual pages',
               detail: 'N = virtual address space ÷ page size = 2³² ÷ 2¹² = 2²⁰ pages',
             },
             {
-              title: 'Step 2 — number of PTEs',
+              title: 'Step 2: number of PTEs',
               detail: 'One entry per page, so 2²⁰ PTEs.',
             },
             {
-              title: 'Step 3 — multiply by the entry size',
+              title: 'Step 3: multiply by the entry size',
               detail: '2²⁰ × 4 bytes = 2²⁰ × 2² = 2²² bytes = 4 MB',
             },
           ],
           answer:
-            '4 MB — and note that this is per process. Page tables consuming memory is a genuine disadvantage of paging.',
+            '4 MB, and note that this is per process. Page tables consuming memory is a genuine disadvantage of paging.',
         },
         {
           kind: 'examTip',
@@ -895,8 +895,9 @@ export const m6: Module = {
           kind: 'viz',
           viz: 'addressTranslation',
           title: 'Trigger a page fault and service it',
+          props: { initialPage: 4, initialOffset: 11 },
           caption:
-            'Set the page number to 4 — its present bit is 0. Then press "Service the page fault" and watch which page gets evicted and how the table changes.',
+            'It starts on page 4, offset 11, the worked example below. Page 4’s present bit is 0 and every frame is full, so press "Service the page fault" and watch which page gets evicted and how the table changes.',
         },
         {
           kind: 'definition',
@@ -911,7 +912,7 @@ export const m6: Module = {
           style: 'number',
           items: [
             'The requested page was **swapped out** to virtual memory to free physical memory for other pages.',
-            'The page was **never loaded** into physical memory — which happens if it is being accessed for the first time.',
+            'The page was **never loaded** into physical memory, which happens if it is being accessed for the first time.',
           ],
         },
         {
@@ -919,17 +920,17 @@ export const m6: Module = {
           title: 'How to reduce page faults',
           style: 'check',
           items: [
-            '**Increase RAM size** — more pages can stay in memory',
-            '**Use efficient page replacement algorithms** — FIFO, LRU, Optimal',
-            '**Locality of reference** — programs should access nearby memory locations',
-            '**Working set model** — keep frequently used pages in RAM',
+            '**Increase RAM size**: more pages can stay in memory',
+            '**Use efficient page replacement algorithms**: FIFO, LRU, Optimal',
+            '**Locality of reference**: programs should access nearby memory locations',
+            '**Working set model**: keep frequently used pages in RAM',
           ],
         },
         {
           kind: 'callout',
           tone: 'info',
           title: 'Page faults cannot be eliminated',
-          text: 'They can be **reduced**, never removed completely. A program accessing a page for the very first time must always fault — there is no way to have loaded it in advance without loading everything, which is precisely what demand paging is avoiding.',
+          text: 'They can be **reduced**, never removed completely. A program accessing a page for the very first time must always fault: there is no way to have loaded it in advance without loading everything, which is precisely what demand paging is avoiding.',
         },
         { kind: 'heading', text: 'Thrashing' },
         {
@@ -967,9 +968,9 @@ export const m6: Module = {
           question:
             'Why is a TLB needed at all? Is the page table not already in memory?',
           simpler:
-            'It is — and that is the problem. Reading the page table means an extra trip to memory, so every single memory access would cost **two** memory accesses: one to read the table, one to get the data. The TLB is small enough to be searched almost instantly, so most translations cost nothing extra.',
+            'It is, and that is the problem. Reading the page table means an extra trip to memory, so every single memory access would cost **two** memory accesses: one to read the table, one to get the data. The TLB is small enough to be searched almost instantly, so most translations cost nothing extra.',
           picture:
-            'The page table is a phone directory in another room. The TLB is the six numbers you have memorised — the ones you call constantly. Most calls need no trip to the other room.',
+            'The page table is a phone directory in another room. The TLB is the six numbers you have memorised: the ones you call constantly. Most calls need no trip to the other room.',
           prerequisite: { label: 'Page tables and address translation', lessonId: 'l6-4' },
         },
         {
@@ -979,22 +980,22 @@ export const m6: Module = {
             'A request arrives for virtual address `01000000001011` (page number `0100` = 4). The page table shows page 4 has present bit 0. To fulfil the request, the OS changed the present/absent bit of page 7 from 1 to 0. Page 7 was in frame `101`₂. What is the resulting 13-bit physical address?',
           steps: [
             {
-              title: 'Step 1 — why is there a fault?',
+              title: 'Step 1: why is there a fault?',
               detail:
                 'Page 4 is not loaded into physical memory, because its present/absent bit is 0.',
             },
             {
-              title: 'Step 2 — what did the OS do?',
+              title: 'Step 2: what did the OS do?',
               detail:
                 'Changing page 7’s present bit from 1 to 0 means page 7 was moved back to virtual memory, and its frame `101`₂ (= 5) was freed to fulfil the request.',
             },
             {
-              title: 'Step 3 — load page 4 into the freed frame',
+              title: 'Step 3: load page 4 into the freed frame',
               detail:
                 'Frame 5 (`101`) is now empty, so page 4 is loaded into it. The page table is updated to record this.',
             },
             {
-              title: 'Step 4 — build the physical address',
+              title: 'Step 4: build the physical address',
               detail:
                 'Replace the page number `0100` with the frame number `101`, keeping the offset `0000001011` intact: `101` + `0000001011` = `1010000001011`.',
             },
@@ -1014,7 +1015,7 @@ export const m6: Module = {
         },
       ],
       takeaways: [
-        'A page fault occurs when the requested page has present/absent bit 0 — it is not in RAM.',
+        'A page fault occurs when the requested page has present/absent bit 0: it is not in RAM.',
         'Demand paging loads pages only when actually needed, reducing RAM usage.',
         'Servicing a fault with no free frame requires evicting a resident page and setting its present bit to 0.',
         'Thrashing = excessive swapping because RAM is insufficient; the CPU services faults instead of executing.',

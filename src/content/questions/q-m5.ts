@@ -16,13 +16,13 @@ export const questionsM5: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Exactly backwards — a program sits on disk, a process runs.',
+      'Exactly backwards: a program sits on disk, a process runs.',
       null,
       'They are genuinely different: one is passive, one is active.',
       'A finished process is *terminated*, not a program.',
     ],
     explanation:
-      'A program is passive — a set of instructions stored in secondary storage. A process is active — a program in execution, together with its current state, CPU registers, memory and required resources.',
+      'A program is passive: a set of instructions stored in secondary storage. A process is active: a program in execution, together with its current state, CPU registers, memory and required resources.',
     tags: ['process'],
   },
   {
@@ -33,7 +33,7 @@ export const questionsM5: Question[] = [
     prompt: 'One program can have many processes.',
     correct: true,
     explanation:
-      'Yes — a program may have many processes. Opening the same application twice creates two processes from one program file, each with its own memory, its own resources and its own place in the code.',
+      'Yes: a program may have many processes. Opening the same application twice creates two processes from one program file, each with its own memory, its own resources and its own place in the code.',
     tags: ['process'],
   },
   {
@@ -52,7 +52,7 @@ export const questionsM5: Question[] = [
       'That classification is about whether it interacts with the user.',
     ],
     explanation:
-      'I/O bound processes spend more time waiting for input/output operations — reading from or writing to a disk or network — than doing actual computation. Copying a large file and loading a web page are the syllabus examples.',
+      'I/O bound processes spend more time waiting for input/output operations, reading from or writing to a disk or network, than doing actual computation. Copying a large file and loading a web page are the syllabus examples.',
     tags: ['process', 'io-bound'],
   },
 
@@ -72,7 +72,7 @@ export const questionsM5: Question[] = [
     ],
     correct: [0, 1, 2, 4],
     explanation:
-      'The PCB stores the PID, process state, program counter, CPU registers, memory management information, CPU scheduling information, accounting information, I/O status information, and lists of open files and devices. The source code is not stored — the executable code is a separate component of the process.',
+      'The PCB stores the PID, process state, program counter, CPU registers, memory management information, CPU scheduling information, accounting information, I/O status information, and lists of open files and devices. The source code is not stored: the executable code is a separate component of the process.',
     tags: ['pcb'],
   },
   {
@@ -90,13 +90,13 @@ export const questionsM5: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'That is accounting information — a separate PCB field.',
+      'That is accounting information: a separate PCB field.',
       null,
       'That is the PID.',
       'That is memory management information.',
     ],
     explanation:
-      'The program counter is a pointer to the address of the next instruction to be executed. Without it, a resumed process would have no idea where it had got to — and multitasking would be impossible.',
+      'The program counter is a pointer to the address of the next instruction to be executed. Without it, a resumed process would have no idea where it had got to, and multitasking would be impossible.',
     tags: ['pcb', 'program-counter'],
   },
   {
@@ -115,7 +115,7 @@ export const questionsM5: Question[] = [
     optionFeedback: [
       'The child has its own memory space and its own PID.',
       null,
-      'A parent can be terminated first — which causes all its children to stop executing.',
+      'A parent can be terminated first. Depending on the OS, its children are then terminated too, or adopted by a system process.',
       'The child can run independently and take a different path.',
     ],
     explanation:
@@ -136,11 +136,11 @@ export const questionsM5: Question[] = [
     optionFeedback: [
       'Blocked is for waiting on a *resource*, such as I/O. Nothing is being waited for here.',
       null,
-      'Suspension means being swapped out to disk — that is not what a timeout does.',
+      'Suspension means being swapped out to disk: that is not what a timeout does.',
       'A timeout does not end the process; it just moves it out of the CPU.',
     ],
     explanation:
-      'Running → Ready is the **timeout** transition. It happens when the time slice expires or a higher-priority process arrives. The process is perfectly healthy and ready to continue — it just no longer holds the CPU.',
+      'Running → Ready is the **timeout** transition. It happens when the time slice expires or a higher-priority process arrives. The process is perfectly healthy and ready to continue: it just no longer holds the CPU.',
     remediation:
       'Timeout → Ready (nothing is wrong). I/O request → Blocked (waiting for something).',
     tags: ['process-states'],
@@ -155,7 +155,7 @@ export const questionsM5: Question[] = [
     diagram: 'process-states',
     correctRegion: 'blocked',
     explanation:
-      'Blocked means the process is paused and waiting for a resource — such as I/O completion or data availability — before it can continue. It is still in main memory. If it were also swapped out to disk it would be Suspended Blocked.',
+      'Blocked means the process is paused and waiting for a resource, such as I/O completion or data availability, before it can continue. It is still in main memory. If it were also swapped out to disk it would be Suspended Blocked.',
     tags: ['process-states'],
   },
   {
@@ -191,13 +191,13 @@ export const questionsM5: Question[] = [
     options: ['Blocked', 'Ready', 'Suspended Ready', 'Running'],
     correct: 2,
     optionFeedback: [
-      'Blocked would mean it is back in main memory *and* still waiting — neither is true.',
+      'Blocked would mean it is back in main memory *and* still waiting: neither is true.',
       'Ready would mean it is back in main memory, but memory is still full.',
       null,
       'It cannot run while it is still on disk.',
     ],
     explanation:
-      'Suspended Blocked → Suspended Ready happens when the waiting event or I/O operation completes **while the process remains in secondary storage**. It is now ready to run, but still swapped out — so it must first be brought back into memory.',
+      'Suspended Blocked → Suspended Ready happens when the waiting event or I/O operation completes **while the process remains in secondary storage**. It is now ready to run, but still swapped out, so it must first be brought back into memory.',
     remediation:
       'Two independent things: is it waiting for a resource, and is it in memory? Suspended Blocked is "yes and no"; Suspended Ready is "no and no".',
     tags: ['process-states'],
@@ -210,13 +210,13 @@ export const questionsM5: Question[] = [
     prompt:
       'A process starts, runs, requests input from the user, receives it, runs again and finishes. Put its states in order.',
     items: [
-      'New — the process is being created',
-      'Ready — waiting for the CPU',
-      'Running — executing on the CPU',
-      'Blocked — waiting for the user’s input',
-      'Ready again — the input has arrived',
-      'Running again — finishing its work',
-      'Terminated — execution complete',
+      'New: the process is being created',
+      'Ready, waiting for the CPU',
+      'Running, executing on the CPU',
+      'Blocked, waiting for the user’s input',
+      'Ready again: the input has arrived',
+      'Running again, finishing its work',
+      'Terminated: execution complete',
     ],
     explanation:
       'New (being created) → Ready (waiting for CPU) → Running → Blocked (waiting for input) → Ready (input arrived, waiting for CPU again) → Running → Terminated. Note that a process re-enters Ready after being unblocked; it never jumps straight from Blocked to Running.',
@@ -263,7 +263,7 @@ export const questionsM5: Question[] = [
     correct: 2,
     optionFeedback: [
       'A zombie has already finished executing, so it uses no CPU.',
-      'It does not occupy main memory either — its memory was released.',
+      'It does not occupy main memory either: its memory was released.',
       null,
       'It does consume one thing: a process table entry.',
     ],
@@ -287,7 +287,7 @@ export const questionsM5: Question[] = [
     ],
     correct: 1,
     explanation:
-      'When a child process terminates it sends its exit status to the parent. If the parent does not collect this exit status, the terminated child remains in the system as a zombie — its process table entry cannot be cleaned up until someone reads the result.',
+      'When a child process terminates it sends its exit status to the parent. If the parent does not collect this exit status, the terminated child remains in the system as a zombie: its process table entry cannot be cleaned up until someone reads the result.',
     tags: ['zombie-process'],
   },
   {
@@ -311,7 +311,7 @@ export const questionsM5: Question[] = [
       'This is an error, not a resource wait.',
     ],
     explanation:
-      'When a process tries to touch memory it does not own, the hardware and OS step in immediately and terminate it. The mechanism is **memory protection** — most modern operating systems use paging or segmentation to ensure each process lives in its own sandbox.',
+      'When a process tries to touch memory it does not own, the hardware and OS step in immediately and terminate it. The mechanism is **memory protection**: most modern operating systems use paging or segmentation to ensure each process lives in its own sandbox.',
     tags: ['process-termination', 'memory-protection'],
   },
 
@@ -341,7 +341,7 @@ export const questionsM5: Question[] = [
       { left: 'Power failure', right: 'Hardware interrupt' },
     ],
     explanation:
-      'Hardware interrupts are triggered by external hardware devices — keyboard input, mouse clicks, disk I/O completion, hardware failures. Software interrupts are triggered by programs — system calls, errors and exceptions.',
+      'Hardware interrupts are triggered by external hardware devices: keyboard input, mouse clicks, disk I/O completion, hardware failures. Software interrupts are triggered by programs: system calls, errors and exceptions.',
     tags: ['interrupts'],
   },
   {
@@ -358,7 +358,7 @@ export const questionsM5: Question[] = [
     ],
     correct: 1,
     explanation:
-      'Non-maskable interrupts cannot be ignored and must be handled immediately — hardware failures are the classic example. Maskable interrupts can be temporarily ignored by the OS.',
+      'Non-maskable interrupts cannot be ignored and must be handled immediately: hardware failures are the classic example. Maskable interrupts can be temporarily ignored by the OS.',
     tags: ['interrupts'],
   },
   {
@@ -369,7 +369,7 @@ export const questionsM5: Question[] = [
     prompt: 'What is the main disadvantage of context switching?',
     options: [
       'It prevents multitasking',
-      'It introduces overhead — time spent saving and restoring state during which no useful work happens',
+      'It introduces overhead: time spent saving and restoring state during which no useful work happens',
       'It requires processes to be in the Blocked state',
       'It only works on multi-core processors',
     ],
@@ -381,7 +381,7 @@ export const questionsM5: Question[] = [
       'Context switching is precisely what makes single-core multitasking possible.',
     ],
     explanation:
-      'Saving and restoring process states takes real time during which the CPU does no useful work. This is exactly why a Round Robin time quantum that is too small hurts performance — the machine spends more time switching than computing.',
+      'Saving and restoring process states takes real time during which the CPU does no useful work. This is exactly why a Round Robin time quantum that is too small hurts performance: the machine spends more time switching than computing.',
     tags: ['context-switch'],
   },
 
@@ -411,17 +411,17 @@ export const questionsM5: Question[] = [
       'The short-term scheduler, because it decides which process runs',
       'The long-term scheduler, because it decides how many processes are admitted into memory',
       'The medium-term scheduler only, because it swaps processes out',
-      'None of them — the degree of multiprogramming is fixed by hardware',
+      'None of them: the degree of multiprogramming is fixed by hardware',
     ],
     correct: 1,
     optionFeedback: [
-      'The short-term scheduler provides *less* control over the degree of multiprogramming — it only chooses among processes already admitted.',
+      'The short-term scheduler provides *less* control over the degree of multiprogramming: it only chooses among processes already admitted.',
       null,
       'The medium-term scheduler also controls it, but the long-term scheduler is the primary answer since it makes the admission decision.',
       'It is very much a software decision.',
     ],
     explanation:
-      'The long-term scheduler selects processes from a pool and loads them into memory, so it decides how many processes are in memory at once — that is the degree of multiprogramming. The medium-term scheduler also controls it, by swapping processes out.',
+      'The long-term scheduler selects processes from a pool and loads them into memory, so it decides how many processes are in memory at once: that is the degree of multiprogramming. The medium-term scheduler also controls it, by swapping processes out.',
     tags: ['schedulers'],
   },
   {
@@ -433,7 +433,7 @@ export const questionsM5: Question[] = [
     options: ['Long-term', 'Short-term', 'Medium-term', 'They all run at the same speed'],
     correct: 1,
     explanation:
-      'The short-term scheduler is the fastest, because it must run every time the CPU becomes free — potentially thousands of times per second. The long-term scheduler runs least often and is slowest; the medium-term scheduler sits between them.',
+      'The short-term scheduler is the fastest, because it must run every time the CPU becomes free: potentially thousands of times per second. The long-term scheduler runs least often and is slowest; the medium-term scheduler sits between them.',
     tags: ['schedulers'],
   },
 
@@ -471,11 +471,11 @@ export const questionsM5: Question[] = [
     optionFeedback: [
       'They differ substantially for preempted processes.',
       null,
-      'Neither includes burst duration — that is turnaround time.',
+      'Neither includes burst duration: that is turnaround time.',
       'Both apply to any algorithm.',
     ],
     explanation:
-      'In Round Robin a process may wait, run, wait, run, wait, run. Response time counts only the first gap — the duration until the very first output is produced. Waiting time counts every gap added together.',
+      'In Round Robin a process may wait, run, wait, run, wait, run. Response time counts only the first gap: the duration until the very first output is produced. Waiting time counts every gap added together.',
     tags: ['scheduling-criteria'],
   },
   {
@@ -498,13 +498,13 @@ export const questionsM5: Question[] = [
     type: 'numeric',
     level: 3,
     prompt:
-      'Four processes — P1 (arrival 0, burst 5), P2 (arrival 1, burst 3), P3 (arrival 2, burst 8), P4 (arrival 4, burst 4) — are scheduled with FCFS. What is the average waiting duration in ms?',
-    answer: 5.5,
+      'Four processes are scheduled with FCFS: P1 (arrival 0, burst 7), P2 (arrival 2, burst 4), P3 (arrival 3, burst 2) and P4 (arrival 5, burst 2). What is the average waiting duration in ms?',
+    answer: 5.25,
     unit: 'ms',
     tolerance: 0.01,
     hint: 'Draw the Gantt chart first: they run in arrival order.',
     explanation:
-      'Gantt: P1 0–5, P2 5–8, P3 8–16, P4 16–20. Turnaround: 5, 7, 14, 16. Waiting = turnaround − burst: 0, 4, 6, 12. Average = (0+4+6+12)/4 = **5.5 ms**.',
+      'Gantt: P1 0–7, P2 7–11, P3 11–13, P4 13–15. Turnaround: 7, 9, 10, 10. Waiting = turnaround − burst: 0, 5, 8, 8. Average = (0+5+8+8)/4 = **5.25 ms**.',
     remediation:
       'FCFS runs processes strictly in arrival order, each to completion. Draw the chart before calculating anything.',
     tags: ['fcfs', 'calculations'],
@@ -515,13 +515,15 @@ export const questionsM5: Question[] = [
     type: 'numeric',
     level: 4,
     prompt:
-      'The same four processes — P1 (0,5), P2 (1,3), P3 (2,8), P4 (4,4) — are scheduled with SRTF (preemptive SJF). What is the average waiting duration in ms?',
-    answer: 4.25,
+      'The same four processes, P1 (0, 7), P2 (2, 4), P3 (3, 2) and P4 (5, 2), given as (arrival, burst), are scheduled with SRTF (preemptive SJF). What is the average waiting duration in ms?',
+    answer: 3,
     unit: 'ms',
     tolerance: 0.01,
-    hint: 'P1 starts, but is preempted at time 1 when P2 arrives with a shorter burst.',
+    hint: 'At time 2, P1 still needs 5 ms but P2 needs only 4, so P1 is preempted.',
     explanation:
-      'Gantt: P1 0–1, P2 1–4, P1 4–8, P4 8–12, P3 12–20. Completions: P1 8, P2 4, P3 20, P4 12. Turnaround: 8, 3, 18, 8. Waiting: 3, 0, 10, 4. Average = (3+0+10+4)/4 = **4.25 ms** — the best of all the algorithms on this workload.',
+      'Gantt: P1 0–2, P2 2–3, P3 3–5, P4 5–7, P2 7–10, P1 10–15. Completions: P1 15, P2 10, P3 5, P4 7. Turnaround: 15, 8, 2, 2. Waiting: 8, 4, 0, 0. Average = (8+4+0+0)/4 = **3 ms**, compared with 5.25 ms under FCFS for the same processes.',
+    remediation:
+      'At every arrival, compare the newcomer’s burst with the running process’s REMAINING time, not its original burst.',
     tags: ['srtf', 'calculations'],
   },
   {
@@ -530,13 +532,13 @@ export const questionsM5: Question[] = [
     type: 'numeric',
     level: 4,
     prompt:
-      'Four processes P1 (burst 5), P2 (burst 3), P3 (burst 8), P4 (burst 4) all arrive at time 0. Round Robin is used with a time quantum of 4 ms. What is the average turnaround duration in ms?',
-    answer: 14.5,
+      'Four processes P1 (burst 5), P2 (burst 3), P3 (burst 7) and P4 (burst 2) all arrive at time 0. Round Robin is used with a time quantum of 3 ms. What is the average turnaround duration in ms?',
+    answer: 11.75,
     unit: 'ms',
     tolerance: 0.01,
-    hint: 'First round: P1 0–4, P2 4–7, P3 7–11, P4 11–15. Then the leftovers.',
+    hint: 'In each round a process runs for at most 3 ms. P3 needs three rounds.',
     explanation:
-      'P1 runs 0–4 (1 ms left), P2 runs 4–7 (finishes), P3 runs 7–11 (4 ms left), P4 runs 11–15 (finishes). Second round: P1 15–16, P3 16–20. Completions: 16, 7, 20, 15. Turnaround = completion (all arrived at 0) = 16, 7, 20, 15. Average = 58/4 = **14.5 ms**.',
+      'Round 1: P1 0–3 (2 ms left), P2 3–6 (finishes), P3 6–9 (4 ms left), P4 9–11 (finishes). Round 2: P1 11–13 (finishes), P3 13–16 (1 ms left). Round 3: P3 16–17. Completions: 13, 6, 17, 11. All arrived at 0, so turnaround = completion. Average = 47/4 = **11.75 ms**.',
     remediation:
       'A preempted process goes to the END of the ready queue, behind everyone who has not yet had a turn.',
     tags: ['round-robin', 'calculations'],
@@ -581,11 +583,11 @@ export const questionsM5: Question[] = [
     optionFeedback: [
       'Deadlock requires processes waiting on *each other*; here nothing is circular.',
       null,
-      'Thrashing is excessive page swapping — a memory problem.',
+      'Thrashing is excessive page swapping: a memory problem.',
       'The convoy effect is an FCFS problem caused by a long job, not by priority.',
     ],
     explanation:
-      'Starvation is when a process waits indefinitely because higher-priority processes continuously get the CPU. Aging solves it: the priority of long-waiting processes is gradually increased — conventionally by 1 for every 15 minutes of waiting.',
+      'Starvation is when a process waits indefinitely because higher-priority processes continuously get the CPU. Aging solves it: the priority of long-waiting processes is gradually increased, for example by 1 for every 15 minutes of waiting.',
     remediation:
       'Priority scheduling has no built-in aging mechanism, so starvation occurs unless aging is applied deliberately.',
     tags: ['starvation', 'aging', 'priority-scheduling'],
@@ -605,13 +607,13 @@ export const questionsM5: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'The opposite — a large quantum makes short processes wait.',
+      'The opposite: a large quantum makes short processes wait.',
       null,
       'A large quantum means *fewer* switches, so overhead falls.',
       'Round Robin prevents starvation regardless of quantum size.',
     ],
     explanation:
-      'When the quantum is large enough that most processes finish in one CPU burst without being preempted, CPU efficiency rises because switching is rare — but the system behaves like FCFS, so short and interactive processes must wait too long. Too small a quantum has the opposite problem: too many switches waste CPU time.',
+      'When the quantum is large enough that most processes finish in one CPU burst without being preempted, CPU efficiency rises because switching is rare, but the system behaves like FCFS, so short and interactive processes must wait too long. Too small a quantum has the opposite problem: too many switches waste CPU time.',
     tags: ['round-robin', 'time-quantum'],
   },
 ]

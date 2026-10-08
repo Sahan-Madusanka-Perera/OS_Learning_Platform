@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'motion/react'
 import { COMMON_MISTAKES, CONFUSED_PAIRS, EXAM_TIPS, KEY_FACTS } from '@/content/examPrep'
-import { allQuestions, course, lessonById } from '@/content/course'
+import { allQuestions, lessonById } from '@/content/course'
 import { useCourseOverview } from '@/hooks/useMastery'
 import { useProgress } from '@/store/progress'
 import { inline } from '@/lib/inline'
@@ -12,6 +12,8 @@ import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { ProgressBar } from '@/components/ui/Progress'
 import { Icon } from '@/components/ui/Icon'
+import { ScrollStrip } from '@/components/ui/ScrollStrip'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 type Tab = 'readiness' | 'facts' | 'confused' | 'mistakes' | 'tips' | 'structured'
 
@@ -25,6 +27,7 @@ const TABS: { id: Tab; label: string }[] = [
 ]
 
 export function ExamPage() {
+  useDocumentTitle('Exam preparation')
   const [tab, setTab] = useState<Tab>('readiness')
   const overview = useCourseOverview()
   const assessments = useProgress((s) => s.assessments)
@@ -35,10 +38,7 @@ export function ExamPage() {
   return (
     <div className="mx-auto max-w-3xl">
       <header className="mb-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-3">
-          {course.subtitle}
-        </p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-display text-ink sm:text-4xl">
+        <h1 className="text-3xl font-semibold tracking-display text-ink sm:text-4xl">
           Exam preparation
         </h1>
         <p className="mt-2 max-w-2xl text-md leading-relaxed text-ink-2">
@@ -47,7 +47,7 @@ export function ExamPage() {
         </p>
       </header>
 
-      <div className="scroll-x mb-6 flex gap-1.5 border-b border-line pb-px" role="tablist">
+      <ScrollStrip className="mb-6 flex gap-1 border-b border-line pb-px" role="tablist" aria-label="Exam preparation sections">
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -63,7 +63,7 @@ export function ExamPage() {
             {t.label}
           </button>
         ))}
-      </div>
+      </ScrollStrip>
 
       <motion.div
         key={tab}
@@ -169,7 +169,7 @@ export function ExamPage() {
                 These are original <span className="font-medium">A/L-style practice questions</span>{' '}
                 written to match the syllabus and its command words. They are{' '}
                 <span className="font-medium">not past-paper questions</span>. Each has a mark
-                scheme you use to mark your own answer — which is itself excellent revision, because
+                scheme you use to mark your own answer, which is itself excellent revision, because
                 it shows you exactly what an examiner is looking for.
               </p>
             </Card>
@@ -256,7 +256,7 @@ function Readiness({
                 ? 'Your mastery across the competency is strong. Focus now on exam technique, timed practice, and keeping the material fresh with daily review.'
                 : nearlyReady
                   ? 'You understand most of the material. Close the gaps below, then take the final assessment to confirm.'
-                  : 'There is real material still to cover. Work through the learning path in order — revision only helps once the understanding is there.'}
+                  : 'There is real material still to cover. Work through the learning path in order: revision only helps once the understanding is there.'}
             </p>
             <ProgressBar
               value={overview.overall}
@@ -314,8 +314,13 @@ function Readiness({
           <p className="mb-3 text-base text-ink-2">
             You cannot be exam-ready on material you have not met. Start with the first one.
           </p>
-          <Button to={`/lesson/${overview.notStarted[0]}`} size="sm">
-            Open {lessonById.get(overview.notStarted[0])?.title} →
+          <Button
+            to={`/lesson/${overview.notStarted[0]}`}
+            size="sm"
+            className="!whitespace-normal text-left"
+          >
+            Open {lessonById.get(overview.notStarted[0])?.title}
+            <Icon name="arrowRight" size={15} className="shrink-0" />
           </Button>
         </Card>
       )}
@@ -324,12 +329,13 @@ function Readiness({
         <h2 className="mb-1 font-semibold text-ink">Final mastery test</h2>
         <p className="mb-4 text-base leading-relaxed text-ink-2">
           A full assessment across every competency level, reported by the kind of thinking each
-          question demanded — recall, understanding, application, reasoning and exam style — so you
+          question demanded (recall, understanding, application, reasoning and exam style) so you
           know precisely where you stand.
         </p>
         <div className="flex flex-wrap gap-2">
           <Button to="/assessment" size="lg">
-            Take the final assessment →
+            Take the final assessment
+            <Icon name="arrowRight" size={16} />
           </Button>
           <Button to="/assessment?timed=1" variant="secondary" size="lg">
             Timed practice (25 min)

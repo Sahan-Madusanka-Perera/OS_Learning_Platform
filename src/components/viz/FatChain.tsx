@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { cx } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
+import { Icon } from '@/components/ui/Icon'
 
 /* ============================================================
    FAT chain explorer
@@ -166,7 +167,8 @@ export function FatChainExplorer({
           <div className="mt-3 flex flex-wrap gap-2">
             {!finished && (
               <Button size="sm" onClick={step}>
-                {notStarted ? `Start at block ${startBlock}` : 'Follow the pointer →'}
+                {notStarted ? `Start at block ${startBlock}` : 'Follow the pointer'}
+                <Icon name="arrowRight" size={16} />
               </Button>
             )}
             {visited.length > 0 && (
@@ -205,7 +207,7 @@ export function FatChainExplorer({
               </ul>
               <p className="mt-2 border-t border-success-300/60 pt-2 text-sm text-ink-3 dark:border-success-700/50">
                 Rows not on the chain (like {table.filter((r) => !visited.includes(r.block)).map((r) => r.block).join(', ')})
-                belong to other files — ignore them.
+                belong to other files, so ignore them.
               </p>
             </motion.div>
           )}

@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export function NotFound({ what = 'page' }: { what?: string }) {
+  useDocumentTitle(`${what[0].toUpperCase()}${what.slice(1)} not found`)
   return (
     <div className="mx-auto grid min-h-[50dvh] max-w-md place-items-center text-center">
       <div>
@@ -10,7 +12,7 @@ export function NotFound({ what = 'page' }: { what?: string }) {
           We couldn’t find that {what}
         </h1>
         <p className="mt-2 text-md leading-relaxed text-ink-2">
-          The link may be out of date, or the {what} may have been renamed. Nothing is lost — your
+          The link may be out of date, or the {what} may have been renamed. Nothing is lost: your
           progress is saved.
         </p>
         <div className="mt-5 flex justify-center gap-2">

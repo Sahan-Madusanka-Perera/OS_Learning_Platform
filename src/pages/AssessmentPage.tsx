@@ -13,6 +13,7 @@ import { MasteryRing, ProgressBar } from '@/components/ui/Progress'
 import { Modal } from '@/components/ui/Modal'
 import { cx, formatClock, shuffle } from '@/lib/utils'
 import { Icon, MODULE_ICON, type IconName } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 /* The final assessment is not just a score. It reports by *kind of
    thinking* — recall, understanding, application, reasoning, exam style —
@@ -30,6 +31,7 @@ interface Answer {
 }
 
 export function AssessmentPage() {
+  useDocumentTitle('Final assessment')
   const [params] = useSearchParams()
   const timed = params.get('timed') === '1'
   const recordAttempt = useProgress((s) => s.recordAttempt)
@@ -150,7 +152,7 @@ export function AssessmentPage() {
                   className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-brand-500"
                 />
                 <span className="text-ink-2">
-                  <span className="font-medium text-ink">{k}</span> — {v}
+                  <span className="font-medium text-ink">{k}</span>: {v}
                 </span>
               </li>
             ))}
@@ -159,7 +161,8 @@ export function AssessmentPage() {
 
         <div className="flex flex-wrap gap-2">
           <Button size="lg" onClick={start}>
-            Begin {timed ? 'timed practice' : 'assessment'} →
+            Begin {timed ? 'timed practice' : 'assessment'}
+            <Icon name="arrowRight" size={16} />
           </Button>
           <Button size="lg" variant="secondary" to="/exam">
             Back to exam prep
@@ -246,7 +249,8 @@ export function AssessmentPage() {
         <div className="mt-4 flex gap-2">
           {index > 0 && !timed && (
             <Button variant="secondary" onClick={() => setIndex((i) => i - 1)}>
-              ← Back
+              <Icon name="arrowLeft" size={16} />
+              Back
             </Button>
           )}
           <Button
@@ -257,8 +261,9 @@ export function AssessmentPage() {
             {!answeredThis
               ? 'Answer to continue'
               : isLast
-                ? 'Finish and see my report →'
-                : 'Next question →'}
+                ? 'Finish and see my report'
+                : 'Next question'}
+            {answeredThis && <Icon name="arrowRight" size={16} />}
           </Button>
         </div>
 
@@ -396,7 +401,7 @@ function ResultsReport({
         ? { icon: 'trending', title: 'Nearly there', text: 'Solid understanding with a few specific gaps to close.', tone: 'text-success-700 dark:text-success-400' }
         : report.percent >= 50
           ? { icon: 'books', title: 'Developing', text: 'The foundations are in place. Targeted revision will move this quickly.', tone: 'text-accent-700 dark:text-accent-400' }
-          : { icon: 'sprout', title: 'Early days', text: 'Work through the lessons again before assessing — practice cements understanding, it does not create it.', tone: 'text-ink-3' }
+          : { icon: 'sprout', title: 'Early days', text: 'Work through the lessons again before assessing: practice cements understanding, it does not create it.', tone: 'text-ink-3' }
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -408,7 +413,7 @@ function ResultsReport({
         <Card className="mb-5 text-center">
           <Icon name={verdict.icon} size={36} className={`mx-auto mb-3 ${verdict.tone}`} />
           <h1 className="text-xl font-semibold tracking-tight text-ink">
-            {timed ? 'Timed practice' : 'Final assessment'} — {verdict.title}
+            {timed ? 'Timed practice' : 'Final assessment'}: {verdict.title}
           </h1>
           <div className="my-5 flex justify-center">
             <MasteryRing
@@ -500,7 +505,7 @@ function ResultsReport({
           </h2>
           {report.strongLessons.length === 0 ? (
             <p className="text-sm text-ink-2">
-              No topic was fully correct this time — which is exactly what the review queue is for.
+              No topic was fully correct this time, which is exactly what the review queue is for.
             </p>
           ) : (
             <ul className="space-y-1.5">
@@ -610,7 +615,7 @@ function buildRecommendations(report: Report): string[] {
   if (report.weakLessons.length > 0) {
     const first = lessonById.get(report.weakLessons[0])
     out.push(
-      `Re-read “${first?.title}” — it scored below 50% and is the highest-value revision available to you right now.`,
+      `Re-read “${first?.title}”: it scored below 50% and is the highest-value revision available to you right now.`,
     )
   }
   if (report.conceptScore < 60) {
@@ -619,7 +624,7 @@ function buildRecommendations(report: Report): string[] {
     )
   } else if (report.applicationScore < 60) {
     out.push(
-      'You know the definitions but struggle to apply them. Practise level 3–4 questions specifically — the Practice page lets you filter by level.',
+      'You know the definitions but struggle to apply them. Practise level 3–4 questions specifically: the Practice page lets you filter by level.',
     )
   }
   if (report.examReadiness < 70) {
@@ -627,7 +632,7 @@ function buildRecommendations(report: Report): string[] {
       'Work through the structured questions in Exam prep, marking your own answers against the mark schemes. That is the fastest way to learn what examiners reward.',
     )
   }
-  out.push('Clear your review queue daily — spaced repetition is what makes this stick until the exam.')
+  out.push('Clear your review queue daily: spaced repetition is what makes this stick until the exam.')
   if (report.percent >= 85) {
     out.push('Retake the timed version in a few days to confirm the knowledge has held.')
   }

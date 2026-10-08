@@ -17,7 +17,7 @@ export const m1: Module = {
       summary:
         'The three-part model every later idea in this unit sits on: hardware you can touch, software you cannot, and the user who wants something done.',
       whyItMatters:
-        'Almost every mistake students make in this unit comes from blurring the line between hardware and software — calling BIOS "hardware", or thinking a program and a process are the same thing. Getting this straight now costs you ten minutes and saves you marks later.',
+        'Almost every mistake students make in this unit comes from blurring the line between hardware and software: calling BIOS "hardware", or thinking a program and a process are the same thing. Getting this straight now costs you ten minutes and saves you marks later.',
       objectives: [
         'Tell hardware and software apart, and explain why the difference matters',
         'Name the three broad categories of software',
@@ -30,9 +30,9 @@ export const m1: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'Open up a computer and you will find metal, plastic and silicon: a processor, memory chips, a disk, a screen, a keyboard. All of that is **hardware** — the physical parts. Hardware is fast, and completely stupid. A CPU cannot open a file. It has no idea what a file *is*.',
+            'Open up a computer and you will find metal, plastic and silicon: a processor, memory chips, a disk, a screen, a keyboard. All of that is **hardware**: the physical parts. Hardware is fast, and completely stupid. A CPU cannot open a file. It has no idea what a file *is*.',
             'What makes hardware useful is **software**: instructions telling the hardware what to do. You cannot touch software. It is stored on a disk and copied into memory when needed.',
-            'And then there is you — the person who actually wants something done. In Sri Lankan A/L ICT this human element is sometimes called **liveware**.',
+            'And then there is you: the person who actually wants something done. In Sri Lankan A/L ICT this human element is sometimes called **liveware**.',
           ],
         },
         {
@@ -45,7 +45,7 @@ export const m1: Module = {
           viz: 'systemLayers',
           title: 'Where does the operating system sit?',
           caption:
-            'Click each layer. Notice that no layer reaches past its neighbours — that is the whole design.',
+            'Click each layer. Notice that no layer reaches past its neighbours: that is the whole design.',
         },
         { kind: 'heading', text: 'The three kinds of software' },
         {
@@ -79,16 +79,16 @@ export const m1: Module = {
           kind: 'misconception',
           wrong: 'Antivirus is application software, because I open it and click things.',
           right:
-            'Antivirus is **utility software** — a type of system software. Its job is to maintain and protect the system itself, not to produce work for you.',
+            'Antivirus is **utility software**: a type of system software. Its job is to maintain and protect the system itself, not to produce work for you.',
           why: 'Ask what the software is *for*. If it produces output you wanted (a document, a picture, a web page), it is application software. If it looks after the machine, it is a utility.',
         },
         {
           kind: 'analogy',
           title: 'A school',
           everyday:
-            'Think of a school building. The classrooms, desks and electricity are the hardware. The lessons the teachers deliver are the application software — that is what students actually came for. And the principal and office staff are the operating system: nobody comes to school to see them, but without someone assigning classrooms, ringing the bell and settling disputes over who uses the hall, the whole thing collapses.',
+            'Think of a school building. The classrooms, desks and electricity are the hardware. The lessons the teachers deliver are the application software: that is what students actually came for. And the principal and office staff are the operating system: nobody comes to school to see them, but without someone assigning classrooms, ringing the bell and settling disputes over who uses the hall, the whole thing collapses.',
           mapsTo:
-            'The OS is doing exactly that job — deciding who gets the CPU, who gets memory, and who is allowed to open which file — every few milliseconds, invisibly.',
+            'The OS is doing exactly that job (deciding who gets the CPU, who gets memory, and who is allowed to open which file) every few milliseconds, invisibly.',
         },
         {
           kind: 'recall',
@@ -106,7 +106,7 @@ export const m1: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'One more piece of system software worth naming, because it explains how programs reach the hardware at all. A CPU only understands **machine language** — binary code, 0s and 1s. Humans do not write that.',
+            'One more piece of system software worth naming, because it explains how programs reach the hardware at all. A CPU only understands **machine language**: binary code, 0s and 1s. Humans do not write that.',
             'So we write in higher-level languages and something translates. An **assembler** turns assembly language (human-readable symbols for machine instructions) into machine code. A **compiler** translates an entire high-level program into machine code *before* it runs. An **interpreter** translates it line by line *while* it runs.',
           ],
         },
@@ -121,7 +121,7 @@ export const m1: Module = {
       ],
       takeaways: [
         'Hardware is physical; software is instructions. The OS is software.',
-        'Software divides into system, application and utility categories — utility is a type of system software.',
+        'Software divides into system, application and utility categories: utility is a type of system software.',
         'The OS exists so applications never have to talk to hardware directly.',
         'Machine language is binary; compilers translate all at once before running, interpreters line by line while running.',
       ],
@@ -135,7 +135,7 @@ export const m1: Module = {
       summary:
         'The eight kinds of utility software the syllabus names, what each one is actually for, and why they count as system software rather than applications.',
       whyItMatters:
-        'Utility software appears in exam questions as "classify this" and "state two functions of". Both are easy marks — but only if you can name the categories, which is exactly what students forget.',
+        'Utility software appears in exam questions as "classify this" and "state two functions of". Both are easy marks, but only if you can name the categories, which is exactly what students forget.',
       objectives: [
         'Name the main types of utility software and what each does',
         'Explain why utility software is classified as system software',
@@ -150,7 +150,7 @@ export const m1: Module = {
           kind: 'definition',
           term: 'Utility software',
           simple:
-            'Small tools whose job is to look after the computer itself — cleaning it, protecting it, backing it up.',
+            'Small tools whose job is to look after the computer itself: cleaning it, protecting it, backing it up.',
           technical:
             'A type of system software designed to help maintain, manage and optimise the performance of a computer system.',
           example: 'Windows Defender, Disk Cleanup, 7-Zip, Task Manager.',
@@ -180,7 +180,7 @@ export const m1: Module = {
             ],
             [
               '**Disk cleanup**',
-              'Removes unnecessary files — temporary files, cache files, system logs — to free storage space and improve system speed.',
+              'Removes unnecessary files (temporary files, cache files, system logs) to free storage space and improve system speed.',
               'Windows Disk Cleanup',
             ],
             [
@@ -200,7 +200,7 @@ export const m1: Module = {
             ],
             [
               '**Clipboard**',
-              'Temporary storage for copied or cut data — text, files, images — so content can move between applications.',
+              'Temporary storage for copied or cut data (text, files, images) so content can move between applications.',
               'Windows clipboard (with history in modern versions)',
             ],
             [
@@ -228,12 +228,12 @@ export const m1: Module = {
             [
               '**Lossless**',
               'Reduces file size **without losing any data**. The original can be perfectly reconstructed.',
-              'Documents, spreadsheets, program files — anything where losing a byte breaks it',
+              'Documents, spreadsheets, program files: anything where losing a byte breaks it',
             ],
             [
               '**Lossy**',
               'Reduces file size **by removing some of the data**. Smaller, but the original cannot be fully recovered.',
-              'Photos, music, video — where small quality losses are invisible',
+              'Photos, music, video, where small quality losses are invisible',
             ],
           ],
         },
@@ -245,7 +245,7 @@ export const m1: Module = {
             ['**Symmetric**', 'A single secret key does both encryption and decryption.'],
             [
               '**Asymmetric**',
-              'A pair of mathematically linked keys — a public key and a private key.',
+              'A pair of mathematically linked keys: a public key and a private key.',
             ],
           ],
           caption:
@@ -255,7 +255,7 @@ export const m1: Module = {
           kind: 'confused',
           question: 'Why is Task Manager a utility and not an application?',
           simpler:
-            'Ask who benefits. When you open Word, *you* get a document. When you open Task Manager, the *computer* gets sorted out — you are maintaining the machine, not producing work with it.',
+            'Ask who benefits. When you open Word, *you* get a document. When you open Task Manager, the *computer* gets sorted out: you are maintaining the machine, not producing work with it.',
           picture:
             'Word is a pen. Task Manager is a spanner you use on the pen factory.',
         },
@@ -264,14 +264,14 @@ export const m1: Module = {
           prompt:
             'Name four types of utility software, and say in one phrase what each protects the user from.',
           answer:
-            'Antivirus — protects from malware. Backup software — protects from data loss. Disk cleanup — protects from running out of space. Task manager — protects from a frozen or overloaded system. (File compression, screen savers, the clipboard and encryption software also count.)',
+            'Antivirus: protects from malware. Backup software: protects from data loss. Disk cleanup: protects from running out of space. Task manager: protects from a frozen or overloaded system. (File compression, screen savers, the clipboard and encryption software also count.)',
         },
         {
           kind: 'viz',
           viz: 'fileTypes',
           title: 'File types and the applications that open them',
           caption:
-            'You will meet these again properly in Module 3 — for now, notice that it is the extension that tells the OS which application to hand the file to.',
+            'You will meet these again properly in Module 3. For now, notice that it is the extension that tells the OS which application to hand the file to.',
         },
         {
           kind: 'quickCheck',
@@ -279,7 +279,7 @@ export const m1: Module = {
         },
       ],
       takeaways: [
-        'Utility software maintains, manages and optimises the system — it is a type of system software.',
+        'Utility software maintains, manages and optimises the system: it is a type of system software.',
         'The main types: antivirus, disk cleanup, backup, file compression, screen saver, clipboard, task manager, encryption.',
         'Lossless compression keeps all data; lossy compression discards some.',
         'Symmetric encryption uses one key; asymmetric uses a public/private key pair.',
@@ -292,7 +292,7 @@ export const m1: Module = {
       moduleId: 'm1',
       title: 'Booting: from a dead machine to a desktop',
       summary:
-        'The exact sequence between pressing the power button and seeing a login screen — and why the OS cannot start itself.',
+        'The exact sequence between pressing the power button and seeing a login screen, and why the OS cannot start itself.',
       whyItMatters:
         'Booting is a favourite exam topic because it has a fixed order you can be asked to reproduce. It also answers a genuinely interesting puzzle: if the OS manages the computer, who loads the OS?',
       objectives: [
@@ -330,7 +330,7 @@ export const m1: Module = {
           term: 'Firmware',
           simple: 'Permanent instructions built into a device telling it how to behave.',
           technical:
-            'Software containing instructions on how a device should perform and how it should communicate with other devices. It is stored in memory that retains its contents even when the device is powered off — ROM or flash memory.',
+            'Software containing instructions on how a device should perform and how it should communicate with other devices. It is stored in memory that retains its contents even when the device is powered off: ROM or flash memory.',
           example: 'BIOS and UEFI are firmware. So is the software inside a printer or a router.',
         },
         {
@@ -338,13 +338,13 @@ export const m1: Module = {
           title: 'BIOS vs UEFI',
           headers: ['Feature', '[[bios|BIOS]]', '[[uefi|UEFI]]'],
           rows: [
-            ['Release date', '1981', '2002'],
+            ['First appeared', '1981 with the IBM PC (the name dates from CP/M, 1975)', '2006 as UEFI 2.0 (grew out of Intel’s EFI, started in 1998)'],
             [
               'User interface',
               'Text based, keyboard navigation',
               'Graphical, supports mouse and keyboard',
             ],
-            ['Operating mode', '16-bit', '32-bit or 64-bit — can access more memory'],
+            ['Operating mode', '16-bit', '32-bit or 64-bit: can access more memory'],
             [
               'Partition support',
               '[[mbr|MBR]] (Master Boot Record), up to 2 TB',
@@ -352,16 +352,18 @@ export const m1: Module = {
             ],
             [
               'Security',
-              'Basic — no inherent security feature',
+              'Basic: no inherent security feature',
               'Supports Secure Boot, preventing an unauthorised OS from loading',
             ],
           ],
+          caption:
+            'Some notes give UEFI’s date as 2002. That was Intel’s earlier EFI 1.10. The industry-wide UEFI specification followed in 2006.',
         },
         {
           kind: 'callout',
           tone: 'info',
-          title: 'CMOS memory — the settings, not the code',
-          text: 'The BIOS **code** lives in non-volatile ROM. The BIOS **settings** — date and time, boot order, hardware configuration — live in [[cmos|CMOS memory]], a small chip kept alive by a coin battery on the motherboard. That is why a computer with a dead CMOS battery forgets the time but still boots. Removing the battery (or shorting a jumper) clears CMOS and resets BIOS settings to their defaults.',
+          title: 'CMOS memory: the settings, not the code',
+          text: 'The BIOS **code** lives in non-volatile ROM. The BIOS **settings** (date and time, boot order, hardware configuration) live in [[cmos|CMOS memory]], a small chip kept alive by a coin battery on the motherboard. That is why a computer with a dead CMOS battery forgets the time but still boots. Removing the battery (or shorting a jumper) clears CMOS and resets BIOS settings to their defaults.',
         },
         {
           kind: 'heading', text: 'POST and beep codes', level: 'sub',
@@ -369,14 +371,14 @@ export const m1: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'Before anything else, the BIOS runs the **Power-On Self-Test**, checking that RAM, the keyboard, the processor and storage devices are present and working. If something has failed, the machine cannot show you an error on screen — the screen may be part of what failed. So it beeps instead.',
+            'Before anything else, the BIOS runs the **Power-On Self-Test**, checking that RAM, the keyboard, the processor and storage devices are present and working. If something has failed, the machine cannot show you an error on screen: the screen may be part of what failed. So it beeps instead.',
           ],
         },
         {
           kind: 'table',
           headers: ['Beep code', 'Meaning'],
           rows: [
-            ['One short beep', 'System booting normally — POST passed'],
+            ['One short beep', 'System booting normally: POST passed'],
             ['Repeated short beeps', 'Memory (RAM) error'],
             ['Two short beeps', 'Minor hardware error'],
             ['Three long beeps', 'Keyboard or motherboard error'],
@@ -385,7 +387,7 @@ export const m1: Module = {
             ['Four short beeps', 'System timer or motherboard problem'],
           ],
           caption:
-            'Exact codes vary by manufacturer — the examinable idea is *why* beeps exist, not the precise pattern.',
+            'Exact codes vary by manufacturer: the examinable idea is *why* beeps exist, not the precise pattern.',
         },
         { kind: 'heading', text: 'Two kinds of boot' },
         {
@@ -398,14 +400,14 @@ export const m1: Module = {
               'Restarting without turning the power off completely',
             ],
             ['Example', 'Switching your PC on in the morning', 'Pressing Restart'],
-            ['POST runs?', 'Yes — the full sequence', 'Usually skipped or shortened'],
+            ['POST runs?', 'Yes, the full sequence', 'Often shortened on older systems; many modern PCs run it in full'],
           ],
         },
         {
           kind: 'callout',
           tone: 'note',
           title: 'RAM drive',
-          text: 'A **RAM drive** is a virtual storage device that uses a portion of RAM as if it were a hard drive. Because RAM is far faster than disk, storing temporary or frequently accessed files there speeds things up — including parts of the boot process.',
+          text: 'A **RAM drive** is a virtual storage device that uses a portion of RAM as if it were a hard drive. Because RAM is far faster than disk, storing temporary or frequently accessed files there speeds things up, including parts of the boot process.',
         },
         {
           kind: 'recall',
@@ -432,7 +434,7 @@ export const m1: Module = {
         },
         {
           kind: 'examTip',
-          text: 'If asked "state the purpose of the boot loader", one sentence gets the mark — do not describe the whole boot process.',
+          text: 'If asked "state the purpose of the boot loader", one sentence gets the mark: do not describe the whole boot process.',
           modelAnswer:
             'The boot loader loads the operating system kernel and system files from secondary storage into main memory.',
         },
@@ -458,7 +460,7 @@ export const m1: Module = {
       summary:
         'The definition you must be able to write, why a computer needs one at all, and what would happen without it.',
       whyItMatters:
-        'This is competency 5.1’s first learning outcome — "defines the computer operating system". A definition question is worth marks only if your wording is precise, so it is worth building the exact sentence deliberately.',
+        'This is competency 5.1’s first learning outcome: "defines the computer operating system". A definition question is worth marks only if your wording is precise, so it is worth building the exact sentence deliberately.',
       objectives: [
         'State a precise definition of an operating system',
         'Explain why an operating system is needed in a computer system',
@@ -492,8 +494,8 @@ export const m1: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'The earliest computers had no operating system. They were special-purpose machines with pre-programmed instructions, and the program was not meant to change — so there was nothing for an OS to do.',
-            'Then general-purpose computers arrived, following John von Neumann’s design, and one computer had to do many different tasks. Programs now needed changing often. Someone — or something — had to load them, run them, and clear up afterwards.',
+            'The earliest computers had no operating system. They were special-purpose machines with pre-programmed instructions, and the program was not meant to change, so there was nothing for an OS to do.',
+            'Then general-purpose computers arrived, following John von Neumann’s design, and one computer had to do many different tasks. Programs now needed changing often. Someone, or something, had to load them, run them, and clear up afterwards.',
             'Doing that by hand was appallingly wasteful. The processor sat idle while a human loaded punch cards and mounted tapes. **The OS was introduced to maximise processor utilisation, automate the manual operations, and reduce the idle time of the processor.**',
           ],
         },
@@ -507,20 +509,20 @@ export const m1: Module = {
           kind: 'analogy',
           title: 'A hotel receptionist',
           everyday:
-            'Guests arrive wanting rooms. There is one lift, three conference halls and a limited number of rooms. Without a receptionist, guests would wander in and fight over keys, two people would end up in the same room, and nobody would know who has paid. The receptionist does not sleep in any room herself — she allocates them, tracks who has what, and hands things back when guests leave.',
+            'Guests arrive wanting rooms. There is one lift, three conference halls and a limited number of rooms. Without a receptionist, guests would wander in and fight over keys, two people would end up in the same room, and nobody would know who has paid. The receptionist does not sleep in any room herself: she allocates them, tracks who has what, and hands things back when guests leave.',
           mapsTo:
-            'The OS allocates CPU time, memory and devices to processes, tracks who holds what, and reclaims everything when a process terminates. It also handles the "who is allowed in here?" question — that is security and protection.',
+            'The OS allocates CPU time, memory and devices to processes, tracks who holds what, and reclaims everything when a process terminates. It also handles the "who is allowed in here?" question: that is security and protection.',
         },
         {
           kind: 'table',
           title: 'Operating systems you already use',
           headers: ['Where', 'Examples'],
           rows: [
-            ['Desktop / laptop', 'Windows 10/11, macOS Ventura & Sonoma, Ubuntu, Fedora, Linux Mint'],
-            ['Servers', 'Windows Server 2022, Red Hat Enterprise Linux, CentOS Stream, IBM z/OS, Solaris'],
+            ['Desktop / laptop', 'Windows 11, macOS, Ubuntu, Fedora, Linux Mint'],
+            ['Servers', 'Windows Server 2025, Red Hat Enterprise Linux, Ubuntu Server, IBM z/OS'],
             ['Mobile', 'Android (Samsung Galaxy, Xiaomi, Google Pixel), iOS (iPhone), iPadOS'],
             ['Cloud / lightweight', 'ChromeOS (Acer, HP, Lenovo Chromebooks)'],
-            ['Older mobile', 'Symbian (Nokia N95, 6600), BlackBerry OS, Windows Phone (Lumia)'],
+            ['Older mobile (discontinued)', 'Symbian (Nokia N95, 6600), BlackBerry OS, Windows Phone (Lumia)'],
             ['Embedded / real-time', 'VxWorks, FreeRTOS, QNX'],
           ],
         },
@@ -532,7 +534,7 @@ export const m1: Module = {
             'You said it manages the hardware and software resources',
             'You said it provides an interface between the user and the hardware',
             'You gave at least one concrete example of a resource it manages (CPU time, memory, storage, devices)',
-            'You explained what would go wrong without one — programs could not share the hardware, and the processor would sit idle',
+            'You explained what would go wrong without one: programs could not share the hardware, and the processor would sit idle',
             'You gave a real example of an OS',
           ],
         },
@@ -540,7 +542,7 @@ export const m1: Module = {
           kind: 'examTip',
           text: 'For "define an operating system", write the technical sentence, then add one concrete example. Definition plus example is almost always the full mark.',
           modelAnswer:
-            'An operating system is system software that manages a computer’s hardware and software resources and provides an interface between the user and the hardware — for example, Windows 11.',
+            'An operating system is system software that manages a computer’s hardware and software resources and provides an interface between the user and the hardware: for example, Windows 11.',
         },
         {
           kind: 'quickCheck',
@@ -548,7 +550,7 @@ export const m1: Module = {
         },
       ],
       takeaways: [
-        'An OS manages hardware and software resources AND provides a user interface — both halves matter.',
+        'An OS manages hardware and software resources AND provides a user interface: both halves matter.',
         'Operating systems became necessary once general-purpose computers had to run many changing programs.',
         'The OS exists to maximise processor utilisation, automate manual operations and reduce idle time.',
         'Without an OS, the processor sits idle while programs are loaded and I/O happens.',

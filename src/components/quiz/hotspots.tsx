@@ -20,6 +20,10 @@ interface Diagram {
   regions: Region[]
   /** Static ornamentation drawn behind the regions. */
   decor?: React.ReactNode
+  /** Label size in viewBox units. Defaults to 12. */
+  fontSize?: number
+  /** Below this width the diagram scrolls rather than shrinking its labels. */
+  minWidth?: string
 }
 
 const arrow = (x1: number, y1: number, x2: number, y2: number, key: string) => (
@@ -29,6 +33,17 @@ const arrow = (x1: number, y1: number, x2: number, y2: number, key: string) => (
     y1={y1}
     x2={x2}
     y2={y2}
+    stroke="var(--border-strong)"
+    strokeWidth="1.5"
+    markerEnd="url(#hs-arrow)"
+  />
+)
+
+const edge = (d: string, key: string) => (
+  <path
+    key={key}
+    d={d}
+    fill="none"
     stroke="var(--border-strong)"
     strokeWidth="1.5"
     markerEnd="url(#hs-arrow)"
@@ -49,28 +64,36 @@ export const DIAGRAMS: Record<string, Diagram> = {
     ],
   },
 
-  /* Seven-state diagram — pick the state being described. */
+  /* Seven-state diagram: pick the state being described. Same topology as
+     the interactive diagram in lesson 5.3 (components/viz/ProcessStates),
+     compacted so the labels stay readable at phone width. */
   'process-states': {
-    title: 'Process states',
-    viewBox: '0 0 480 300',
+    title: 'Seven-state process transition diagram',
+    viewBox: '0 0 476 300',
+    fontSize: 13,
+    minWidth: '24rem',
     regions: [
-      { id: 'new', label: 'New', x: 16, y: 16, w: 92, h: 44 },
-      { id: 'ready', label: 'Ready', x: 152, y: 16, w: 92, h: 44 },
-      { id: 'running', label: 'Running', x: 288, y: 16, w: 92, h: 44 },
-      { id: 'terminated', label: 'Terminated', x: 288, y: 132, w: 92, h: 44 },
-      { id: 'blocked', label: 'Blocked', x: 152, y: 132, w: 92, h: 44 },
-      { id: 'susp-ready', label: 'Suspended Ready', x: 136, y: 232, w: 124, h: 44 },
-      { id: 'susp-blocked', label: 'Suspended Blocked', x: 288, y: 232, w: 124, h: 44 },
+      { id: 'new', label: 'New', x: 8, y: 16, w: 84, h: 44 },
+      { id: 'ready', label: 'Ready', x: 112, y: 16, w: 84, h: 44 },
+      { id: 'running', label: 'Running', x: 258, y: 16, w: 88, h: 44 },
+      { id: 'terminated', label: 'Terminated', x: 372, y: 16, w: 96, h: 44 },
+      { id: 'blocked', label: 'Blocked', x: 258, y: 120, w: 88, h: 44 },
+      { id: 'susp-ready', label: 'Suspended Ready', x: 92, y: 228, w: 124, h: 44 },
+      { id: 'susp-blocked', label: 'Suspended Blocked', x: 234, y: 228, w: 136, h: 44 },
     ],
     decor: (
       <g>
-        {arrow(110, 38, 150, 38, 'a1')}
-        {arrow(246, 38, 286, 38, 'a2')}
-        {arrow(334, 62, 334, 130, 'a3')}
-        {arrow(286, 48, 248, 130, 'a4')}
-        {arrow(198, 130, 198, 62, 'a5')}
-        {arrow(198, 178, 198, 230, 'a6')}
-        {arrow(334, 178, 334, 230, 'a7')}
+        {edge('M94 38 L110 38', 'admit')} {/* New → Ready */}
+        {edge('M198 30 L256 30', 'dispatch')} {/* Ready → Running */}
+        {edge('M256 46 L198 46', 'timeout')} {/* Running → Ready */}
+        {edge('M348 38 L370 38', 'release')} {/* Running → Terminated */}
+        {edge('M302 62 L302 118', 'io-wait')} {/* Running → Blocked */}
+        {edge('M256 142 Q186 142 182 62', 'io-done')} {/* Blocked → Ready */}
+        {edge('M146 62 L146 226', 'swap-out-ready')} {/* Ready → Suspended Ready */}
+        {edge('M162 226 L162 62', 'activate-ready')} {/* Suspended Ready → Ready */}
+        {edge('M310 166 L310 226', 'swap-out-blocked')} {/* Blocked → Suspended Blocked */}
+        {edge('M294 226 L294 166', 'activate-blocked')} {/* Suspended Blocked → Blocked */}
+        {edge('M302 274 L302 290 L154 290 L154 274', 'io-done-disk')} {/* Suspended Blocked → Suspended Ready */}
       </g>
     ),
   },
@@ -159,7 +182,8 @@ export function HotspotDiagram({
       <div className="scroll-x rounded-xl border border-line bg-sunken/50 p-3">
         <svg
           viewBox={d.viewBox}
-          className="h-auto w-full min-w-[20rem]"
+          className="h-auto w-full"
+          style={{ minWidth: d.minWidth ?? '20rem' }}
           role="group"
           aria-label={d.title}
         >
@@ -220,7 +244,7 @@ export function HotspotDiagram({
                   x={r.x + r.w / 2}
                   y={r.y + r.h / 2 + 4}
                   textAnchor="middle"
-                  fontSize="12"
+                  fontSize={d.fontSize ?? 12}
                   fontWeight="500"
                   fill={answered && isCorrect ? 'var(--color-success-900)' : 'var(--text-primary)'}
                   pointerEvents="none"

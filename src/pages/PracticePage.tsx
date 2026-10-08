@@ -10,6 +10,7 @@ import { Card } from '@/components/ui/Card'
 import { ProgressBar } from '@/components/ui/Progress'
 import { cx, shuffle } from '@/lib/utils'
 import { Icon, MODULE_ICON } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 /* Free practice with real filters. Difficulty rises through the five
    levels — recognition, understanding, application, reasoning, exam
@@ -18,6 +19,7 @@ import { Icon, MODULE_ICON } from '@/components/ui/Icon'
 const LEVELS: QuestionLevel[] = [1, 2, 3, 4, 5]
 
 export function PracticePage() {
+  useDocumentTitle('Practice')
   const [params] = useSearchParams()
   const focusQuestionId = params.get('q')
   const recordAttempt = useProgress((s) => s.recordAttempt)
@@ -91,7 +93,7 @@ export function PracticePage() {
                   ? 'Excellent. Try raising the difficulty level to push further.'
                   : pct >= 50
                     ? 'Solid work. Anything you got wrong is now in your review queue.'
-                    : 'Worth going back to the lessons before practising more — practice cements understanding, it does not create it.'}
+                    : 'Worth going back to the lessons before practising more: practice cements understanding, it does not create it.'}
               </p>
               <div className="mt-5 flex flex-wrap justify-center gap-2">
                 <Button onClick={start}>Another 10 questions</Button>
@@ -148,7 +150,8 @@ export function PracticePage() {
         </motion.div>
 
         <Button full className="mt-4" onClick={() => setIndex((i) => i + 1)}>
-          {index + 1 >= session.length ? 'See results' : 'Next question →'}
+          {index + 1 >= session.length ? 'See results' : 'Next question'}
+          <Icon name="arrowRight" size={16} />
         </Button>
       </div>
     )
@@ -163,7 +166,7 @@ export function PracticePage() {
         </h1>
         <p className="mt-2 max-w-2xl text-md leading-relaxed text-ink-2">
           Build a practice set from any part of the course. Difficulty runs from simple recognition
-          up to full A/L-style questions — pick the level you actually need to train.
+          up to full A/L-style questions. Pick the level you actually need to train.
         </p>
       </header>
 
@@ -211,7 +214,7 @@ export function PracticePage() {
           </Button>
           <p className="text-sm text-ink-2">
             {pool.length === 0
-              ? 'No questions match these filters — try widening them.'
+              ? 'No questions match these filters: try widening them.'
               : `${pool.length} question${pool.length === 1 ? '' : 's'} match your filters.`}
           </p>
         </div>

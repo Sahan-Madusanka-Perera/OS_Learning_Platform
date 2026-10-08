@@ -18,32 +18,58 @@ interface PageTableEntry {
   present: boolean
 }
 
+/* The geometry of the lesson's own worked examples: a 14-bit virtual address
+   (4-bit page number + 10-bit offset) and a 13-bit physical address (3-bit
+   frame number + the same offset). 16 pages but only 8 frames, so virtual
+   memory is bigger than RAM, every frame is in use, and a page fault really
+   does need a victim. Page 5 sits in frame 111 and page 7 in frame 101,
+   exactly as in the worked examples. */
 const DEFAULT_TABLE: PageTableEntry[] = [
-  { page: 0, frame: 6, present: true },
-  { page: 1, frame: 1, present: true },
-  { page: 2, frame: 5, present: true },
-  { page: 3, frame: 0, present: true },
-  { page: 4, frame: 3, present: false },
+  { page: 0, frame: 2, present: true },
+  { page: 1, frame: 0, present: false },
+  { page: 2, frame: 6, present: true },
+  { page: 3, frame: 0, present: false },
+  { page: 4, frame: 0, present: false },
   { page: 5, frame: 7, present: true },
-  { page: 6, frame: 2, present: true },
-  { page: 7, frame: 4, present: true },
+  { page: 6, frame: 0, present: false },
+  { page: 7, frame: 5, present: true },
+  { page: 8, frame: 0, present: false },
+  { page: 9, frame: 0, present: true },
+  { page: 10, frame: 3, present: true },
+  { page: 11, frame: 0, present: false },
+  { page: 12, frame: 1, present: true },
+  { page: 13, frame: 0, present: false },
+  { page: 14, frame: 4, present: true },
+  { page: 15, frame: 0, present: false },
 ]
 
+/* Resident pages, oldest first. The OS here replaces pages FIFO: the page
+   that has been in memory longest is the victim. Page 7 is the oldest, so
+   servicing a fault on page 4 reproduces the worked example in lesson 6.5. */
+const DEFAULT_LOAD_ORDER = [7, 0, 2, 5, 9, 10, 12, 14]
+
 export function AddressTranslationLab({
-  pageBits = 3,
+  pageBits = 4,
   offsetBits = 10,
   frameBits = 3,
+  initialPage = 5,
+  initialOffset = 745,
 }: {
   pageBits?: number
   offsetBits?: number
   frameBits?: number
+  initialPage?: number
+  initialOffset?: number
 }) {
-  const [pageNo, setPageNo] = useState(5)
-  const [offset, setOffset] = useState(232)
+  const [pageNo, setPageNo] = useState(initialPage)
+  const [offset, setOffset] = useState(initialOffset)
   const [table, setTable] = useState(DEFAULT_TABLE)
+  const [loadOrder, setLoadOrder] = useState(DEFAULT_LOAD_ORDER)
+  const [lastService, setLastService] = useState<string | null>(null)
   const reduce = useReducedMotion()
 
   const maxOffset = 2 ** offsetBits - 1
+  const frameCount = 2 ** frameBits
   const entry = table.find((t) => t.page === pageNo)
   const fault = !entry?.present
 
@@ -56,10 +82,22 @@ export function AddressTranslationLab({
   const physical = entry ? entry.frame * pageSize + offset : null
 
   const handleFault = () => {
-    // Servicing the fault: evict a resident page to free its frame,
-    // then load the faulting page into it.
-    const victim = table.find((t) => t.present && t.page !== pageNo)
-    if (!victim || !entry) return
+    if (!entry) return
+    const used = new Set(table.filter((t) => t.present).map((t) => t.frame))
+    const free = Array.from({ length: frameCount }, (_, f) => f).find((f) => !used.has(f))
+
+    if (free !== undefined) {
+      // A frame is free: no victim needed.
+      setTable((prev) => prev.map((t) => (t.page === pageNo ? { ...t, frame: free, present: true } : t)))
+      setLoadOrder((prev) => [...prev, pageNo])
+      setLastService(`Frame ${free} was free, so page ${pageNo} was loaded straight into it.`)
+      return
+    }
+
+    // Every frame is in use: evict the page that has been resident longest.
+    const victimPage = loadOrder[0]
+    const victim = table.find((t) => t.page === victimPage)
+    if (!victim) return
     setTable((prev) =>
       prev.map((t) =>
         t.page === victim.page
@@ -69,6 +107,19 @@ export function AddressTranslationLab({
             : t,
       ),
     )
+    setLoadOrder((prev) => [...prev.slice(1), pageNo])
+    const bin = victim.frame.toString(2).padStart(frameBits, '0')
+    setLastService(
+      `No frame was free, so the OS chose a victim: page ${victim.page}, the page in memory longest (FIFO). ` +
+        `Its present bit was set to 0, freeing frame ${victim.frame} (${bin}₂), and page ${pageNo} was loaded into that frame. ` +
+        `Had page ${victim.page} been modified (dirty bit 1), it would have been written back to disk first.`,
+    )
+  }
+
+  const reset = () => {
+    setTable(DEFAULT_TABLE)
+    setLoadOrder(DEFAULT_LOAD_ORDER)
+    setLastService(null)
   }
 
   return (
@@ -78,6 +129,10 @@ export function AddressTranslationLab({
           Page size = frame size ={' '}
           <span className="font-mono font-semibold text-ink">{fmtBytes(pageSize)}</span> ·{' '}
           {pageBits} page-number bits · {offsetBits} offset bits · {frameBits} frame-number bits
+        </p>
+        <p className="mt-0.5 text-xs text-ink-3">
+          {2 ** pageBits} virtual pages but only {frameCount} physical frames: virtual memory is
+          bigger than RAM, so some pages are on disk.
         </p>
       </div>
 
@@ -110,7 +165,17 @@ export function AddressTranslationLab({
               className="mb-1.5 flex items-baseline justify-between text-sm font-medium text-ink"
             >
               <span>Offset (displacement)</span>
-              <span className="font-mono text-accent-700 dark:text-accent-400">{offset}</span>
+              <input
+                type="number"
+                min={0}
+                max={maxOffset}
+                value={offset}
+                aria-label="Offset value"
+                onChange={(e) =>
+                  setOffset(Math.max(0, Math.min(maxOffset, Math.round(Number(e.target.value) || 0))))
+                }
+                className="w-20 rounded-md border border-line bg-card px-1.5 py-0.5 text-right font-mono text-sm text-accent-700 focus:border-accent-400 focus:outline-none dark:text-accent-400"
+              />
             </label>
             <input
               id="pl-offset"
@@ -127,7 +192,7 @@ export function AddressTranslationLab({
         {/* Virtual address */}
         <div>
           <p className="mb-1.5 text-2xs font-semibold uppercase tracking-[0.08em] text-ink-3">
-            Virtual (logical) address — byte {logical.toLocaleString()}
+            Virtual (logical) address: byte {logical.toLocaleString()}
           </p>
           <div className="scroll-x">
             <div className="flex min-w-max gap-1 font-mono text-sm">
@@ -162,13 +227,13 @@ export function AddressTranslationLab({
                         : 'even:bg-sunken/40',
                     )}
                   >
-                    <td className="border-b border-line px-3 py-1.5 font-mono font-semibold text-ink">
+                    <td className="border-b border-line px-3 py-1 font-mono font-semibold text-ink">
                       {t.page}
                     </td>
-                    <td className="border-b border-line px-3 py-1.5 font-mono text-ink-2">
-                      {t.present ? `${t.frame} (${t.frame.toString(2).padStart(frameBits, '0')}₂)` : '—'}
+                    <td className="border-b border-line px-3 py-1 font-mono text-ink-2">
+                      {t.present ? `${t.frame} (${t.frame.toString(2).padStart(frameBits, '0')}₂)` : 'on disk'}
                     </td>
-                    <td className="border-b border-line px-3 py-1.5">
+                    <td className="border-b border-line px-3 py-1">
                       <span
                         className={cx(
                           'rounded px-1.5 py-0.5 font-mono text-xs font-semibold',
@@ -222,11 +287,11 @@ export function AddressTranslationLab({
         {/* Physical address / fault */}
         {fault ? (
           <div className="rounded-lg border border-danger-300 bg-danger-50 p-4 dark:border-danger-700/60 dark:bg-danger-900/25">
-            <p className="font-semibold text-ink">Page fault — this page is not in RAM</p>
+            <p className="font-semibold text-ink">Page fault: this page is not in RAM</p>
             <p className="mt-1 text-base leading-relaxed text-ink-2">
               Page {pageNo}’s present/absent bit is <span className="font-mono font-semibold">0</span>,
               so no physical address exists yet. The OS must load the page from secondary storage
-              into a free frame. If no frame is free, it evicts a resident page first — freeing that
+              into a free frame. If no frame is free, it evicts a resident page first, freeing that
               frame and setting the evicted page’s present bit to 0.
             </p>
             <Button size="sm" className="mt-3" onClick={handleFault}>
@@ -234,14 +299,24 @@ export function AddressTranslationLab({
             </Button>
           </div>
         ) : (
+          <>
+          {lastService && (
+            <div className="rounded-lg border border-success-300 bg-success-50 p-4 dark:border-success-700/60 dark:bg-success-900/25">
+              <p className="font-semibold text-ink">Page fault serviced</p>
+              <p className="mt-1 text-base leading-relaxed text-ink-2">{lastService}</p>
+              <Button size="sm" variant="secondary" className="mt-3" onClick={reset}>
+                Reset the page table
+              </Button>
+            </div>
+          )}
           <div>
             <p className="mb-1.5 text-2xs font-semibold uppercase tracking-[0.08em] text-ink-3">
-              Physical address — byte {physical!.toLocaleString()} in RAM
+              Physical address: byte {physical!.toLocaleString()} in RAM
             </p>
             <div className="scroll-x">
               <div className="flex min-w-max gap-1 font-mono text-sm">
                 <Bits bits={frameBin} tone="success" label="frame number" />
-                <Bits bits={offsetBin} tone="accent" label="offset — unchanged" />
+                <Bits bits={offsetBin} tone="accent" label="offset: unchanged" />
               </div>
             </div>
             <div className="mt-3 rounded-lg bg-sunken px-4 py-3">
@@ -258,7 +333,7 @@ export function AddressTranslationLab({
                 <span className="font-mono font-semibold text-accent-700 dark:text-accent-400">
                   {offsetBin}
                 </span>{' '}
-                is byte-for-byte identical — because a page and a frame are the same size, so the
+                is byte-for-byte identical, because a page and a frame are the same size, so the
                 byte sits at the same distance from the start of either one.
               </p>
               <p className="mt-2 font-mono text-xs text-ink-3">
@@ -267,6 +342,7 @@ export function AddressTranslationLab({
               </p>
             </div>
           </div>
+          </>
         )}
       </div>
     </div>
@@ -384,7 +460,7 @@ export function MemoryCalculator() {
           working={`${fmtBytes(pageSize)} × ${(2 ** frameCountExp).toLocaleString()} = 2^${pageSizeExp} × 2^${frameCountExp} = 2^${pageSizeExp + frameCountExp} bytes`}
         />
         <Result
-          label="Virtual address length (bus)"
+          label="Virtual address length"
           value={`${pageSizeExp + pageCountExp} bits`}
           working={`${pageCountExp} page-number bits + ${pageSizeExp} offset bits`}
         />
@@ -397,9 +473,10 @@ export function MemoryCalculator() {
 
       <p className="mt-4 rounded-lg bg-sunken px-4 py-3 text-sm leading-relaxed text-ink-2">
         <span className="font-semibold text-ink">Notice: </span>
-        halving the page size doubles the number of pages for the same memory, and adds one offset
-        bit while removing one page-number bit. The total address length never changes — that is
-        fixed by the bus width.
+        for the same amount of memory, halving the page size doubles the number of pages. The
+        address loses one offset bit and gains one page-number bit, so its total length stays the
+        same. (Here the page count stays put when you move the page-size slider, so the memory
+        size changes instead.)
       </p>
     </div>
   )

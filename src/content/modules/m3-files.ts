@@ -17,7 +17,7 @@ export const m3: Module = {
       summary:
         'The difference between data and a file, what a file structure is, and why the bit after the dot matters so much.',
       whyItMatters:
-        'The syllabus explicitly asks you to "identify the need for file types". That needs a real reason, not "so you know what it is" — and the reason is about which application the OS hands the file to.',
+        'The syllabus explicitly asks you to "identify the need for file types". That needs a real reason, not "so you know what it is", and the reason is about which application the OS hands the file to.',
       objectives: [
         'Distinguish data from a file',
         'Explain the two components of a file name and why each is needed',
@@ -36,7 +36,7 @@ export const m3: Module = {
           rows: [
             [
               'What it is',
-              'Raw facts, figures, symbols or information — numbers, text, images, sounds. May have no meaning until processed.',
+              'Raw facts, figures, symbols or information: numbers, text, images, sounds. May have no meaning until processed.',
               'A named collection of related information, usually a sequence of bytes, stored on a computer or other electronic device.',
             ],
             ['Simple version', 'The **content**', 'The **container** that stores that content'],
@@ -49,7 +49,7 @@ export const m3: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'A **file structure** is a format understood by the operating system. Every file has a specifically defined structure according to its file type — a JPEG has a header describing the image dimensions before any pixel data begins; an MP3 has a completely different arrangement. The OS relies on the file type to know what shape to expect.',
+            'A **file structure** is a format understood by the operating system. Every file has a specifically defined structure according to its file type: a JPEG has a header describing the image dimensions before any pixel data begins; an MP3 has a completely different arrangement. The OS relies on the file type to know what shape to expect.',
           ],
         },
         { kind: 'heading', text: 'The two parts of a file name' },
@@ -72,7 +72,7 @@ export const m3: Module = {
           kind: 'callout',
           tone: 'warn',
           title: 'Why unique names matter',
-          text: 'If two files have the same name **and** the same extension in the same directory, saving the second overwrites the first — potentially losing important data. `report.txt` and `report.docx` can coexist; two `report.txt` files cannot.',
+          text: 'If two files have the same name **and** the same extension in the same directory, saving the second overwrites the first: potentially losing important data. `report.txt` and `report.docx` can coexist; two `report.txt` files cannot.',
         },
         {
           kind: 'viz',
@@ -83,13 +83,13 @@ export const m3: Module = {
           kind: 'misconception',
           wrong: 'Changing a file’s extension changes the file’s type.',
           right:
-            'The extension only tells the OS **which application to open the file with**. The bytes inside are unchanged. Renaming `song.mp3` to `song.txt` does not turn music into text — it just makes the OS hand it to Notepad, which then displays gibberish.',
+            'The extension only tells the OS **which application to open the file with**. The bytes inside are unchanged. Renaming `song.mp3` to `song.txt` does not turn music into text: it just makes the OS hand it to Notepad, which then displays gibberish.',
         },
         {
           kind: 'callout',
           tone: 'note',
           title: 'Seeing hidden extensions in Windows',
-          text: 'Windows hides extensions for known file types by default. To show them: Control Panel → search "file extension" → click **Show or hide file extensions** under File Explorer Options → untick **Hide extensions for known file types**.',
+          text: 'Windows hides extensions for known file types by default. To show them: In Windows 11, open File Explorer → **View** → **Show** → tick **File name extensions**. (On older versions: File Explorer Options → View → untick **Hide extensions for known file types**.)',
         },
         { kind: 'heading', text: 'Two ways of looking at the same file' },
         {
@@ -98,7 +98,7 @@ export const m3: Module = {
           rows: [
             [
               'Representation',
-              'Represents data in a meaningful format — text, tables, records, pixels, bytes',
+              'Represents data in a meaningful format: text, tables, records, pixels, bytes',
               'Represents data as binary content stored on the disk (0s and 1s / north–south magnetism / crest–trough)',
             ],
             [
@@ -122,7 +122,7 @@ export const m3: Module = {
           kind: 'analogy',
           title: 'A song',
           everyday:
-            'When you listen to a song you hear a melody — verses, a chorus, a singer. That is the logical view. What is physically on the CD is a spiral of microscopic pits and lands. Nobody hears pits. But without them there is no song.',
+            'When you listen to a song you hear a melody: verses, a chorus, a singer. That is the logical view. What is physically on the CD is a spiral of microscopic pits and lands. Nobody hears pits. But without them there is no song.',
           mapsTo:
             'A sound wave is converted into digital form to be stored: the logical view is the music; the physical view is the pattern of bits. The OS bridges the two so applications only ever deal with the logical view.',
         },
@@ -140,7 +140,7 @@ export const m3: Module = {
       takeaways: [
         'Data is the content; a file is the named container holding it.',
         'A file name has two parts: the primary name (uniqueness) and the extension (which application opens it).',
-        'Two files with the same name and extension in one directory cannot coexist — the second overwrites the first.',
+        'Two files with the same name and extension in one directory cannot coexist: the second overwrites the first.',
         'Logical view = meaningful format for users; physical view = binary content on disk.',
       ],
     },
@@ -153,7 +153,7 @@ export const m3: Module = {
       summary:
         'The six attributes stored about every file, and why "size" and "size on disk" are different numbers.',
       whyItMatters:
-        '"List the attributes of files and directories" is an explicit learning outcome. It is also the setup for internal fragmentation later — the moment you understand why size on disk exceeds file size, you have understood block allocation.',
+        '"List the attributes of files and directories" is an explicit learning outcome. It is also the setup for internal fragmentation later: the moment you understand why size on disk exceeds file size, you have understood block allocation.',
       objectives: [
         'List the attributes of a file',
         'Explain the difference between file size and size on disk',
@@ -167,7 +167,7 @@ export const m3: Module = {
         {
           kind: 'definition',
           term: 'File attributes',
-          simple: 'The properties the system records about a file — who owns it, how big it is, when it changed.',
+          simple: 'The properties the system records about a file: who owns it, how big it is, when it changed.',
           technical:
             'Properties associated with files that provide information about their characteristics, permissions and status within a file system.',
         },
@@ -183,7 +183,7 @@ export const m3: Module = {
             {
               title: 'Location',
               detail:
-                'The physical or logical location(s) where the file is stored on secondary storage devices — hard disk drive, solid-state drive.',
+                'The physical or logical location(s) where the file is stored on secondary storage devices: hard disk drive, solid-state drive.',
             },
             {
               title: 'Access permissions',
@@ -197,7 +197,7 @@ export const m3: Module = {
             },
             {
               title: 'File size',
-              detail: 'The amount of storage space the file occupies — the actual quantity of data.',
+              detail: 'The amount of storage space the file occupies: the actual quantity of data.',
             },
             {
               title: 'Size on disk',
@@ -210,18 +210,18 @@ export const m3: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Why are there two different sizes?',
-          text: 'Because the OS never gives out space in fractions. It allocates whole **[[block|blocks]]**. A 1 KB file on a system with 4 KB blocks still consumes a whole 4 KB block — so file size reads 1 KB and size on disk reads 4 KB. You will see exactly this in the next lesson.',
+          text: 'Because the OS never gives out space in fractions. It allocates whole **[[block|blocks]]**. A 1 KB file on a system with 4 KB blocks still consumes a whole 4 KB block, so file size reads 1 KB and size on disk reads 4 KB. You will see exactly this in the next lesson.',
         },
         {
           kind: 'callout',
           tone: 'note',
           title: 'Directories have attributes too',
-          text: 'A directory has attributes of its own — and **they are the same attributes as a file’s**. Owner, location, permissions, timestamps, size. If asked about directory attributes, you can quote the file list.',
+          text: 'A directory has attributes of its own, and **they are the same attributes as a file’s**. Owner, location, permissions, timestamps, size. If asked about directory attributes, you can quote the file list.',
         },
         {
           kind: 'prose',
           paragraphs: [
-            'Collectively, this information is called **[[metadata|metadata]]** — data about the data. It is stored by the file system separately from the file’s contents, which is why you can see a file’s size and date without opening it.',
+            'Collectively, this information is called **[[metadata|metadata]]**: data about the data. It is stored by the file system separately from the file’s contents, which is why you can see a file’s size and date without opening it.',
           ],
         },
         {
@@ -239,7 +239,7 @@ export const m3: Module = {
         'Attributes: owner, location, access permissions, timestamps, file size, size on disk.',
         'Size on disk can exceed file size because space is allocated in whole blocks.',
         'Directories have the same attributes as files.',
-        'Attributes are metadata — data about the data — stored separately from the contents.',
+        'Attributes are metadata, data about the data, stored separately from the contents.',
       ],
     },
 
@@ -251,7 +251,7 @@ export const m3: Module = {
       summary:
         'How folders organise files, the three directory structures, and the difference between absolute and relative paths.',
       whyItMatters:
-        'Path-name questions appear regularly and are easy marks — but only if you are precise about where a relative path starts from. That is exactly the bit students get wrong.',
+        'Path-name questions appear regularly and are easy marks, but only if you are precise about where a relative path starts from. That is exactly the bit students get wrong.',
       objectives: [
         'Define a file directory and state the difference between a directory and a folder',
         'Describe single-level, two-level and hierarchical directory structures',
@@ -274,7 +274,7 @@ export const m3: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'Folder or directory?',
-          text: '**Folder** is the user-friendly term used in graphical interfaces. **Directory** is the technical term used in operating systems and command-line environments. They mean the same thing — use "directory" in exam answers.',
+          text: '**Folder** is the user-friendly term used in graphical interfaces. **Directory** is the technical term used in operating systems and command-line environments. They mean the same thing: use "directory" in exam answers.',
         },
         {
           kind: 'list',
@@ -282,7 +282,7 @@ export const m3: Module = {
           items: [
             'Directories can contain any number of files and subdirectories, allowing hierarchical organisation.',
             'Each file and directory within the same directory must have a **unique name**.',
-            'A file directory is a **logical structure and a concept** — it cannot be seen by users as a physical thing. It does take a small amount of space on the disk to record.',
+            'A file directory is a **logical structure and a concept**: it cannot be seen by users as a physical thing. It does take a small amount of space on the disk to record.',
             'Directories have attributes, and those attributes are the same as file attributes.',
           ],
         },
@@ -300,13 +300,13 @@ export const m3: Module = {
           technical:
             'The record a directory holds for each file it contains, storing the file’s name and the information the operating system needs to locate its data on the disk.',
           example:
-            'When you open a folder and see `report.txt`, you are looking at its directory entry — not at the file’s data, which is elsewhere on the disk.',
+            'When you open a folder and see `report.txt`, you are looking at its directory entry, not at the file’s data, which is elsewhere on the disk.',
         },
         {
           kind: 'prose',
           paragraphs: [
-            'This matters more than it sounds. A directory does not *contain* files the way a box contains objects — the file’s data sits somewhere else entirely on the disk. What the directory holds is a **[[directory-entry|directory entry]]**: a name, plus a pointer to where the data begins.',
-            'That is why moving a file within the same disk is instant while copying it is slow. Moving rewrites one directory entry; copying has to duplicate every block of data.',
+            'This matters more than it sounds. A directory does not *contain* files the way a box contains objects: the file’s data sits somewhere else entirely on the disk. What the directory holds is a **[[directory-entry|directory entry]]**: a name, plus a pointer to where the data begins.',
+            'That is why moving a file within the same drive is instant while copying it is slow. Moving rewrites one directory entry; copying has to duplicate every block of data. (Moving to a *different* drive is really a copy followed by a delete, which is why that one is slow.)',
           ],
         },
         {
@@ -315,18 +315,18 @@ export const m3: Module = {
           rows: [
             [
               '**Single-level**',
-              'All files in one directory, no subdirectories. Simplest form — suitable for small systems or limited file management needs.',
+              'All files in one directory, no subdirectories. Simplest form: suitable for small systems or limited file management needs.',
               'Every file in the entire system must have a unique name.',
             ],
             [
               '**Two-level**',
-              'Multiple directories at the top level, each holding files and further directories. Introduces organisation through subdirectories.',
-              'Each file must still be unique within its own directory — but two users can now both have `notes.txt`.',
+              'A root directory with one level of directories below it (classically one per user), each holding files. Introduces organisation through subdirectories.',
+              'Each file must still be unique within its own directory, but two users can now both have `notes.txt`.',
             ],
             [
               '**Hierarchical**',
               'Multiple levels arranged in a tree-like fashion. Nested directories to any depth; users navigate up and down. Flexible, scalable, efficient for large systems.',
-              'None significant — this is what every modern OS uses.',
+              'None significant: this is what every modern OS uses.',
             ],
           ],
         },
@@ -336,7 +336,7 @@ export const m3: Module = {
           term: 'Root directory',
           simple: 'The very top folder that everything else lives inside.',
           technical:
-            'The topmost directory in a file system — the starting point from which all other files and folders branch out. Every file and directory in the system is located inside the root directory, either directly or indirectly.',
+            'The topmost directory in a file system: the starting point from which all other files and folders branch out. Every file and directory in the system is located inside the root directory, either directly or indirectly.',
           example: '`/` on Unix-like systems, `C:\\` on Windows.',
         },
         {
@@ -368,7 +368,7 @@ export const m3: Module = {
             [
               'Examples',
               '`/home/user/Documents/report.txt` (Unix-like)  ·  `C:\\Users\\user\\Documents\\report.txt` (Windows)',
-              '`/Documents/report.txt`  ·  `images\\cheems.jpg`',
+              '`Documents/report.txt`  ·  `images\\cheems.jpg`',
             ],
           ],
         },
@@ -379,29 +379,36 @@ export const m3: Module = {
             'A file `abc.html` sits in a folder called `nf 3`. An image `xyz.jpg` is in the **same** folder. A second image `cheems.jpg` is inside `nf 3\\images`. Write the shortest correct reference to each image from `abc.html`, and give the absolute path of `cheems.jpg`.',
           steps: [
             {
-              title: 'Step 1 — `xyz.jpg` is in the same folder as the HTML file',
+              title: 'Step 1: `xyz.jpg` is in the same folder as the HTML file',
               detail:
                 'Nothing to navigate. Refer to it simply as `xyz.jpg`. This is a relative path name.',
             },
             {
-              title: 'Step 2 — `cheems.jpg` is one folder down',
+              title: 'Step 2: `cheems.jpg` is one folder down',
               detail:
-                'Start from the current folder and step into `images`: `\\images\\cheems.jpg`. Also a relative path name.',
+                'Start from the current folder and step into `images`: `images\\cheems.jpg`. Also a relative path name. (In HTML you would write it with forward slashes: `images/cheems.jpg`.)',
             },
             {
-              title: 'Step 3 — the absolute path starts at the root',
+              title: 'Step 3: the absolute path starts at the root',
               detail:
                 'Give the full route from the drive letter: `C:\\nf 3\\images\\cheems.jpg`.',
             },
           ],
           answer:
-            '`xyz.jpg` and `\\images\\cheems.jpg` are relative paths; `C:\\nf 3\\images\\cheems.jpg` is the absolute path.',
+            '`xyz.jpg` and `images\\cheems.jpg` are relative paths; `C:\\nf 3\\images\\cheems.jpg` is the absolute path.',
+        },
+        {
+          kind: 'misconception',
+          wrong: '`/Documents/report.txt` and `\\images\\cheems.jpg` are relative paths, because they are short.',
+          right:
+            'A path that **begins with a slash** (`/` or `\\`) starts at the **root**, so it is not relative. The relative versions are `Documents/report.txt` and `images\\cheems.jpg`, with no slash in front.',
+          why: 'Some printed notes get this wrong. Length has nothing to do with it: look at the first character. A leading slash anchors the path to the root of the drive (or of the website).',
         },
         {
           kind: 'confused',
           question: 'Why would anyone use a relative path if absolute paths always work?',
           simpler:
-            'Because absolute paths break the moment you move the folder. If a website’s pages refer to images by absolute path, uploading the site to a server — where the folder lives somewhere completely different — breaks every image. Relative paths survive the move, because everything moves together.',
+            'Because absolute paths break the moment you move the folder. If a website’s pages refer to images by absolute path, uploading the site to a server, where the folder lives somewhere completely different, breaks every image. Relative paths survive the move, because everything moves together.',
           picture:
             'Absolute: "42 Galle Road, Colombo 03". Relative: "next door". If the whole street is picked up and rebuilt elsewhere, "next door" is still correct and the street address is not.',
         },
@@ -420,7 +427,7 @@ export const m3: Module = {
       takeaways: [
         'A directory is a virtual container holding files and other directories; every name inside one must be unique.',
         '"Folder" is the GUI term; "directory" is the technical term.',
-        'Three structures: single-level, two-level, hierarchical (tree) — modern systems use hierarchical.',
+        'Three structures: single-level, two-level and hierarchical (tree). Modern systems use hierarchical.',
         'The root directory is the topmost directory; absolute paths start there, relative paths start at the current directory.',
       ],
     },
@@ -431,7 +438,7 @@ export const m3: Module = {
       moduleId: 'm3',
       title: 'How data physically sits on a disk',
       summary:
-        'Platters, tracks, sectors, blocks and clusters — and the wasted space that block allocation creates.',
+        'Platters, tracks, sectors, blocks and clusters, and the wasted space that block allocation creates.',
       whyItMatters:
         'Internal fragmentation is a guaranteed exam topic and it is purely mechanical once you can picture blocks. It also explains the "size on disk" mystery from the previous lesson.',
       objectives: [
@@ -447,7 +454,7 @@ export const m3: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'Data on a hard disk is stored as tiny magnetised spots. To find any one of them, the disk needs a physical addressing scheme — and that scheme is built from four nested structures.',
+            'Data on a hard disk is stored as tiny magnetised spots. To find any one of them, the disk needs a physical addressing scheme, and that scheme is built from four nested structures.',
           ],
         },
         {
@@ -462,7 +469,7 @@ export const m3: Module = {
             {
               title: '[[track|Tracks]]',
               detail:
-                'Circular paths drawn on the surface of a platter. Data is recorded along these circular paths. There are several tracks on one platter — modern hard disks can have thousands on a single platter.',
+                'Circular paths drawn on the surface of a platter. Data is recorded along these circular paths. There are several tracks on one platter: modern hard disks can have thousands on a single platter.',
             },
             {
               title: '[[sector|Sectors]]',
@@ -485,7 +492,7 @@ export const m3: Module = {
           kind: 'callout',
           tone: 'info',
           title: 'The physical / logical divide',
-          text: 'Sectors are a **hardware** fact — the disk is manufactured that way. Blocks and clusters are **software** decisions the file system makes, and blocks are created when the disk is formatted. Each file system has a default block size, but it can be tuned.',
+          text: 'Sectors are a **hardware** fact: the disk is manufactured that way. Blocks and clusters are **software** decisions the file system makes, and blocks are created when the disk is formatted. Each file system has a default block size, but it can be tuned.',
         },
         { kind: 'heading', text: 'Why the computer never reads one byte' },
         {
@@ -518,15 +525,15 @@ export const m3: Module = {
             'A disk uses 4 KB blocks. A file is 8.66 KB. How many blocks are allocated, how much disk space is used, and how much is wasted?',
           steps: [
             {
-              title: 'Step 1 — how many blocks are needed?',
+              title: 'Step 1: how many blocks are needed?',
               detail: '8.66 ÷ 4 = 2.165 → round UP to 3 blocks. (Never round down: the remainder still needs somewhere to live.)',
             },
             {
-              title: 'Step 2 — how much space is allocated?',
+              title: 'Step 2: how much space is allocated?',
               detail: '3 blocks × 4 KB = 12 KB',
             },
             {
-              title: 'Step 3 — how much is wasted?',
+              title: 'Step 3: how much is wasted?',
               detail: '12 KB − 8.66 KB = 3.34 KB of internal fragmentation',
             },
           ],
@@ -547,7 +554,7 @@ export const m3: Module = {
           simpler:
             'Because every block needs to be tracked. Halving the block size doubles the number of blocks, which doubles the size of the tables the file system must keep and the number of lookups needed to read a file. You trade wasted space for wasted time.',
           picture:
-            'Storing rice in matchboxes wastes almost no space inside each box — but you now need ten thousand matchboxes and a catalogue to find any grain. Big sacks waste space at the top of each sack, but you only manage five sacks.',
+            'Storing rice in matchboxes wastes almost no space inside each box, but you now need ten thousand matchboxes and a catalogue to find any grain. Big sacks waste space at the top of each sack, but you only manage five sacks.',
           prerequisite: { label: 'File attributes', lessonId: 'l3-2' },
         },
         {

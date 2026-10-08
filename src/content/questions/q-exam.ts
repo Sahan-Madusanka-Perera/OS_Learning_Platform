@@ -50,13 +50,13 @@ export const questionsExam: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Contiguous allocation cannot spread a file across gaps — that is precisely what it forbids.',
+      'Contiguous allocation cannot spread a file across gaps: that is precisely what it forbids.',
       null,
       'Files are never silently truncated.',
       'Contiguous allocation is exactly the method that cannot handle this.',
     ],
     explanation:
-      'Contiguous allocation requires one unbroken run of blocks. The largest available run is 45, which is less than 50, so the file cannot be stored — even though 100 blocks are free in total. This is external fragmentation, and compaction would be needed to merge the gaps.',
+      'Contiguous allocation requires one unbroken run of blocks. The largest available run is 45, which is less than 50, so the file cannot be stored, even though 100 blocks are free in total. This is external fragmentation, and compaction would be needed to merge the gaps.',
     tags: ['external-fragmentation', 'allocation'],
   },
   {
@@ -80,7 +80,7 @@ export const questionsExam: Question[] = [
       'Non-preemptive priority has the same flaw: once the long job holds the CPU, nothing can take it back.',
     ],
     explanation:
-      'The freezing is the convoy effect: under FCFS the long job holds the CPU to completion. Round Robin is preemptive and designed for time-sharing — every process gets a turn within one cycle of the queue, so interactive tasks respond quickly even while the long job is still running.',
+      'The freezing is the convoy effect: under FCFS the long job holds the CPU to completion. Round Robin is preemptive and designed for time-sharing: every process gets a turn within one cycle of the queue, so interactive tasks respond quickly even while the long job is still running.',
     remediation:
       'When the complaint is about *responsiveness*, you need a preemptive algorithm. Non-preemptive algorithms cannot fix a freeze.',
     tags: ['scheduling', 'round-robin'],
@@ -94,7 +94,7 @@ export const questionsExam: Question[] = [
       'A computer has 1 GB of virtual memory. The size of a frame is 128 KB. How many pages are there in the virtual memory?',
     answer: 8192,
     unit: 'pages',
-    hint: 'Page size equals frame size — that is the fact this question is testing.',
+    hint: 'Page size equals frame size: that is the fact this question is testing.',
     explanation:
       'Since page size = frame size, each page is 128 KB. Number of pages = 1 GB ÷ 128 KB = 2³⁰ ÷ (2⁷ × 2¹⁰) = 2³⁰ ÷ 2¹⁷ = 2¹³ = **8192 pages**.',
     remediation:
@@ -134,12 +134,12 @@ export const questionsExam: Question[] = [
     type: 'numeric',
     level: 5,
     prompt:
-      'A 32-bit virtual address space uses 4 KB pages, and each page table entry is 4 bytes. What is the total size of the page table, in MB?',
-    answer: 4,
+      'A 32-bit virtual address space uses 8 KB pages, and each page table entry is 4 bytes. What is the total size of the page table, in MB?',
+    answer: 2,
     unit: 'MB',
     hint: 'Number of pages first, then multiply by the entry size.',
     explanation:
-      'Number of pages = 2³² ÷ 2¹² = 2²⁰. Page table size = 2²⁰ entries × 4 bytes = 2²⁰ × 2² = 2²² bytes = **4 MB** — per process. This is why "the page table consumes memory" is a genuine disadvantage of paging.',
+      'Number of pages = 2³² ÷ 2¹³ = 2¹⁹. Page table size = 2¹⁹ entries × 4 bytes = 2¹⁹ × 2² = 2²¹ bytes = **2 MB** per process. Doubling the page size from 4 KB halved the table, which is one reason larger pages are sometimes chosen.',
     tags: ['page-table', 'calculations'],
   },
   {
@@ -157,7 +157,7 @@ export const questionsExam: Question[] = [
     ],
     correct: 1,
     optionFeedback: [
-      'Waiting for network data blocks the process — it does not simply return to Ready.',
+      'Waiting for network data blocks the process: it does not simply return to Ready.',
       null,
       'Nothing here terminates the process.',
       'A process can never run while swapped out to disk.',
@@ -187,7 +187,7 @@ export const questionsExam: Question[] = [
       'ReiserFS is a Linux file system with no support elsewhere.',
     ],
     explanation:
-      'FAT is universally compatible: because of its simplicity and long history it is supported by almost all operating systems and many devices — digital cameras, printers, smart TVs, gaming consoles and car infotainment systems. Many storage devices are preformatted with FAT for exactly this reason.',
+      'FAT (FAT32, or exFAT on cards over 32 GB) is universally compatible: because of its simplicity and long history it is supported by almost all operating systems and many devices, including digital cameras, printers, smart TVs, gaming consoles and car infotainment systems. Many storage devices are preformatted with FAT for exactly this reason.',
     tags: ['file-systems'],
   },
   {
@@ -208,7 +208,7 @@ export const questionsExam: Question[] = [
       'Spooling affects timing, not quality.',
       null,
       'Physical connection is a separate matter from spooling.',
-      'Without a queue there is no ordering problem — there is a *waiting* problem.',
+      'Without a queue there is no ordering problem: there is a *waiting* problem.',
     ],
     explanation:
       'Without spooling, the CPU must wait until the peripheral device finishes the current job, which reduces overall system efficiency. Spooling stores jobs in spool files on disk so the CPU continues executing other processes and the user can carry on working while printing occurs.',
@@ -222,7 +222,7 @@ export const questionsExam: Question[] = [
     type: 'structured',
     level: 5,
     prompt:
-      'A/L-style practice question — Operating system fundamentals.',
+      'A/L-style practice question, Operating system fundamentals.',
     parts: [
       {
         prompt: 'Define the term "operating system".',
@@ -253,7 +253,7 @@ export const questionsExam: Question[] = [
       },
     ],
     explanation:
-      'This question tests the definition, the function list and the historical reasoning together — which is how the topic is usually examined. The definition needs both halves; the third part needs the idea of processor idle time.',
+      'This question tests the definition, the function list and the historical reasoning together, which is how the topic is usually examined. The definition needs both halves; the third part needs the idea of processor idle time.',
     tags: ['exam', 'os-fundamentals'],
   },
   {
@@ -261,7 +261,7 @@ export const questionsExam: Question[] = [
     lessonId: 'l4-1',
     type: 'structured',
     level: 5,
-    prompt: 'A/L-style practice question — Disk allocation.',
+    prompt: 'A/L-style practice question: Disk allocation.',
     parts: [
       {
         prompt: 'Name the three disk allocation methods.',
@@ -297,7 +297,7 @@ export const questionsExam: Question[] = [
     lessonId: 'l5-3',
     type: 'structured',
     level: 5,
-    prompt: 'A/L-style practice question — Process states.',
+    prompt: 'A/L-style practice question: Process states.',
     parts: [
       {
         prompt: 'List the seven states in the process transition diagram.',
@@ -324,9 +324,9 @@ export const questionsExam: Question[] = [
           'A process is in the Running state. Name two states it can move to, and give the reason for each transition.',
         marks: 4,
         markScheme: [
-          'Ready — the time quantum expired or a higher-priority process arrived (timeout) (2)',
-          'Blocked — the process requested I/O or must wait for an event or resource (2)',
-          '(Terminated — the process completed, or the OS ended it due to an error, is also acceptable)',
+          'Ready: the time quantum expired or a higher-priority process arrived (timeout) (2)',
+          'Blocked: the process requested I/O or must wait for an event or resource (2)',
+          '(Terminated: the process completed, or the OS ended it due to an error, is also acceptable)',
         ],
       },
     ],
@@ -340,17 +340,17 @@ export const questionsExam: Question[] = [
     type: 'structured',
     level: 5,
     prompt:
-      'A/L-style practice question — CPU scheduling. Four processes are given: P1 (arrival 0, burst 5), P2 (arrival 1, burst 3), P3 (arrival 2, burst 8), P4 (arrival 4, burst 4).',
+      'A/L-style practice question: CPU scheduling. Four processes are given: P1 (arrival 0, burst 8), P2 (arrival 1, burst 2), P3 (arrival 3, burst 5), P4 (arrival 4, burst 1).',
     parts: [
       {
         prompt:
           'Draw a Gantt chart for First Come First Served scheduling and state the completion time of each process.',
         marks: 4,
         markScheme: [
-          'Gantt chart shows P1 0–5, P2 5–8 (1)',
-          'Gantt chart shows P3 8–16, P4 16–20 (1)',
-          'Completion times: P1 = 5, P2 = 8 (1)',
-          'Completion times: P3 = 16, P4 = 20 (1)',
+          'Gantt chart shows P1 0–8, P2 8–10 (1)',
+          'Gantt chart shows P3 10–15, P4 15–16 (1)',
+          'Completion times: P1 = 8, P2 = 10 (1)',
+          'Completion times: P3 = 15, P4 = 16 (1)',
         ],
       },
       {
@@ -358,8 +358,8 @@ export const questionsExam: Question[] = [
         marks: 3,
         markScheme: [
           'Uses turnaround = completion − arrival (1)',
-          'Individual values: 5, 7, 14, 16 (1)',
-          'Average = (5+7+14+16)/4 = 10.5 ms (1)',
+          'Individual values: 8, 9, 12, 12 (1)',
+          'Average = (8+9+12+12)/4 = 10.25 ms (1)',
         ],
       },
       {
@@ -367,8 +367,8 @@ export const questionsExam: Question[] = [
         marks: 3,
         markScheme: [
           'Uses waiting = turnaround − burst (1)',
-          'Individual values: 0, 4, 6, 12 (1)',
-          'Average = (0+4+6+12)/4 = 5.5 ms (1)',
+          'Individual values: 0, 7, 7, 11 (1)',
+          'Average = (0+7+7+11)/4 = 6.25 ms (1)',
         ],
       },
       {
@@ -377,12 +377,12 @@ export const questionsExam: Question[] = [
         marks: 2,
         markScheme: [
           'Names the convoy effect, or high average waiting time (1)',
-          'Refers to the evidence: P4 waits 12 ms behind the 8 ms process P3 despite needing only 4 ms (1)',
+          'Refers to the evidence: P4 needs only 1 ms but waits 11 ms, stuck behind the 8 ms process P1 and the 5 ms process P3 (1)',
         ],
       },
     ],
     explanation:
-      'Method marks are available even if arithmetic slips, so always write the formula and the individual values before averaging. Part (d) asks you to connect the numbers to the concept — a common structure in higher-mark questions.',
+      'Method marks are available even if arithmetic slips, so always write the formula and the individual values before averaging. Part (d) asks you to connect the numbers to the concept: a common structure in higher-mark questions.',
     tags: ['exam', 'scheduling', 'calculations'],
   },
   {
@@ -391,15 +391,15 @@ export const questionsExam: Question[] = [
     type: 'structured',
     level: 5,
     prompt:
-      'A/L-style practice question — Paging and address translation. A system uses 4 KB pages, and its physical memory contains 256 frames.',
+      'A/L-style practice question: Paging and address translation. A system uses 8 KB pages, and its physical memory contains 512 frames.',
     parts: [
       {
         prompt: 'Calculate the number of bits used for the offset and for the frame number.',
         marks: 3,
         markScheme: [
-          'Offset: 4 KB = 2¹² bytes, so 12 offset bits (1)',
-          'Frames: 256 = 2⁸, so 8 frame number bits (1)',
-          'Physical address length = 8 + 12 = 20 bits (1)',
+          'Offset: 8 KB = 2¹³ bytes, so 13 offset bits (1)',
+          'Frames: 512 = 2⁹, so 9 frame number bits (1)',
+          'Physical address length = 9 + 13 = 22 bits (1)',
         ],
       },
       {
@@ -407,7 +407,7 @@ export const questionsExam: Question[] = [
         marks: 2,
         markScheme: [
           'Uses capacity = frame size × number of frames (1)',
-          '4 KB × 256 = 2¹² × 2⁸ = 2²⁰ bytes = 1 MB (1)',
+          '8 KB × 512 = 2¹³ × 2⁹ = 2²² bytes = 4 MB (1)',
         ],
       },
       {
@@ -433,7 +433,7 @@ export const questionsExam: Question[] = [
       },
     ],
     explanation:
-      'Parts (a) and (b) are pure arithmetic — convert to powers of two and the marks are free. Parts (c) and (d) test whether you can explain the mechanism, which is where most marks are actually lost.',
+      'Parts (a) and (b) are pure arithmetic: convert to powers of two and the marks are free. Parts (c) and (d) test whether you can explain the mechanism, which is where most marks are actually lost.',
     tags: ['exam', 'paging', 'page-fault'],
   },
   {
@@ -441,15 +441,15 @@ export const questionsExam: Question[] = [
     lessonId: 'l7-3',
     type: 'structured',
     level: 5,
-    prompt: 'A/L-style practice question — Device management.',
+    prompt: 'A/L-style practice question: Device management.',
     parts: [
       {
         prompt:
           'Name the two main components an operating system uses to manage I/O devices, and state whether each is hardware or software.',
         marks: 4,
         markScheme: [
-          'Device controller (1) — hardware (1)',
-          'Device driver (1) — software (1)',
+          'Device controller (1): hardware (1)',
+          'Device driver (1): software (1)',
         ],
       },
       {
@@ -471,7 +471,7 @@ export const questionsExam: Question[] = [
       },
     ],
     explanation:
-      'Part (a) is worth four marks for a two-item answer — because each item needs both the name and the classification. Read mark allocations carefully; they tell you how much to write.',
+      'Part (a) is worth four marks for a two-item answer, because each item needs both the name and the classification. Read mark allocations carefully; they tell you how much to write.',
     tags: ['exam', 'device-management', 'spooling'],
   },
 ]

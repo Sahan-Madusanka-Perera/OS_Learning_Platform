@@ -9,10 +9,12 @@ import { MasteryRing, ProgressBar } from '@/components/ui/Progress'
 import { NotFound } from './NotFound'
 import { MODULE_ICON } from '@/components/ui/Icon'
 import { Icon } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 export function ModulePage() {
   const { moduleId = '' } = useParams()
   const mod = moduleById.get(moduleId)
+  useDocumentTitle(mod ? mod.title : 'Module not found')
   const overview = useCourseOverview()
 
   if (!mod) return <NotFound what="module" />
@@ -57,7 +59,8 @@ export function ModulePage() {
             <ProgressBar value={pct} className="mt-2" height={6} tone={pct >= 88 ? 'success' : 'brand'} />
           </div>
           <Button to={`/lesson/${firstUnfinished.id}`} className="hidden shrink-0 sm:inline-flex">
-            {pct === 0 ? 'Start' : 'Continue'} →
+            {pct === 0 ? 'Start' : 'Continue'}
+            <Icon name="arrowRight" size={16} />
           </Button>
         </div>
       </Card>
@@ -119,8 +122,9 @@ export function ModulePage() {
             to={`/module/${modules[index - 1].id}`}
             className="flex-1 rounded-xl border border-line p-4 transition hover:bg-sunken"
           >
-            <span className="block text-2xs font-medium uppercase tracking-wide text-ink-3">
-              ← Previous module
+            <span className="flex items-center gap-1 text-2xs font-medium uppercase tracking-wide text-ink-3">
+              <Icon name="arrowLeft" size={13} />
+              Previous module
             </span>
             <span className="mt-0.5 block text-base font-medium text-ink">
               {modules[index - 1].title}
@@ -132,8 +136,9 @@ export function ModulePage() {
             to={`/module/${nextMod.id}`}
             className="flex-1 rounded-xl border border-brand-300 bg-brand-50 p-4 text-right transition hover:bg-brand-100 dark:border-brand-700 dark:bg-brand-950/60"
           >
-            <span className="block text-2xs font-medium uppercase tracking-wide text-brand-600 dark:text-brand-400">
-              Next module →
+            <span className="flex items-center justify-end gap-1 text-2xs font-medium uppercase tracking-wide text-brand-600 dark:text-brand-400">
+              Next module
+              <Icon name="arrowRight" size={13} />
             </span>
             <span className="mt-0.5 block text-base font-medium text-ink">{nextMod.title}</span>
           </Link>

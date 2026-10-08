@@ -30,9 +30,9 @@ interface StateNode {
 
 const NODES: StateNode[] = [
   { id: 'new', label: 'New', x: 14, y: 100, w: 92, h: 46, where: 'none', meaning: 'The process is being created. The OS is allocating memory and setting up its Process Control Block.' },
-  { id: 'ready', label: 'Ready', x: 158, y: 100, w: 92, h: 46, where: 'main', meaning: 'Fully prepared to execute. It is waiting for one thing only — the CPU to become free.' },
+  { id: 'ready', label: 'Ready', x: 158, y: 100, w: 92, h: 46, where: 'main', meaning: 'Fully prepared to execute. It is waiting for one thing only: the CPU to become free.' },
   { id: 'running', label: 'Running', x: 302, y: 100, w: 96, h: 46, where: 'main', meaning: 'This process is actually executing on the CPU right now. Only one process per CPU core can be here.' },
-  { id: 'terminated', label: 'Terminated', x: 446, y: 100, w: 104, h: 46, where: 'none', meaning: 'Execution has finished — normally, or because the OS or user stopped it. All its resources are released.' },
+  { id: 'terminated', label: 'Terminated', x: 446, y: 100, w: 104, h: 46, where: 'none', meaning: 'Execution has finished: normally, or because the OS or user stopped it. All its resources are released.' },
   { id: 'blocked', label: 'Blocked', x: 302, y: 200, w: 96, h: 46, where: 'main', meaning: 'Paused, waiting for a resource such as I/O completion. It cannot run even if the CPU is free.' },
   { id: 'susp-ready', label: 'Suspended Ready', x: 140, y: 316, w: 132, h: 46, where: 'secondary', meaning: 'Ready to run, but swapped out to secondary storage to free main memory. It must be brought back before it can run.' },
   { id: 'susp-blocked', label: 'Suspended Blocked', x: 300, y: 316, w: 140, h: 46, where: 'secondary', meaning: 'Still waiting for a resource AND swapped out of main memory. The worst of both worlds.' },
@@ -49,7 +49,7 @@ interface Transition {
 const TRANSITIONS: Transition[] = [
   { from: 'new', to: 'ready', label: 'Admit', action: 'Admit to memory', why: 'The long-term scheduler loads the process into main memory and it joins the ready queue.' },
   { from: 'ready', to: 'running', label: 'Dispatch', action: 'Dispatch to CPU', why: 'The short-term scheduler picks this process and hands it the CPU.' },
-  { from: 'running', to: 'ready', label: 'Timeout', action: 'Time quantum expires', why: 'Its time slice ran out, or a higher-priority process arrived. It is preempted back to Ready — it did nothing wrong.' },
+  { from: 'running', to: 'ready', label: 'Timeout', action: 'Time quantum expires', why: 'Its time slice ran out, or a higher-priority process arrived. It is preempted back to Ready: it did nothing wrong.' },
   { from: 'running', to: 'blocked', label: 'I/O wait', action: 'Request I/O', why: 'It asked for input/output or must wait for an event. Holding the CPU while waiting would waste it.' },
   { from: 'running', to: 'terminated', label: 'Release', action: 'Finish or be killed', why: 'The process completed its task, or the OS ended it because of an error.' },
   { from: 'blocked', to: 'ready', label: 'I/O done', action: 'I/O completes', why: 'The resource it waited for is now available, so it can queue for the CPU again.' },
@@ -57,7 +57,7 @@ const TRANSITIONS: Transition[] = [
   { from: 'susp-ready', to: 'ready', label: 'Activate', action: 'Swap back in', why: 'Enough main memory is free again, so the process is loaded back and can be scheduled.' },
   { from: 'blocked', to: 'susp-blocked', label: 'Swap out', action: 'Swap out while blocked', why: 'It is waiting anyway, so it is the cheapest thing to move out of memory.' },
   { from: 'susp-blocked', to: 'blocked', label: 'Activate', action: 'Swap back in', why: 'It is brought back into main memory while still waiting for its event.' },
-  { from: 'susp-blocked', to: 'susp-ready', label: 'I/O done', action: 'I/O completes on disk', why: 'The event it waited for finished while it was still swapped out — so it becomes ready, but still on disk.' },
+  { from: 'susp-blocked', to: 'susp-ready', label: 'I/O done', action: 'I/O completes on disk', why: 'The event it waited for finished while it was still swapped out, so it becomes ready, but still on disk.' },
 ]
 
 const EDGES: { from: StateId; to: StateId; d: string; labelX: number; labelY: number; label: string }[] = [
@@ -96,7 +96,7 @@ export function ProcessStateMachine() {
           viewBox="0 0 580 412"
           className="h-auto w-full min-w-[35rem]"
           role="img"
-          aria-label="Seven-state process transition diagram. Current state: {current}"
+          aria-label={`Seven-state process transition diagram. Current state: ${node.label}.`}
         >
           <defs>
             <marker id="ps-arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
@@ -108,12 +108,12 @@ export function ProcessStateMachine() {
           </defs>
 
           {/* Memory zones */}
-          <rect x="118" y="80" width="450" height="186" rx="12" fill="none" stroke="var(--grid-line)" strokeDasharray="4 4" />
-          <text x="126" y="74" fontSize="10.5" fill="var(--text-muted)" fontWeight="600">
+          <rect x="140" y="80" width="280" height="186" rx="12" fill="none" stroke="var(--grid-line)" strokeDasharray="4 4" />
+          <text x="148" y="74" fontSize="10.5" fill="var(--text-muted)" fontWeight="600">
             MAIN MEMORY (RAM)
           </text>
-          <rect x="118" y="300" width="450" height="104" rx="12" fill="none" stroke="var(--grid-line)" strokeDasharray="4 4" />
-          <text x="126" y="294" fontSize="10.5" fill="var(--text-muted)" fontWeight="600">
+          <rect x="124" y="300" width="332" height="104" rx="12" fill="none" stroke="var(--grid-line)" strokeDasharray="4 4" />
+          <text x="132" y="294" fontSize="10.5" fill="var(--text-muted)" fontWeight="600">
             SECONDARY STORAGE (swapped out)
           </text>
 
@@ -237,7 +237,7 @@ export function ProcessStateMachine() {
         ) : (
           <div className="rounded-lg border border-line bg-sunken px-4 py-3">
             <p className="text-base text-ink-2">
-              Terminated is a dead end — a process never comes back from here. Its PCB entry is
+              Terminated is a dead end: a process never comes back from here. Its PCB entry is
               removed once the parent collects its exit status.
             </p>
             <Button

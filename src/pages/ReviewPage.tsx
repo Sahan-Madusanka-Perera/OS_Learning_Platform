@@ -11,12 +11,14 @@ import { Card, SectionHeading } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { ProgressBar } from '@/components/ui/Progress'
 import { Icon } from '@/components/ui/Icon'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 /* Spaced repetition, kept deliberately simple. A question you got wrong
    comes back today; each time you get it right it moves further down the
    ladder (1, 2, 4, 8, 16 days) until it graduates out of the queue. */
 
 export function ReviewPage() {
+  useDocumentTitle('Review')
   const reviews = useProgress((s) => s.reviews)
   const reviewAnswered = useProgress((s) => s.reviewAnswered)
   const overview = useCourseOverview()
@@ -56,7 +58,7 @@ export function ReviewPage() {
           <h2 className="text-lg font-semibold text-ink">Nothing due for review</h2>
           <p className="mx-auto mt-2 max-w-md text-md leading-relaxed text-ink-2">
             Your review queue fills up automatically. Whenever you answer a question incorrectly, it
-            is scheduled to come back — first today, then after 1, 2, 4, 8 and 16 days if you keep
+            is scheduled to come back: first today, then after 1, 2, 4, 8 and 16 days if you keep
             getting it right.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -102,8 +104,8 @@ export function ReviewPage() {
               {pct >= 80
                 ? 'Strong recall. The questions you got right have moved further down the review ladder, so you will see them less often.'
                 : pct >= 50
-                  ? 'Mixed — which is exactly what review is for. The ones you missed will come back tomorrow.'
-                  : 'These concepts have not stuck yet. Rather than repeating the questions, go back and re-read the lessons below — then the review will land.'}
+                  ? 'Mixed, which is exactly what review is for. The ones you missed will come back tomorrow.'
+                  : 'These concepts have not stuck yet. Rather than repeating the questions, go back and re-read the lessons below, then the review will land.'}
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">
               <Button to={`/lesson/${overview.continueLessonId}`}>Continue learning</Button>
@@ -142,8 +144,12 @@ export function ReviewPage() {
           Missed {current.item.lapses} time{current.item.lapses === 1 ? '' : 's'}
         </Badge>
         {lesson && (
-          <Link to={`/lesson/${lesson.id}`} className="text-ink-3 transition hover:text-ink">
-            from “{lesson.title}” →
+          <Link
+            to={`/lesson/${lesson.id}`}
+            className="inline-flex items-center gap-1 text-ink-3 transition hover:text-ink"
+          >
+            from “{lesson.title}”
+            <Icon name="arrowRight" size={14} className="shrink-0" />
           </Link>
         )}
       </div>
@@ -172,7 +178,8 @@ export function ReviewPage() {
             else setIndex((i) => i + 1)
           }}
         >
-          {index + 1 >= session.length ? 'Finish session' : 'Next question →'}
+          {index + 1 >= session.length ? 'Finish session' : 'Next question'}
+          <Icon name="arrowRight" size={16} />
         </Button>
       </div>
     </div>

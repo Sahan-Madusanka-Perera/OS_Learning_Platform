@@ -17,7 +17,7 @@ export const m2: Module = {
       summary:
         'Five jobs: providing interfaces, process management, resource management, security and protection, and executing application software.',
       whyItMatters:
-        '"State the main functions of an operating system" is one of the most predictable questions in this competency. Five clean, distinct points is a full answer — vague waffle is not.',
+        '"State the main functions of an operating system" is one of the most predictable questions in this competency. Five clean, distinct points is a full answer: vague waffle is not.',
       objectives: [
         'List the main functions of an operating system',
         'Explain what the OS does under each function',
@@ -74,21 +74,21 @@ export const m2: Module = {
           paragraphs: [
             'This function is worth more than one sentence, because it is the deepest idea in the whole unit.',
             'Your hard disk stores magnetised spots on a spinning platter. It has no concept of a "file". Yet you double-click **report.txt** and something opens. The OS invented the file. It invented folders. It invented the idea that data has a name.',
-            'These invented conveniences are called **abstractions**. Directories, files and data are abstractions the operating system provides to the user. They do not exist in the hardware — the OS creates them and maintains the illusion perfectly.',
+            'These invented conveniences are called **abstractions**. Directories, files and data are abstractions the operating system provides to the user. They do not exist in the hardware: the OS creates them and maintains the illusion perfectly.',
           ],
         },
         {
           kind: 'keyIdea',
           title: 'The virtual machine idea',
-          text: 'The OS presents every program with a clean, simplified, imaginary computer — one with files instead of magnetised spots, and unlimited private memory instead of shared chips. Programs are written against that imaginary machine, which is why one program can run on thousands of different real machines.',
+          text: 'The OS presents every program with a clean, simplified, imaginary computer: one with files instead of magnetised spots, and unlimited private memory instead of shared chips. Programs are written against that imaginary machine, which is why one program can run on thousands of different real machines.',
         },
         {
           kind: 'analogy',
           title: 'A postal address',
           everyday:
-            'You write "42 Galle Road, Colombo 03" on an envelope. You have no idea which sorting office it passes through, which van carries it, or which route the postman walks. The address is an abstraction — a simple name standing in for an enormously complicated physical journey.',
+            'You write "42 Galle Road, Colombo 03" on an envelope. You have no idea which sorting office it passes through, which van carries it, or which route the postman walks. The address is an abstraction: a simple name standing in for an enormously complicated physical journey.',
           mapsTo:
-            'A file path is exactly the same trick. `C:\\Users\\Nimal\\report.txt` hides which platter, which track, which sector — and lets the OS change all of that without your program noticing.',
+            'A file path is exactly the same trick. `C:\\Users\\Nimal\\report.txt` hides which platter, which track, which sector, and lets the OS change all of that without your program noticing.',
         },
         {
           kind: 'recall',
@@ -102,7 +102,7 @@ export const m2: Module = {
           kind: 'misconception',
           wrong: 'Resource management and process management are the same thing.',
           right:
-            'Process management is about the **lifecycle** of programs — creating, running and terminating them, and sharing CPU time. Resource management is about **tracking and allocating** things processes need — memory, devices, files — and controlling permissions to them.',
+            'Process management is about the **lifecycle** of programs: creating, running and terminating them, and sharing CPU time. Resource management is about **tracking and allocating** things processes need (memory, devices, files) and controlling permissions to them.',
           why: 'A useful test: process management answers "who runs next?"; resource management answers "who is allowed to use this, and are they finished with it?"',
         },
         {
@@ -117,7 +117,7 @@ export const m2: Module = {
       takeaways: [
         'Five main functions: interfaces, process management, resource management, security & protection, executing applications.',
         'The OS provides a virtual machine hiding hardware details.',
-        'Directories, files and data are abstractions the OS provides to the user — they do not exist in hardware.',
+        'Directories, files and data are abstractions the OS provides to the user: they do not exist in hardware.',
         'Process management is about lifecycle; resource management is about tracking and permissions.',
       ],
     },
@@ -128,7 +128,7 @@ export const m2: Module = {
       moduleId: 'm2',
       title: 'Evolution: four generations, one problem',
       summary:
-        'From no OS at all to time-sharing — each generation invented to stop the processor sitting idle.',
+        'From no OS at all to time-sharing: each generation invented to stop the processor sitting idle.',
       whyItMatters:
         'Exam questions ask you to compare the generations across specific features: input, output, memory structure, scheduling, users. If you understand *why* each generation appeared, the table becomes something you can reconstruct instead of memorise.',
       objectives: [
@@ -144,14 +144,14 @@ export const m2: Module = {
         {
           kind: 'keyIdea',
           title: 'One idea drives the whole story',
-          text: 'A CPU costing a fortune must never be idle. Every generation of operating system exists to remove one more source of idle time.',
+          text: 'A CPU costing a fortune must never be idle. The first three generations each remove one more source of idle time. The fourth, time-sharing, keeps the CPU just as busy but finally makes it respond to people.',
         },
         {
           kind: 'viz',
           viz: 'evolutionTimeline',
-          title: 'Four generations — click each one',
+          title: 'Four generations: click each one',
           caption:
-            'Watch the CPU activity strip. The red gaps are wasted money, and each generation exists to shrink them.',
+            'Watch the CPU activity strip. The red gaps are wasted money, and each generation up to multiprogramming shrinks them. Then see what time-sharing changes instead.',
         },
         { kind: 'heading', text: 'The story in words' },
         {
@@ -165,7 +165,7 @@ export const m2: Module = {
             {
               title: 'Simple batch system (mid 1950s – late 1960s)',
               detail:
-                'A **[[resident-monitor|resident monitor]]** occupies a small part of memory and automatically loads the next job when the current one finishes — removing the human from between jobs. Scheduling is FCFS and non-preemptive. Jobs are described using JCL (Job Control Language). **But the CPU is still idle during I/O.** Examples: IBM 7094, FORTRAN Monitor System.',
+                'A **[[resident-monitor|resident monitor]]** occupies a small part of memory and automatically loads the next job when the current one finishes, removing the human from between jobs. Scheduling is FCFS and non-preemptive. Jobs are described using JCL (Job Control Language). **But the CPU is still idle during I/O.** Examples: IBM 7094, FORTRAN Monitor System.',
             },
             {
               title: 'Multi-programmed batch system (third generation, mid–late 1960s)',
@@ -175,7 +175,7 @@ export const m2: Module = {
             {
               title: 'Time-sharing system (from the 1960s)',
               detail:
-                'The processor switches after a fixed **time quantum**, whether or not a job has blocked — preemptive scheduling driven by a timer interrupt. Rapid switching creates the illusion of concurrent execution and lets many users interact through terminals. Examples: UNIX, Multics, IBM OS/360, VMS, Windows NT.',
+                'The processor switches after a fixed **time quantum**, whether or not a job has blocked: preemptive scheduling driven by a timer interrupt. Rapid switching creates the illusion of concurrent execution and lets many users interact through terminals. Examples: CTSS (the first, 1961), Multics, UNIX, VMS, Windows NT.',
             },
           ],
         },
@@ -183,7 +183,7 @@ export const m2: Module = {
           kind: 'callout',
           tone: 'warn',
           title: 'The one distinction examiners love',
-          text: 'In **multiprogramming**, a process switches only when it *blocks* (usually for I/O). In **time-sharing**, a process switches even when it is running perfectly well — because its time slice expired. Multiprogramming maximises CPU utilisation; time-sharing minimises response time.',
+          text: 'In **multiprogramming**, a process switches only when it *blocks* (usually for I/O). In **time-sharing**, a process switches even when it is running perfectly well, because its time slice expired. Multiprogramming maximises CPU utilisation; time-sharing minimises response time.',
         },
         {
           kind: 'compare',
@@ -200,10 +200,10 @@ export const m2: Module = {
             ],
             [
               'CPU utilisation',
-              'Low — idle during I/O and loading',
-              'Low — idle during I/O',
-              'Higher — overlaps I/O and CPU',
-              'High — rapid switching',
+              'Low: idle during I/O and loading',
+              'Low: idle during I/O',
+              'Higher: overlaps I/O and CPU',
+              'High: rapid switching',
             ],
             ['Memory management', 'None', 'Simple', 'Complex (partitions, protection)', 'More complex (swapping, paging, virtual memory)'],
             ['Complexity', 'Low', 'Low', 'Medium', 'High'],
@@ -223,9 +223,9 @@ export const m2: Module = {
           question:
             'If multiprogramming already keeps the CPU busy, why did we need time-sharing at all?',
           simpler:
-            'Multiprogramming makes the *machine* efficient. It does nothing for the *person*. If your job is third in the queue and the first two are long, you wait hours — the CPU is 95% busy the whole time, and you are still waiting. Time-sharing fixes the human’s problem, not the machine’s.',
+            'Multiprogramming makes the *machine* efficient. It does nothing for the *person*. If your job is third in the queue and the first two are long, you wait hours: the CPU is 95% busy the whole time, and you are still waiting. Time-sharing fixes the human’s problem, not the machine’s.',
           picture:
-            'Imagine a doctor who never has an idle moment because there is always a patient in the room. Excellent for the doctor. Terrible for you, sitting in the waiting room since 8 a.m. Time-sharing is the doctor seeing each patient for five minutes in rotation — less efficient per patient, but everyone gets seen.',
+            'Imagine a doctor who never has an idle moment because there is always a patient in the room. Excellent for the doctor. Terrible for you, sitting in the waiting room since 8 a.m. Time-sharing is the doctor seeing each patient for five minutes in rotation: less efficient per patient, but everyone gets seen.',
           prerequisite: { label: 'Main functions of an operating system', lessonId: 'l2-1' },
         },
         {
@@ -239,8 +239,8 @@ export const m2: Module = {
         },
       ],
       takeaways: [
-        'No OS → simple batch → multi-programmed batch → time-sharing; each removes a source of CPU idle time.',
-        'A resident monitor in a simple batch system loads the next job automatically — but the CPU still idles during I/O.',
+        'No OS → simple batch → multi-programmed batch → time-sharing; the first three each remove a source of CPU idle time, and time-sharing adds fast response.',
+        'A resident monitor in a simple batch system loads the next job automatically, but the CPU still idles during I/O.',
         'Multiprogramming switches when a process blocks; time-sharing switches when the time quantum expires.',
         'Multiprogramming is considered the central theme of modern operating systems.',
       ],
@@ -254,7 +254,7 @@ export const m2: Module = {
       summary:
         'How one CPU appears to run five programs at once, and the difference between switching between processes and switching between threads.',
       whyItMatters:
-        'Students routinely write that multitasking means "running programs at the same time". On a single core that is false, and examiners notice. The precise wording — "seemingly at the same time" — carries the mark.',
+        'Students routinely write that multitasking means "running programs at the same time". On a single core that is false, and examiners notice. The precise wording, "seemingly at the same time", carries the mark.',
       objectives: [
         'Explain how multitasking creates the illusion of simultaneous execution',
         'Distinguish process-based from thread-based multitasking',
@@ -284,7 +284,7 @@ export const m2: Module = {
           wrong: 'Multitasking means the CPU runs several programs at exactly the same moment.',
           right:
             'On a single core, only one process executes at any instant. The OS switches between them so rapidly that it *appears* simultaneous. That is why the definition says **"seemingly at the same time"**.',
-          why: 'Multi-core CPUs genuinely can run one process per core simultaneously — but even then, far more processes are running than there are cores, so switching is still what makes it work.',
+          why: 'Multi-core CPUs genuinely can run one process per core simultaneously, but even then, far more processes are running than there are cores, so switching is still what makes it work.',
         },
         { kind: 'heading', text: 'Two kinds of multitasking' },
         {
@@ -303,8 +303,8 @@ export const m2: Module = {
             ],
             [
               'Communication',
-              'Harder — processes are isolated from each other',
-              'Easier — shared memory makes communication and synchronisation simpler',
+              'Harder: processes are isolated from each other',
+              'Easier: shared memory makes communication and synchronisation simpler',
             ],
             [
               'Example',
@@ -324,7 +324,7 @@ export const m2: Module = {
           kind: 'analogy',
           title: 'A kitchen',
           everyday:
-            'Two separate restaurants are two processes: each has its own kitchen, its own ingredients, its own staff. Nothing is shared, and if one burns down the other carries on. Two chefs working in **one** kitchen are two threads: they share the same fridge and the same stove, which makes cooperation fast — but if one chef leaves the gas on, both are in trouble.',
+            'Two separate restaurants are two processes: each has its own kitchen, its own ingredients, its own staff. Nothing is shared, and if one burns down the other carries on. Two chefs working in **one** kitchen are two threads: they share the same fridge and the same stove, which makes cooperation fast, but if one chef leaves the gas on, both are in trouble.',
           mapsTo:
             'Threads share memory, so they are cheap to switch between and easy to coordinate. But an error in one thread can corrupt data another thread is using, which is why process isolation still matters.',
         },
@@ -395,7 +395,7 @@ export const m2: Module = {
       moduleId: 'm2',
       title: 'Classifying operating systems',
       summary:
-        'Four ways to classify an OS — by number of users, number of tasks, processing model, and timing requirements.',
+        'Four ways to classify an OS: by number of users, number of tasks, processing model, and timing requirements.',
       whyItMatters:
         'Classification questions are guaranteed marks *if* you know which axis the question is asking about. Mixing up "multi-user" with "multi-tasking" is the single most common error in this competency.',
       objectives: [
@@ -443,6 +443,8 @@ export const m2: Module = {
               'UNIX and UNIX-like systems, Windows Server, IBM z/OS, Solaris, FreeBSD',
             ],
           ],
+          caption:
+            'Windows 10/11 and macOS let you create several accounts, but only one person uses the machine at a time. That is why the syllabus classes them as single-user, multi-tasking.',
         },
         { kind: 'heading', text: '2. Based on number of tasks' },
         {
@@ -468,23 +470,23 @@ export const m2: Module = {
         {
           kind: 'list',
           items: [
-            '**Single-user, single-tasking** — one user performs one task at a time. Foundational in computing history; simple and efficient for specific, limited-use scenarios.',
-            '**Single-user, multi-tasking** — one user runs several applications at once. This is your laptop.',
-            '**Multi-user, multi-tasking** — multiple users concurrently, each running multiple tasks. This is a server.',
+            '**Single-user, single-tasking**: one user performs one task at a time. Foundational in computing history; simple and efficient for specific, limited-use scenarios.',
+            '**Single-user, multi-tasking**: one user runs several applications at once. This is your laptop.',
+            '**Multi-user, multi-tasking**: multiple users concurrently, each running multiple tasks. This is a server.',
           ],
         },
         {
           kind: 'callout',
           tone: 'warn',
           title: 'A favourite exam trap',
-          text: 'A **multi-user single-tasking operating system cannot exist**. When multiple users are active, the system must handle multiple tasks at the same time — and that *is* multitasking. There are only three valid combinations, not four.',
+          text: 'A **multi-user single-tasking operating system cannot exist**. When multiple users are active, the system must handle multiple tasks at the same time, and that *is* multitasking. There are only three valid combinations, not four.',
         },
         { kind: 'heading', text: '3. Based on processing model' },
         {
           kind: 'prose',
           paragraphs: [
-            'This is the single-threading vs multi-threading distinction from the previous lesson. A **single-threading OS** allows only one thread per process, so tasks execute sequentially with no internal concurrency — simpler to design, but limited performance and CPU utilisation. Examples: MS-DOS, CP/M, and some real-time and embedded systems.',
-            'A **multi-threading OS** lets the scheduler manage multiple threads to improve CPU utilisation and enable concurrent execution — enhancing performance, responsiveness and efficiency. Examples: Windows, Linux, macOS, Android, iOS.',
+            'This is the single-threading vs multi-threading distinction from the previous lesson. A **single-threading OS** allows only one thread per process, so tasks execute sequentially with no internal concurrency: simpler to design, but limited performance and CPU utilisation. Examples: MS-DOS, CP/M, and some real-time and embedded systems.',
+            'A **multi-threading OS** lets the scheduler manage multiple threads to improve CPU utilisation and enable concurrent execution: enhancing performance, responsiveness and efficiency. Examples: Windows, Linux, macOS, Android, iOS.',
           ],
         },
         { kind: 'heading', text: '4. Based on timing requirements' },
@@ -501,11 +503,11 @@ export const m2: Module = {
           title: 'Key characteristics of an RTOS',
           style: 'check',
           items: [
-            '**Deterministic timing** — tasks complete within known, fixed time constraints',
-            '**Priority-based scheduling** — higher-priority tasks preempt lower-priority ones',
-            '**Minimal interrupt latency** — interrupts are handled with minimal delay',
-            '**Reliability and stability** — designed to recover from hardware or software faults',
-            '**Real-time clock** — used to manage and track task deadlines accurately',
+            '**Deterministic timing**: tasks complete within known, fixed time constraints',
+            '**Priority-based scheduling**: higher-priority tasks preempt lower-priority ones',
+            '**Minimal interrupt latency**: interrupts are handled with minimal delay',
+            '**Reliability and stability**: designed to recover from hardware or software faults',
+            '**Real-time clock**: used to manage and track task deadlines accurately',
           ],
         },
         {
@@ -529,20 +531,20 @@ export const m2: Module = {
           kind: 'list',
           title: 'Where RTOSs are used',
           items: [
-            '**Automotive** — engine control units, airbag systems, driver-assistance systems',
-            '**Medical devices** — pacemakers, infusion pumps, MRI machines',
-            '**Industrial automation** — robotics, assembly line control, process automation',
-            '**Aerospace and defence** — avionics, UAVs, missile guidance',
-            '**Nuclear reactor control** — monitoring and controlling reactor operations in real time',
-            '**Satellite and space probe control** — navigation with strict timing requirements',
-            '**Elevator control** — movement and safety responses in real time',
+            '**Automotive**: engine control units, airbag systems, driver-assistance systems',
+            '**Medical devices**: pacemakers, infusion pumps, MRI machines',
+            '**Industrial automation**: robotics, assembly line control, process automation',
+            '**Aerospace and defence**: avionics, UAVs, missile guidance',
+            '**Nuclear reactor control**: monitoring and controlling reactor operations in real time',
+            '**Satellite and space probe control**: navigation with strict timing requirements',
+            '**Elevator control**: movement and safety responses in real time',
           ],
         },
         {
           kind: 'analogy',
           title: 'An airbag and a video call',
           everyday:
-            'An airbag must inflate within about 30 milliseconds of a crash. At 31 milliseconds it is not "slightly worse" — it is useless, and someone dies. That is hard real-time. A video call that stutters for half a second is annoying; you carry on talking. That is soft real-time.',
+            'An airbag has to fire within a few tens of milliseconds of a crash. If it fires late, it is not "slightly worse". It can fail to protect the driver at all. That is hard real-time. A video call that stutters for half a second is annoying, but you carry on talking. That is soft real-time.',
           mapsTo:
             'The difference is not how fast the deadline is, but what happens when you miss it. Catastrophic failure means hard; degraded performance means soft.',
         },
@@ -558,7 +560,7 @@ export const m2: Module = {
             ],
             [
               'Task scheduling',
-              'Priority-based — high-priority tasks run immediately',
+              'Priority-based: high-priority tasks run immediately',
               'Round Robin using time slices',
             ],
             ['User interaction', 'Typically minimal', 'High interaction with multiple users'],
@@ -570,7 +572,7 @@ export const m2: Module = {
             [
               'Examples',
               'VxWorks, FreeRTOS, QNX, RTEMS',
-              'UNIX, Multics, IBM OS/360, VMS, Windows NT',
+              'CTSS, Multics, UNIX, VMS, Windows NT',
             ],
           ],
         },
@@ -579,7 +581,7 @@ export const m2: Module = {
           prompt:
             'Why can a multi-user single-tasking operating system not exist?',
           answer:
-            'Because when multiple users are active, the system must handle multiple tasks at the same time — and handling multiple tasks simultaneously *is* multitasking. So a multi-user system is necessarily multi-tasking.',
+            'Because when multiple users are active, the system must handle multiple tasks at the same time, and handling multiple tasks simultaneously *is* multitasking. So a multi-user system is necessarily multi-tasking.',
         },
         {
           kind: 'quickCheck',
@@ -588,7 +590,7 @@ export const m2: Module = {
       ],
       takeaways: [
         'Four classification axes: number of users, number of tasks, processing model (threads), timing requirements.',
-        'A multi-user single-tasking OS cannot exist — multiple users implies multitasking.',
+        'A multi-user single-tasking OS cannot exist: multiple users implies multitasking.',
         'RTOS features: deterministic timing, priority scheduling, minimal interrupt latency, reliability, real-time clock.',
         'Hard real-time: missing a deadline is catastrophic. Soft real-time: performance degrades only.',
         'RTOS guarantees response time; time-sharing merely aims for a short one.',
@@ -601,7 +603,7 @@ export const m2: Module = {
       moduleId: 'm2',
       title: 'User interfaces: how people talk to machines',
       summary:
-        'CLI, GUI, voice, virtual reality and gesture-based interfaces — and an honest comparison of the first two.',
+        'CLI, GUI, voice, virtual reality and gesture-based interfaces, and an honest comparison of the first two.',
       whyItMatters:
         'The GUI-vs-CLI comparison table is directly examinable, and the "CLI is old and useless" assumption costs students marks. Both are still used, for good reasons.',
       objectives: [
@@ -632,14 +634,14 @@ export const m2: Module = {
           kind: 'prose',
           paragraphs: [
             'A **[[cli|CLI]]** is a text-based interface where you interact by typing commands into a terminal or command prompt. It was the primary way of using early computers, and it is still widely used today.',
-            'It is powerful and efficient: commands can be automated into scripts, files managed in bulk, and system settings controlled precisely — through command interpreters called shells, such as Bash, PowerShell or Zsh.',
+            'It is powerful and efficient: commands can be automated into scripts, files managed in bulk, and system settings controlled precisely. You type into a command interpreter called a shell, such as Bash, PowerShell or Zsh.',
           ],
         },
         {
           kind: 'list',
           title: 'CLI examples',
           items: [
-            'Unix/Linux shells — Bash, Zsh',
+            'Unix/Linux shells: Bash, Zsh',
             'Windows Command Prompt',
             'PowerShell',
             'Terminal on macOS',
@@ -649,7 +651,7 @@ export const m2: Module = {
         {
           kind: 'prose',
           paragraphs: [
-            'A **[[gui|GUI]]** lets you interact using visual elements — windows, icons, buttons and menus — with a pointing device such as a mouse. The classic shorthand is **WIMP**: windows, icons, menus and pointers.',
+            'A **[[gui|GUI]]** lets you interact using visual elements (windows, icons, buttons and menus) with a pointing device such as a mouse. The classic shorthand is **WIMP**: windows, icons, menus and pointers.',
             'Operating systems like Windows and macOS use GUIs to improve usability and accessibility, which is why they became the default for everyday computing.',
           ],
         },
@@ -660,20 +662,20 @@ export const m2: Module = {
           rows: [
             [
               'User interaction',
-              'Through graphical elements — windows, icons, buttons',
+              'Through graphical elements: windows, icons, buttons',
               'Through typed text commands',
             ],
             ['Usability', 'User-friendly, easier for beginners', 'Requires knowledge of commands; more complex'],
             ['Learning curve', 'Easier to learn', 'Steeper learning curve'],
             [
               'Speed',
-              'Slower for experienced users — navigating menus and dialogs',
+              'Slower for experienced users, navigating menus and dialogs',
               'Faster for experienced users who can execute commands quickly',
             ],
             [
               'Resource usage',
               'Consumes more memory and processing power',
-              'Lightweight — uses fewer resources',
+              'Lightweight: uses fewer resources',
             ],
             [
               'Error handling',
@@ -686,7 +688,7 @@ export const m2: Module = {
           kind: 'misconception',
           wrong: 'The CLI is outdated and nobody uses it any more.',
           right:
-            'CLIs are used constantly — on servers, in software development, and anywhere tasks must be automated. A GUI cannot be scripted; a CLI command can run on ten thousand machines unattended.',
+            'CLIs are used constantly: on servers, in software development, and anywhere tasks must be automated. GUI clicks are hard to automate; a CLI command can run on ten thousand machines unattended.',
           why: 'Servers frequently run with **no GUI at all**, precisely because a GUI wastes memory and processing power that should go to serving users.',
         },
         { kind: 'heading', text: 'Three more interfaces' },
@@ -697,7 +699,7 @@ export const m2: Module = {
             [
               '**Voice User Interface (VUI)**',
               'Lets users interact using spoken language instead of typing or clicking. Converts speech into commands using speech recognition, enabling hands-free, natural-language interaction with real-time responses. Enhances accessibility and supports multiple languages, often integrated with AI assistants. May struggle with accents, background noise or complex commands.',
-              'Siri, Google Assistant, Amazon Alexa, Cortana',
+              'Siri, Google Assistant, Amazon Alexa, Samsung Bixby',
             ],
             [
               '**Virtual Reality interface**',
@@ -706,8 +708,8 @@ export const m2: Module = {
             ],
             [
               '**Gesture-Based Interface (GBI)**',
-              'Lets users interact using body movements — typically hand or finger gestures — without touching a screen or physical controls. Uses sensors, cameras or wearable devices to detect and interpret gestures. Touchless, natural and intuitive control.',
-              'Microsoft Kinect, touchless gesture controls in smartphones, gesture-navigating smart TVs, Oculus Quest hand tracking, BMW gesture control',
+              'Lets users interact using body movements, typically hand or finger gestures, without touching a screen or physical controls. Uses sensors, cameras or wearable devices to detect and interpret gestures. Touchless, natural and intuitive control.',
+              'Microsoft Kinect, touchless gesture controls in smartphones, gesture-navigating smart TVs, Meta Quest hand tracking, BMW gesture control',
             ],
           ],
         },

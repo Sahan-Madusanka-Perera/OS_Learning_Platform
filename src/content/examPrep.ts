@@ -13,7 +13,7 @@ export const KEY_FACTS: KeyFact[] = [
     facts: [
       'An OS manages hardware and software resources **and** provides an interface between user and hardware.',
       'Five main functions: providing interfaces · process management · resource management · security and protection · executing application software.',
-      'Directories, files and data are **abstractions** provided by the OS — they do not exist in hardware.',
+      'Directories, files and data are **abstractions** provided by the OS: they do not exist in hardware.',
       'The OS was introduced to maximise processor utilisation, automate manual operations and reduce processor idle time.',
     ],
   },
@@ -23,18 +23,18 @@ export const KEY_FACTS: KeyFact[] = [
       'Order: power on → BIOS/UEFI → POST → boot device selection → boot loader → OS loads → login screen.',
       'BIOS is firmware in non-volatile ROM; its **settings** live in battery-backed CMOS memory.',
       'POST checks RAM, keyboard, processor and storage, reporting faults via beep codes.',
-      'BIOS: 1981, text-based, 16-bit, MBR up to 2 TB, no inherent security. UEFI: 2002, graphical, 32/64-bit, GPT over 2 TB, Secure Boot.',
+      'BIOS: IBM PC standard from 1981, text-based, 16-bit, MBR up to 2 TB, no inherent security. UEFI: specified 2006, graphical, 32/64-bit, GPT over 2 TB, Secure Boot.',
       'Cold boot = from powered off. Warm boot = restart without cutting power.',
     ],
   },
   {
     topic: 'Evolution and classification',
     facts: [
-      'No OS → simple batch → multi-programmed batch → time-sharing. Each removes one source of CPU idle time.',
-      'Simple batch: a **resident monitor** loads the next job automatically — but the CPU still idles during I/O.',
+      'No OS → simple batch → multi-programmed batch → time-sharing. The first three each remove a source of CPU idle time; time-sharing adds fast response for users.',
+      'Simple batch: a **resident monitor** loads the next job automatically, but the CPU still idles during I/O.',
       'Multiprogramming switches when a process **blocks**; time-sharing switches when the **time quantum expires**.',
       'Multiprogramming is considered the central theme of modern operating systems.',
-      'A **multi-user single-tasking OS cannot exist** — multiple users implies multitasking.',
+      'A **multi-user single-tasking OS cannot exist**: multiple users implies multitasking.',
       'Hard real-time: missing a deadline is catastrophic. Soft real-time: performance degrades only.',
       'RTOS **guarantees** response time; time-sharing only aims for a short one.',
     ],
@@ -64,9 +64,9 @@ export const KEY_FACTS: KeyFact[] = [
   {
     topic: 'Disk allocation and file systems',
     facts: [
-      'Contiguous: one unbroken run. Very fast, no overhead — but external fragmentation and hard to grow.',
-      'Linked: pointer in every block. No external fragmentation, easy growth — but sequential access only and pointer corruption risk. Used by FAT.',
-      'Indexed: one index block per file. Direct + random access, dynamic growth — but an extra block, and index size caps file size. Used by UNIX/Linux.',
+      'Contiguous: one unbroken run. Very fast, no pointer overhead, but external fragmentation and hard to grow.',
+      'Linked: pointer in every block. No external fragmentation, easy growth, but sequential access only and pointer corruption risk. Used by FAT.',
+      'Indexed: one index block per file. Direct + random access, dynamic growth, but an extra block, and index size caps file size. Used by UNIX/Linux.',
       'FAT chaining: directory entry = **first** block. Follow the chain to −1. Space = blocks × block size.',
       'FAT keeps **two copies** of the table for safety; it is universally compatible.',
       'NTFS uses a Master File Table, and adds permissions, encryption, compression, fault tolerance and large file support.',
@@ -81,7 +81,7 @@ export const KEY_FACTS: KeyFact[] = [
       'Seven states: New, Ready, Running, Blocked, Terminated, Suspended Ready, Suspended Blocked.',
       'Ready/Running/Blocked are in main memory; both Suspended states are on disk.',
       'Running → Ready is a **timeout**; Running → Blocked is an **I/O or resource wait**.',
-      'There is no Blocked → Running transition — everything reaches Running through Ready.',
+      'There is no Blocked → Running transition: everything reaches Running through Ready.',
     ],
   },
   {
@@ -91,7 +91,7 @@ export const KEY_FACTS: KeyFact[] = [
       'A zombie has finished executing but keeps a **process table entry**. It uses no CPU or memory.',
       'An interrupt is an event that **alters the sequence of execution** of a process.',
       'Hardware interrupts come from devices; software interrupts from programs (system calls, errors, exceptions).',
-      'Non-maskable interrupts cannot be ignored — hardware failures, for example.',
+      'Non-maskable interrupts cannot be ignored: hardware failures, for example.',
       'Context switching saves the running process’s state into its PCB and restores another’s. Its cost is overhead.',
     ],
   },
@@ -104,14 +104,14 @@ export const KEY_FACTS: KeyFact[] = [
       '**Turnaround = Completion − Arrival.**  **Waiting = Turnaround − Burst.**',
       'Response time = wait before the *first* output. Waiting time = *total* time in the ready queue.',
       'Non-preemptive: FCFS, SJF, non-preemptive Priority. Preemptive: RR, SRTF, preemptive Priority.',
-      'FCFS suffers the **convoy effect**. Priority risks **starvation**, fixed by **aging** (+1 every 15 minutes).',
+      'FCFS suffers the **convoy effect**. Priority risks **starvation**, fixed by **aging** (e.g. +1 every 15 minutes).',
       'Round Robin prevents starvation and is designed for time-sharing. Too small a quantum wastes time switching; too large and it becomes FCFS.',
     ],
   },
   {
     topic: 'Memory and paging',
     facts: [
-      'Programs cannot execute from secondary storage — the OS must load them into RAM.',
+      'Programs cannot execute from secondary storage: the OS must load them into RAM.',
       '**2^(address bits) = maximum addressable memory in bytes.** Address length = bus width.',
       'Data bus: bidirectional, width sets transfer speed. Address bus: unidirectional, width sets max memory. Control bus: Read/Write/Interrupt/Clock/Reset.',
       'Virtual memory uses secondary storage as an extension of RAM so programs larger than RAM can run.',
@@ -133,7 +133,7 @@ export const KEY_FACTS: KeyFact[] = [
       'Spooling: **disk**, large data, manages slow devices, printer queue.',
       'Buffering: **RAM**, small data, handles speed mismatch, keyboard input buffer.',
       'Kernel functions: process · memory · device · file management, plus system call handling.',
-      'Monolithic = all services in kernel space (Linux). Microkernel = only essentials. Hybrid = both (Windows).',
+      'Monolithic = all services in kernel space (Linux). Microkernel = only essentials (QNX). Hybrid = both (Windows).',
     ],
   },
 ]
@@ -160,7 +160,7 @@ export const CONFUSED_PAIRS: Confusion[] = [
   {
     pair: ['Multiprogramming', 'Time-sharing'],
     distinction:
-      'Multiprogramming switches when a process **blocks** for I/O — its goal is CPU utilisation. Time-sharing switches when the **time quantum expires** — its goal is response time.',
+      'Multiprogramming switches when a process **blocks** for I/O: its goal is CPU utilisation. Time-sharing switches when the **time quantum expires**: its goal is response time.',
     trick: 'Multiprogramming helps the machine. Time-sharing helps the person.',
   },
   {
@@ -190,20 +190,20 @@ export const CONFUSED_PAIRS: Confusion[] = [
   {
     pair: ['Device controller', 'Device driver'],
     distinction:
-      'The controller is **hardware** — it manages the electronic communication between the device and the CPU. The driver is **software** — it translates general OS instructions into device-specific commands.',
+      'The controller is **hardware**: it manages the electronic communication between the device and the CPU. The driver is **software**: it translates general OS instructions into device-specific commands.',
     trick: 'Controller = the telephone. Driver = the interpreter.',
   },
   {
     pair: ['Page', 'Frame'],
     distinction:
-      'A page is a fixed-size block of **logical (virtual)** memory. A frame is a fixed-size block of **physical** memory. They are always the same size, but the *number* of each differs — pages depend on virtual memory size, frames on physical.',
+      'A page is a fixed-size block of **logical (virtual)** memory. A frame is a fixed-size block of **physical** memory. They are always the same size, but the *number* of each differs: pages depend on virtual memory size, frames on physical.',
     trick: 'Pages are what the program thinks it has. Frames are what actually exists.',
   },
   {
     pair: ['BIOS', 'CMOS'],
     distinction:
-      'BIOS is the firmware **code**, stored in non-volatile ROM. CMOS is the small battery-backed memory holding BIOS **settings** — date, time, boot order.',
-    trick: 'A dead CMOS battery loses the clock but the machine still boots — because the code survives.',
+      'BIOS is the firmware **code**, stored in non-volatile ROM. CMOS is the small battery-backed memory holding BIOS **settings**: date, time, boot order.',
+    trick: 'A dead CMOS battery loses the clock but the machine still boots, because the code survives.',
   },
   {
     pair: ['Preemptive', 'Non-preemptive'],
@@ -214,7 +214,7 @@ export const CONFUSED_PAIRS: Confusion[] = [
   {
     pair: ['Starvation', 'Deadlock'],
     distinction:
-      'Starvation is one process waiting indefinitely because others keep jumping ahead — the system is still working. Deadlock is two or more processes waiting on **each other**, so none can ever proceed.',
+      'Starvation is one process waiting indefinitely because others keep jumping ahead: the system is still working. Deadlock is two or more processes waiting on **each other**, so none can ever proceed.',
     trick: 'Starvation has a fix (aging). Deadlock needs the cycle broken.',
   },
 ]
@@ -245,7 +245,7 @@ export const COMMON_MISTAKES: Mistake[] = [
   },
   {
     wrong: 'Rounding the number of blocks **down** in a fragmentation calculation.',
-    right: 'Always round **up** — the remainder still needs a whole block to live in.',
+    right: 'Always round **up**: the remainder still needs a whole block to live in.',
   },
   {
     wrong: 'Saying paging removes all fragmentation.',
@@ -271,7 +271,7 @@ export const COMMON_MISTAKES: Mistake[] = [
   },
   {
     wrong: 'Treating a device driver as hardware.',
-    right: 'The driver is software (specifically utility software). The controller is the hardware.',
+    right: 'The driver is software (system software). The controller is the hardware.',
   },
   {
     wrong: 'Answering "list" questions when the command word is "describe".',
@@ -316,6 +316,6 @@ export const EXAM_TIPS: ExamTip[] = [
   },
   {
     title: 'Check waiting time is never negative',
-    text: 'If a waiting time comes out negative, your Gantt chart is wrong — go back and redraw it rather than pressing on.',
+    text: 'If a waiting time comes out negative, your Gantt chart is wrong: go back and redraw it rather than pressing on.',
   },
 ]
